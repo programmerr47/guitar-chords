@@ -1,0 +1,21 @@
+This is the main description for the future application. I know that I tried several time to do something, that is needed. And maybe I could do this if I had an ability to finish my works. But I haven't. I hope I will finish this project. Good bless me.
+
+We all know (me and me) that this app using some content from some sites. In first version it will be amdm.ru, then number of sites will grow. So we need to consider this when we will planning our architecture.
+
+We must have some interesting features, but can not link to "concrete-site-features". When only one site of the whole world has some good feature and we provided 10 sites, then probably for us it is bad feature. OR! We need to separate interface for each site (some feature, settings, some cool specified stuff).
+
+Fixed: Probably we need to provide only one site or some group of "same" sites. I don't now yet :(
+
+This is all just words for nothing. In the text below I describes main pages for app (this is drawer menu):
+
+0) (not page but just search field)
+1) News
+2) New chords
+3) Popular chords (today, last 7 days, last week, all time - it a tabs)
+4) Popular artists
+5) Saved chords
+6) All chords
+7) Settings ?!?
+8) About
+
+If I decide to do app only for one site, then we cann add another important page with forum. And then (if amdm create a API) will add working with users (login, add coments and e.t.c.)
