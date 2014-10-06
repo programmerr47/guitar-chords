@@ -1,0 +1,19 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="ChordsTheme" parent="android:Theme.Holo.Light">
+        <item name="android:actionBarStyle">@style/VkazamActionBar</item>
+        <item name="android:windowBackground">@color/gray_light_very</item>
+    </style>
+
+    <!-- ActionBar styles -->
+    <style name="VkazamActionBar"
+        parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@color/blue_vivid</item>
+    </style>
+
+    <style name="DrawerTextPrimary" parent="android:TextAppearance.Holo.Medium">
+        <item name="android:textColor">@color/gray_dark_very_transparent_light</item>
+    </style>
+
+</resources>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/drawer_item_height"
+    android:background="@drawable/drawer_item_primary_background">
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="@dimen/icon_default_size"
+        android:layout_height="@dimen/icon_default_size"
+        android:padding="@dimen/padding_big"/>
+
+    <com.github.programmerr47.chords.representation.view.CustomFontTextView
+        xmlns:fonts="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        fonts:fontName="Roboto-Light.ttf"
+        style="@style/DrawerTextPrimary"/>
+
+</LinearLayout>

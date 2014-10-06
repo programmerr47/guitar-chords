@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Commonly used for base blocks in application such as Action Bar background color -->
+    <color name="blue_soft_very">#B3E5fC</color>
+    <color name="blue_strong">#0288d1</color>
+    <color name="blue_vivid">#03A9F4</color>
+
+    <!-- Commonly used for serving accent elements such as buttons, switchers -->
+    <color name="cyan_light">#64FFDA</color>
+    <color name="cyan_pale">#A7FFEB</color>
+    <color name="cyan_vivid">#1DE9B6</color>
+
+    <!-- Commonly used for main information elements such as action bar icons, primary texts -->
+    <color name="gray_dark_very_transparent_light">#CC333333</color>
+
+    <!-- Commonly used for main information elements such as secondary texts -->
+    <color name="gray_dark_very_transparent_semi">#88333333</color>
+
+    <!-- Commonly used for main disabled elements -->
+    <color name="gray_dark_very_transparent_very">#4C333333</color>
+
+    <!-- Commonly used for backgrounds -->
+    <color name="gray_light_very">#EBEBEB</color>
+
+    <!-- Commonly used for items, backgrounds of "front" elements or "back" elements -->
+    <color name="white_pure">#FFFFFF</color>
+
+    <!-- Commonly user for secondary backgrounds for primary menus -->
+    <color name="white_mostly">#F5F5F5</color>
+
+    <!-- Commonly used for main information elements such as action bar icons, primary texts -->
+    <color name="white_transparent_light">#CCFFFFFF</color>
+
+    <!-- Commonly used for main information elements such as secondary texts -->
+    <color name="white_transparent_semi">#88FFFFFF</color>
+
+    <!-- Commonly used for main disabled elements -->
+    <color name="white_transparent_very">#4CFFFFFF</color>
+
+    <!-- Four colors for swipe to refresh -->
+    <!-- Will soon -->
+</resources>
