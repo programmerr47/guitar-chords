@@ -16,4 +16,8 @@
         <item name="android:textColor">@color/gray_dark_very_transparent_light</item>
     </style>
 
+    <style name="DrawerTextSecondary" parent="android:TextAppearance.Holo.Small">
+        <item name="android:textColor">@color/gray_dark_very_transparent_light</item>
+    </style>
+
 </resources>
