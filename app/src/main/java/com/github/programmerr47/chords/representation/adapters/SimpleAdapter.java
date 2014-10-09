@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.programmerr47.chords.representation.adapters.elements.AdapterElement;
+import com.github.programmerr47.chords.representation.utils.Util;
 
 import java.util.List;
 
@@ -18,29 +19,33 @@ import java.util.List;
  * @author Michael Spitsin
  * @since 2014-10-08
  */
-public class SimpleAdapter<Item extends AdapterElement> extends BindBaseAdapter {
+public class SimpleAdapter extends BindBaseAdapter {
 
     protected Context mContext;
-    protected List<Item> mItems;
+    protected List<AdapterElement> mItems;
 
-    public SimpleAdapter(Context context, List<Item> items) {
+    private List<String> mItemTypes;
+
+    public SimpleAdapter(Context context, List<AdapterElement> items) {
         if (context == null) {
             throw new NullPointerException("Context must be not null");
         }
 
         mContext = context;
         mItems = items;
+
+        mItemTypes = Util.getAllDifferentClassesFromCollection(mItems);
     }
 
     @Override
     protected View newView(ViewGroup parent, int position) {
-        Item item = mItems.get(position);
+        AdapterElement item = mItems.get(position);
         return item.newView(parent, position);
     }
 
     @Override
     protected void bindView(View view, int position) {
-        Item item = mItems.get(position);
+        AdapterElement item = mItems.get(position);
         item.bindView(view, position);
     }
 
@@ -67,24 +72,36 @@ public class SimpleAdapter<Item extends AdapterElement> extends BindBaseAdapter 
         if (mItems == null) {
             return -1;
         } else {
-            Item item = mItems.get(i);
+            AdapterElement item = mItems.get(i);
             return item.getElementId();
         }
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (mItems == null) {
-            return -1;
+        if ((mItemTypes == null) || (mItems == null)) {
+            return 0;
         } else {
-            Item item = mItems.get(position);
-            return item.getTypeId();
+            AdapterElement item = mItems.get(position);
+            String itemClassName = item.getClass().getName();
+
+            return mItemTypes.indexOf(itemClassName);
         }
     }
 
     @Override
     public int getViewTypeCount() {
-        //TODO I need to check visitor pattern
-        return -1;
+        if (mItemTypes == null) {
+            return 0;
+        } else {
+            return mItemTypes.size();
+        }
+    }
+
+    public void updateItems(List<AdapterElement> newItems) {
+        mItems = newItems;
+        mItemTypes = Util.getAllDifferentClassesFromCollection(mItems);
+
+        notifyDataSetChanged();
     }
 }
