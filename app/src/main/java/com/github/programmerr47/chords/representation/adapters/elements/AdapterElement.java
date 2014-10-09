@@ -13,24 +13,6 @@ import android.view.ViewGroup;
 public interface AdapterElement {
 
     /**
-     * Retrieves id of type of specific implementation.
-     * ListView has different types of elements, with different layouts.
-     * Therefor it is needed to specify type identifier to refresh we,
-     * if new view differs from old view, when you scrolling.
-     *
-     * @return id of type
-     */
-    int getTypeId();
-
-    /**
-     * Retrieves unique identificator of {@link AdapterElement}. This is needed for
-     * specify behavior of each concrete item, if It cannot be done inside specific class.
-     *
-     * @return id of element
-     */
-    int getElementId();
-
-    /**
      * Calls when another taken in {@link com.github.programmerr47.chords.representation.adapters.BindBaseAdapter#getView(int, android.view.View, android.view.ViewGroup)}
      * element is not exists and it is needed to create it from layout.
      *

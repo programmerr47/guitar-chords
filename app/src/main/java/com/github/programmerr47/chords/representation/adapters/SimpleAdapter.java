@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import com.github.programmerr47.chords.representation.adapters.elements.AdapterElement;
 import com.github.programmerr47.chords.representation.utils.Util;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -19,14 +20,14 @@ import java.util.List;
  * @author Michael Spitsin
  * @since 2014-10-08
  */
-public class SimpleAdapter extends BindBaseAdapter {
+public class SimpleAdapter<Item extends AdapterElement> extends BindBaseAdapter {
 
     protected Context mContext;
-    protected List<AdapterElement> mItems;
+    protected List<Item> mItems;
 
     private List<String> mItemTypes;
 
-    public SimpleAdapter(Context context, List<AdapterElement> items) {
+    public SimpleAdapter(Context context, List<Item> items) {
         if (context == null) {
             throw new NullPointerException("Context must be not null");
         }
@@ -39,13 +40,13 @@ public class SimpleAdapter extends BindBaseAdapter {
 
     @Override
     protected View newView(ViewGroup parent, int position) {
-        AdapterElement item = mItems.get(position);
+        Item item = mItems.get(position);
         return item.newView(parent, position);
     }
 
     @Override
     protected void bindView(View view, int position) {
-        AdapterElement item = mItems.get(position);
+        Item item = mItems.get(position);
         item.bindView(view, position);
     }
 
@@ -72,8 +73,7 @@ public class SimpleAdapter extends BindBaseAdapter {
         if (mItems == null) {
             return -1;
         } else {
-            AdapterElement item = mItems.get(i);
-            return item.getElementId();
+            return i;
         }
     }
 
@@ -82,7 +82,7 @@ public class SimpleAdapter extends BindBaseAdapter {
         if ((mItemTypes == null) || (mItems == null)) {
             return 0;
         } else {
-            AdapterElement item = mItems.get(position);
+            Item item = mItems.get(position);
             String itemClassName = item.getClass().getName();
 
             return mItemTypes.indexOf(itemClassName);
@@ -98,10 +98,14 @@ public class SimpleAdapter extends BindBaseAdapter {
         }
     }
 
-    public void updateItems(List<AdapterElement> newItems) {
+    public void updateItems(List<Item> newItems) {
         mItems = newItems;
         mItemTypes = Util.getAllDifferentClassesFromCollection(mItems);
 
         notifyDataSetChanged();
+    }
+
+    public List<Item> getItems() {
+        return mItems;
     }
 }
