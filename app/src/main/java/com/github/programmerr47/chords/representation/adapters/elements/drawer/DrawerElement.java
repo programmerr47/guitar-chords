@@ -28,7 +28,7 @@ public abstract class DrawerElement extends SelectionModeAdapterElement {
         mName = type;
     }
 
-    public DrawerElementName getType() {
+    public final DrawerElementName getType() {
         return mName;
     }
 }

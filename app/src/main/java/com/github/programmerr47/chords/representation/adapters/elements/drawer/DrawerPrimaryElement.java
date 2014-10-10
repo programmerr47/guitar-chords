@@ -17,7 +17,7 @@ import com.github.programmerr47.chords.representation.Constants;
  * @author Michael Spitsin
  * @since 2014-10-10
  */
-public class DrawerPrimaryElement extends DrawerElement {
+public final class DrawerPrimaryElement extends DrawerElement {
 
     private static final int LAYOUT_ID = R.layout.drawer_item_primary;
 

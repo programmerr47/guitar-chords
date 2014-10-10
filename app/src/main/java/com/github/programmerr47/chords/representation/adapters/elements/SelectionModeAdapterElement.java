@@ -17,7 +17,7 @@ public abstract class SelectionModeAdapterElement implements AdapterElement {
      *
      * @param isSelected true if need to select element, false if need to deselect element
      */
-    public void setElementSelected(boolean isSelected) {
+    public final void setElementSelected(boolean isSelected) {
         this.isSelected = isSelected;
     }
 
@@ -26,7 +26,7 @@ public abstract class SelectionModeAdapterElement implements AdapterElement {
      *
      * @return true if element is selected and false if elements is deselected
      */
-    public boolean isElementSelected() {
+    public final boolean isElementSelected() {
         return isSelected;
     }
 

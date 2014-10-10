@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import com.github.programmerr47.chords.representation.adapters.elements.AdapterElement;
 import com.github.programmerr47.chords.representation.utils.Util;
 
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -39,13 +38,13 @@ public class SimpleAdapter<Item extends AdapterElement> extends BindBaseAdapter 
     }
 
     @Override
-    protected View newView(ViewGroup parent, int position) {
+    protected final View newView(ViewGroup parent, int position) {
         Item item = mItems.get(position);
         return item.newView(parent, position);
     }
 
     @Override
-    protected void bindView(View view, int position) {
+    protected final void bindView(View view, int position) {
         Item item = mItems.get(position);
         item.bindView(view, position);
     }
@@ -78,7 +77,7 @@ public class SimpleAdapter<Item extends AdapterElement> extends BindBaseAdapter 
     }
 
     @Override
-    public int getItemViewType(int position) {
+    public final int getItemViewType(int position) {
         if ((mItemTypes == null) || (mItems == null)) {
             return 0;
         } else {
@@ -90,7 +89,7 @@ public class SimpleAdapter<Item extends AdapterElement> extends BindBaseAdapter 
     }
 
     @Override
-    public int getViewTypeCount() {
+    public final int getViewTypeCount() {
         if (mItemTypes == null) {
             return 0;
         } else {
@@ -98,14 +97,14 @@ public class SimpleAdapter<Item extends AdapterElement> extends BindBaseAdapter 
         }
     }
 
-    public void updateItems(List<Item> newItems) {
+    public final void updateItems(List<Item> newItems) {
         mItems = newItems;
         mItemTypes = Util.getAllDifferentClassesFromCollection(mItems);
 
         notifyDataSetChanged();
     }
 
-    public List<Item> getItems() {
+    public final List<Item> getItems() {
         return mItems;
     }
 }
