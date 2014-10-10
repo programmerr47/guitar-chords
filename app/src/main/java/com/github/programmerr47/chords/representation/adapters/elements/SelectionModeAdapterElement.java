@@ -7,7 +7,9 @@ package com.github.programmerr47.chords.representation.adapters.elements;
  * @author Michael Spitsin
  * @since 2014-10-08
  */
-public interface SelectionModeAdapterElement extends AdapterElement {
+public abstract class SelectionModeAdapterElement implements AdapterElement {
+
+    protected boolean isSelected;
 
     /**
      * Selects/deselects element. It is needed for selection mode to keep the "selection"
@@ -15,12 +17,17 @@ public interface SelectionModeAdapterElement extends AdapterElement {
      *
      * @param isSelected true if need to select element, false if need to deselect element
      */
-    void setElementSelected(boolean isSelected);
+    public void setElementSelected(boolean isSelected) {
+        this.isSelected = isSelected;
+    }
 
     /**
      * Retrieves "selection" state of concrete element.
      *
      * @return true if element is selected and false if elements is deselected
      */
-    boolean isElementSelected();
+    public boolean isElementSelected() {
+        return isSelected;
+    }
+
 }
