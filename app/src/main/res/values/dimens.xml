@@ -3,8 +3,10 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="drawer_icon_primary_size">48dp</dimen>
-    <dimen name="drawer_icon_secondary_size">48dp</dimen>
+    <dimen name="drawer_icon_search_size">40dp</dimen>
+    <dimen name="drawer_icon_secondary_size">40dp</dimen>
     <dimen name="drawer_item_primary_height">48dp</dimen>
+    <dimen name="drawer_item_search_height">40dp</dimen>
     <dimen name="drawer_item_secondary_height">40dp</dimen>
     <dimen name="margin_big">16dp</dimen>
     <dimen name="margin_medium">8dp</dimen>

@@ -15,20 +15,41 @@ public abstract class DrawerElement extends SelectionModeAdapterElement {
     protected Context mContext;
     protected DrawerElementName mName;
 
-    public DrawerElement(Context context, DrawerElementName type) {
-        if (context == null) {
+    public DrawerElement(Builder builder) {
+        if (builder.context == null) {
             throw new NullPointerException("Context must be not null");
         }
 
-        if (type == null) {
+        if (builder.name == null) {
             throw new NullPointerException("Type must be not null");
         }
 
-        mContext = context;
-        mName = type;
+        mContext = builder.context;
+        mName = builder.name;
     }
 
-    public final DrawerElementName getType() {
+    public final DrawerElementName getName() {
         return mName;
+    }
+
+
+    /**
+     * @author Michael Spitsin
+     * @since 2014-10-12
+     */
+    public static abstract class Builder {
+        private Context context;
+        private DrawerElementName name;
+
+        public Builder(Context context) {
+            this.context = context;
+        }
+
+        public Builder setName(DrawerElementName name) {
+            this.name = name;
+            return this;
+        }
+
+        public abstract DrawerElement build();
     }
 }

@@ -12,14 +12,14 @@ import com.github.programmerr47.chords.R;
 import com.github.programmerr47.chords.representation.Constants;
 
 /**
- * Represents drawer elements that show primary pages (New chords, Popular chords/artists and etc).
+ * Represents drawer elements that show secondary pages (About).
  *
  * @author Michael Spitsin
  * @since 2014-10-10
  */
-public final class DrawerPrimaryElement extends DrawerElement {
+public final class DrawerSecondaryElement extends DrawerElement{
 
-    private static final int LAYOUT_ID = R.layout.drawer_item_primary;
+    private static final int LAYOUT_ID = R.layout.drawer_item_secondary;
 
     private Typeface selectedStateTypeface;
     private Typeface defaultStateTypeface;
@@ -29,7 +29,7 @@ public final class DrawerPrimaryElement extends DrawerElement {
 
     private ViewHolder holder;
 
-    private DrawerPrimaryElement(Builder builder) {
+    private DrawerSecondaryElement(Builder builder) {
         super(builder);
 
         this.iconResId = builder.iconResId;
@@ -95,10 +95,6 @@ public final class DrawerPrimaryElement extends DrawerElement {
         private TextView title;
     }
 
-    /**
-     * @author Michael Spitsin
-     * @since 2014-10-12
-     */
     public static final class Builder extends DrawerElement.Builder {
         private int iconResId;
         private int titleResId;
@@ -118,8 +114,8 @@ public final class DrawerPrimaryElement extends DrawerElement {
         }
 
         @Override
-        public DrawerPrimaryElement build() {
-            return new DrawerPrimaryElement(this);
+        public DrawerSecondaryElement build() {
+            return new DrawerSecondaryElement(this);
         }
     }
 }
