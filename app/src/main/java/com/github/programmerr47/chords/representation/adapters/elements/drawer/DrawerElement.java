@@ -15,7 +15,7 @@ public abstract class DrawerElement extends SelectionModeAdapterElement {
     protected Context mContext;
     protected DrawerElementName mName;
 
-    public DrawerElement(Builder builder) {
+    protected DrawerElement(Builder builder) {
         if (builder.context == null) {
             throw new NullPointerException("Context must be not null");
         }

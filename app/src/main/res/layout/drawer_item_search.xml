@@ -14,12 +14,13 @@
 
         <EditText
             android:id="@+id/searchField"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_big"
             android:layout_weight="1"
+            android:layout_marginLeft="@dimen/margin_big"
             android:layout_gravity="center"
             android:inputType="text"
+            android:imeOptions="actionSearch"
             android:hint="@string/SEARCH_HINT"/>
 
         <ImageView

@@ -15,7 +15,7 @@ import com.github.programmerr47.chords.representation.Constants;
  * Represents drawer elements that show secondary pages (About).
  *
  * @author Michael Spitsin
- * @since 2014-10-10
+ * @since 2014-10-12
  */
 public final class DrawerSecondaryElement extends DrawerElement{
 
@@ -88,13 +88,17 @@ public final class DrawerSecondaryElement extends DrawerElement{
 
     /**
      * @author Michael Spitsin
-     * @since 2014-10-10
+     * @since 2014-10-12
      */
     public static final class ViewHolder {
         private ImageView icon;
         private TextView title;
     }
 
+    /**
+     * @author Michael Spitsin
+     * @since 2014-10-12
+     */
     public static final class Builder extends DrawerElement.Builder {
         private int iconResId;
         private int titleResId;
