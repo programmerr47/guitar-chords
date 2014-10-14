@@ -18,7 +18,7 @@ import com.github.programmerr47.chords.R;
  * @author Michael Spitsin
  * @since 2014-10-13
  */
-public class DrawerSearchElement extends DrawerElement {
+public final class DrawerSearchElement extends DrawerElement {
 
     private static final int LAYOUT_ID = R.layout.drawer_item_search;
 
@@ -59,7 +59,7 @@ public class DrawerSearchElement extends DrawerElement {
 
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     if (onSearchListener != null) {
-                        onSearchListener.searchStart(textView.getText().toString());
+                        onSearchListener.onSearchStarted(textView.getText().toString());
                     }
                     handled = true;
                 }
@@ -86,8 +86,9 @@ public class DrawerSearchElement extends DrawerElement {
             super(context);
         }
 
-        public void setOnSearchListener(OnSearchListener listener) {
+        public Builder setOnSearchListener(OnSearchListener listener) {
             this.listener = listener;
+            return this;
         }
 
         @Override
@@ -105,8 +106,8 @@ public class DrawerSearchElement extends DrawerElement {
         /**
          * Calls when search field is filled and it is needed to search this information.
          *
-         * @param text text from search field
+         * @param searchText text from search field
          */
-        void searchStart(String text);
+        void onSearchStarted(String searchText);
     }
 }

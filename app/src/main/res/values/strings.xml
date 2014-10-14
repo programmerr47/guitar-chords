@@ -5,6 +5,14 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
+    <string name="ABOUT">About</string>
+    <string name="ALL_CHORDS">All chords</string>
+    <string name="NAVIGATION_DRAWER_OPEN">Open navigation drawer</string>
+    <string name="NAVIGATION_DRAWER_CLOSE">Close navigation drawer</string>
+    <string name="NEW_CHORDS">New chords</string>
+    <string name="POPULAR_ARTISTS">Popular artists</string>
+    <string name="POPULAR_CHORDS">Popular chords</string>
+    <string name="SAVED_CHORDS">Saved chords</string>
     <string name="SEARCH_HINT">Type song name, words or artist</string>
 
 </resources>

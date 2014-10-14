@@ -19,7 +19,7 @@ public abstract class SelectionModeAdapterElement implements AdapterElement {
      */
     public final void setElementSelected(boolean isSelected) {
         this.isSelected = isSelected;
-        setViewSelected(isSelected);
+        setViewSelected();
     }
 
     /**
