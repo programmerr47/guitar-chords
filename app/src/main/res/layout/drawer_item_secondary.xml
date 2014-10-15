@@ -12,19 +12,28 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/drawer_item_secondary_height">
 
-        <ImageView
-            android:id="@+id/icon"
-            android:layout_width="@dimen/drawer_item_secondary_height"
-            android:layout_height="@dimen/drawer_icon_secondary_size"
-            android:layout_marginLeft="@dimen/margin_small"
-            android:padding="@dimen/padding_big"/>
+        <FrameLayout
+            android:layout_width="@dimen/drawer_icon_area_width"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
 
-        <TextView
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="@dimen/drawer_item_secondary_height"
+                android:layout_height="@dimen/drawer_icon_secondary_size"
+                android:layout_gravity="center"
+                android:padding="@dimen/padding_big"/>
+
+        </FrameLayout>
+
+        <com.github.programmerr47.chords.representation.view.CustomFontTextView
+            xmlns:fonts="http://schemas.android.com/apk/res-auto"
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textAllCaps="true"
+            fonts:fontName="Roboto-Regular.ttf"
             style="@style/DrawerTextSecondary"/>
 
     </LinearLayout>
@@ -32,6 +41,6 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:src="@color/gray_light_very"/>
+        android:background="@color/gray_light_very"/>
 
 </LinearLayout>

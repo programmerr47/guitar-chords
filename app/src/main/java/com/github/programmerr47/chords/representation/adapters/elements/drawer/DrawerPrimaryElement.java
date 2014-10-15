@@ -36,7 +36,7 @@ public final class DrawerPrimaryElement extends DrawerElement {
         this.titleResId = builder.titleResId;
 
         selectedStateTypeface = Typeface.createFromAsset(mContext.getAssets(), Constants.ASSETS_FONTS_DIR + Constants.ROBOTO_BOLD);
-        defaultStateTypeface = Typeface.createFromAsset(mContext.getAssets(), Constants.ASSETS_FONTS_DIR + Constants.ROBOTO_REGULAR);
+        defaultStateTypeface = Typeface.createFromAsset(mContext.getAssets(), Constants.ASSETS_FONTS_DIR + Constants.ROBOTO_LIGHT);
     }
 
     @Override

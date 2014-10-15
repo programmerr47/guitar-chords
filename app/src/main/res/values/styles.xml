@@ -12,7 +12,7 @@
         <item name="android:background">@color/blue_vivid</item>
     </style>
 
-    <style name="DrawerTextPrimary" parent="android:TextAppearance.Holo.Medium">
+    <style name="DrawerTextPrimary" parent="android:TextAppearance.Holo.Large">
         <item name="android:textColor">@color/gray_dark_very_transparent_light</item>
     </style>
 

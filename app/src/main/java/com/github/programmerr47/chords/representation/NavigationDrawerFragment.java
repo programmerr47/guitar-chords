@@ -1,4 +1,4 @@
-package com.github.programmerr47.chords;
+package com.github.programmerr47.chords.representation;
 
 import android.app.Activity;
 import android.app.ActionBar;
@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.github.programmerr47.chords.R;
 import com.github.programmerr47.chords.representation.adapters.SimpleAdapter;
 import com.github.programmerr47.chords.representation.adapters.elements.drawer.DrawerElement;
 import com.github.programmerr47.chords.representation.adapters.elements.drawer.DrawerElementName;
@@ -110,6 +111,7 @@ public class NavigationDrawerFragment extends Fragment implements DrawerSearchEl
         mDrawerAdapterElements.add(new DrawerPrimaryElement.Builder(getActivity()).setIcon(R.drawable.ic_launcher).setTitle(R.string.SAVED_CHORDS).setName(DrawerElementName.SAVED_CHORDS).build());
         mDrawerAdapterElements.add(new DrawerPrimaryElement.Builder(getActivity()).setIcon(R.drawable.ic_launcher).setTitle(R.string.ALL_CHORDS).setName(DrawerElementName.ALL_CHORDS).build());
         mDrawerAdapterElements.add(new DrawerSecondaryElement.Builder(getActivity()).setIcon(R.drawable.ic_launcher).setTitle(R.string.ABOUT).setName(DrawerElementName.ABOUT).build());
+        mDrawerAdapterElements.add(new DrawerSecondaryElement.Builder(getActivity()).setIcon(R.drawable.ic_launcher).setTitle(R.string.SEND_FEEDBACK).setName(DrawerElementName.SEND_FEEDBACK).build());
 
         mDrawerAdapter = new SimpleAdapter<DrawerElement>(getActivity(), mDrawerAdapterElements);
 
@@ -142,7 +144,6 @@ public class NavigationDrawerFragment extends Fragment implements DrawerSearchEl
 
         // set a custom shadow that overlays the main content when the drawer opens
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
-        // set up the drawer's list view with items and click listener
 
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -291,6 +292,12 @@ public class NavigationDrawerFragment extends Fragment implements DrawerSearchEl
 
     @Override
     public void onSearchStarted(String searchText) {
+        mCurrentSelectedPosition = -1;
+        //mDrawerAdapter.setItemChecked(position);//TODO
+        if (mDrawerLayout != null) {
+            mDrawerLayout.closeDrawer(mFragmentContainerView);
+        }
+
         if (mCallbacks != null) {
             mCallbacks.onSearchStarted(searchText);
         }

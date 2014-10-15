@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -51,7 +52,7 @@ public final class DrawerSearchElement extends DrawerElement {
             throw new IllegalArgumentException("View must contain its own holder");
         }
 
-        EditText searchField = (EditText) view.getTag();
+        final EditText searchField = (EditText) view.getTag();
         searchField.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
@@ -65,6 +66,21 @@ public final class DrawerSearchElement extends DrawerElement {
                 }
 
                 return handled;
+            }
+        });
+
+        searchField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (!hasFocus) {
+                    searchField.setText("");
+
+                    InputMethodManager inputMethodManager =  (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputMethodManager.hideSoftInputFromWindow(searchField.getWindowToken(), 0);
+                } else {
+                    InputMethodManager inputMethodManager = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputMethodManager.showSoftInput(searchField, InputMethodManager.SHOW_IMPLICIT);
+                }
             }
         });
     }

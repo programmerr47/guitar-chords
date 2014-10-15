@@ -13,5 +13,6 @@ public enum DrawerElementName {
     POPULAR_ARTISTS,
     SAVED_CHORDS,
     ALL_CHORDS,
-    ABOUT
+    ABOUT,
+    SEND_FEEDBACK
 }

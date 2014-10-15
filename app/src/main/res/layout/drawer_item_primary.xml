@@ -7,11 +7,19 @@
     android:layout_height="@dimen/drawer_item_primary_height"
     android:background="@drawable/drawer_item_primary_background">
 
-    <ImageView
-        android:id="@+id/icon"
-        android:layout_width="@dimen/drawer_icon_primary_size"
-        android:layout_height="@dimen/drawer_icon_primary_size"
-        android:padding="@dimen/padding_big"/>
+    <FrameLayout
+        android:layout_width="@dimen/drawer_icon_area_width"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="@dimen/drawer_icon_primary_size"
+            android:layout_height="@dimen/drawer_icon_primary_size"
+            android:layout_gravity="center"
+            android:padding="@dimen/padding_big"/>
+
+    </FrameLayout>
 
     <com.github.programmerr47.chords.representation.view.CustomFontTextView
         xmlns:fonts="http://schemas.android.com/apk/res-auto"

@@ -14,5 +14,6 @@
     <string name="POPULAR_CHORDS">Popular chords</string>
     <string name="SAVED_CHORDS">Saved chords</string>
     <string name="SEARCH_HINT">Type song name, words or artist</string>
+    <string name="SEND_FEEDBACK">Send feedback</string>
 
 </resources>
