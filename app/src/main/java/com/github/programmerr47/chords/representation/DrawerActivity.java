@@ -20,7 +20,7 @@ import com.github.programmerr47.chords.representation.adapters.elements.drawer.D
  * Main activity for all fragments that represented by drawer items.
  *
  * @author Michael Spitsin
- * @since 2014-07-21
+ * @since 2014-10-15
  */
 public class DrawerActivity extends Activity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
