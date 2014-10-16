@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/item_height_default"
+    android:background="@color/white_pure">
+
+    <ImageView
+        android:layout_width="@dimen/item_icon_size"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin_big"/>
+
+    <LinearLayout
+        xmlns:fonts="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/margin_big"
+        android:layout_marginBottom="@dimen/margin_big"
+        android:layout_marginRight="@dimen/margin_big"
+        android:orientation="vertical">
+
+        <com.github.programmerr47.chords.representation.view.CustomFontTextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Artist name"
+            android:textSize="16sp"
+            android:textColor="@color/gray_dark_very_transparent_light"
+            fonts:fontName="Roboto-Regular.ttf"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/item_icon_secondary_size"
+                android:layout_height="@dimen/item_icon_secondary_size"/>
+
+            <com.github.programmerr47.chords.representation.view.CustomFontTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/margin_medium"
+                android:text="123"
+                android:textSize="12sp"
+                android:textColor="@color/gray_dark_very_transparent_semi"
+                fonts:fontName="Roboto-Regular.ttf"/>
+
+            <ImageView
+                android:layout_width="@dimen/item_icon_secondary_size"
+                android:layout_height="@dimen/item_icon_secondary_size"
+                android:layout_marginLeft="@dimen/margin_big"/>
+
+            <com.github.programmerr47.chords.representation.view.CustomFontTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/margin_medium"
+                android:text="43231"
+                android:textSize="12sp"
+                android:textColor="@color/gray_dark_very_transparent_semi"
+                fonts:fontName="Roboto-Regular.ttf"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

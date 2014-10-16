@@ -32,7 +32,7 @@ public abstract class SelectionModeAdapterElement implements AdapterElement {
     }
 
     /**
-     * Changes view when calls {@link this#setElementSelected(boolean)}.
+     * Changes view when calls {@link SelectionModeAdapterElement#setElementSelected(boolean)}.
      */
     protected abstract void setViewSelected();
 }
