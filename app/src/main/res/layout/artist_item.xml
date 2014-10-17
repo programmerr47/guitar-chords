@@ -7,10 +7,18 @@
     android:layout_height="@dimen/item_height_default"
     android:background="@color/white_pure">
 
-    <ImageView
-        android:layout_width="@dimen/item_icon_size"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/margin_big"/>
+    <FrameLayout
+        android:layout_width="@dimen/avatar_area_size"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="@dimen/item_avatar_primary_size"
+            android:layout_height="@dimen/item_avatar_primary_size"
+            android:padding="@dimen/padding_medium"
+            android:src="@color/cyan_vivid"
+            android:layout_gravity="center"/>
+
+    </FrameLayout>
 
     <LinearLayout
         xmlns:fonts="http://schemas.android.com/apk/res-auto"
@@ -37,7 +45,8 @@
 
             <ImageView
                 android:layout_width="@dimen/item_icon_secondary_size"
-                android:layout_height="@dimen/item_icon_secondary_size"/>
+                android:layout_height="@dimen/item_icon_secondary_size"
+                android:src="@drawable/ic_item_watchings"/>
 
             <com.github.programmerr47.chords.representation.view.CustomFontTextView
                 android:layout_width="wrap_content"
@@ -52,7 +61,8 @@
             <ImageView
                 android:layout_width="@dimen/item_icon_secondary_size"
                 android:layout_height="@dimen/item_icon_secondary_size"
-                android:layout_marginLeft="@dimen/margin_big"/>
+                android:layout_marginLeft="@dimen/margin_big"
+                android:src="@drawable/ic_item_watchings"/>
 
             <com.github.programmerr47.chords.representation.view.CustomFontTextView
                 android:layout_width="wrap_content"

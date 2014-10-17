@@ -1,4 +1,5 @@
 <resources>
+    <dimen name="avatar_area_size">72dp</dimen>
     <dimen name="drawer_icon_area_width">48dp</dimen>
     <dimen name="drawer_icon_primary_size">48dp</dimen>
     <dimen name="drawer_icon_search_size">40dp</dimen>
@@ -6,8 +7,8 @@
     <dimen name="drawer_item_primary_height">56dp</dimen>
     <dimen name="drawer_item_search_height">40dp</dimen>
     <dimen name="drawer_item_secondary_height">40dp</dimen>
+    <dimen name="item_avatar_primary_size">48dp</dimen>
     <dimen name="item_height_default">72dp</dimen>
-    <dimen name="item_icon_size">40dp</dimen>
     <dimen name="item_icon_secondary_size">16dp</dimen>
     <dimen name="margin_big">16dp</dimen>
     <dimen name="margin_medium">8dp</dimen>
@@ -15,6 +16,7 @@
     <!-- Per the design guidelines, navigation drawers should be between 240dp and 320dp:
          https://developer.android.com/design/patterns/navigation-drawer.html -->
     <dimen name="navigation_drawer_width">300dp</dimen>
+    <dimen name="padding_huge">12dp</dimen>
     <dimen name="padding_big">8dp</dimen>
     <dimen name="padding_medium">4dp</dimen>
     <dimen name="padding_small">2dp</dimen>
