@@ -7,6 +7,8 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,7 +27,7 @@ import com.github.programmerr47.chords.representation.adapters.elements.drawer.D
  * @author Michael Spitsin
  * @since 2014-10-15
  */
-public class DrawerActivity extends Activity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+public class DrawerActivity extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -37,10 +39,18 @@ public class DrawerActivity extends Activity implements NavigationDrawerFragment
      */
     private CharSequence mTitle;
 
+    /**
+     * New action bar for material design
+     */
+    private Toolbar mToolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawer);
+
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
