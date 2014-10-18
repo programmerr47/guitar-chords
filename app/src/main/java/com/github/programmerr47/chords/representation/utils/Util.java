@@ -1,5 +1,10 @@
 package com.github.programmerr47.chords.representation.utils;
 
+import android.content.Context;
+import android.util.DisplayMetrics;
+
+import com.github.programmerr47.chords.representation.Constants;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -44,5 +49,30 @@ public class Util {
 
             return new ArrayList<String>(preResult);
         }
+    }
+
+    /**
+     * Retrieves dynamic width of the drawer base on height of presented Toolbar.
+     * <br><br>
+     * <strong>Link: </strong> http://www.google.com/design/spec/layout/metrics-and-keylines.html#metrics-and-keylines-keylines-and-spacing
+     * <br><br>
+     * According to this link drawer_width = screen_width - toolbar_height.
+     * <br><br>
+     * <strong>Note </strong> that drawer has max_width defined by
+     * {@link Constants#DRAWER_MAX_WIDTH_DP} in <strong>independent pixels</strong>.
+     *
+     * @param applicationContext given context of application to work with screen metrics
+     * @param toolbarHeight height of currently displayed toolbar in <strong>pixels</strong>
+     * @return width of drawer in <strong>pixels</strong>
+     */
+    public static int getDrawerWidthPixels(Context applicationContext, int toolbarHeight) {
+        DisplayMetrics metrics = applicationContext.getResources().getDisplayMetrics();
+        int resultWidth = metrics.widthPixels - toolbarHeight;
+
+        if (resultWidth > Constants.DRAWER_MAX_WIDTH_DP * metrics.density) {
+            resultWidth = (int)(Constants.DRAWER_MAX_WIDTH_DP * metrics.density);
+        }
+
+        return resultWidth;
     }
 }
