@@ -1,23 +1,23 @@
 package com.github.programmerr47.chords.representation;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 
 import com.github.programmerr47.chords.R;
 import com.github.programmerr47.chords.representation.adapters.elements.drawer.DrawerElement;
 import com.github.programmerr47.chords.representation.adapters.elements.drawer.DrawerElementName;
+import com.github.programmerr47.chords.representation.utils.Util;
 
 /**
  * Main activity for all fragments that represented by drawer items.
@@ -25,7 +25,7 @@ import com.github.programmerr47.chords.representation.adapters.elements.drawer.D
  * @author Michael Spitsin
  * @since 2014-10-15
  */
-public class DrawerActivity extends Activity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+public class DrawerActivity extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -37,14 +37,29 @@ public class DrawerActivity extends Activity implements NavigationDrawerFragment
      */
     private CharSequence mTitle;
 
+    /**
+     * New action bar for material design
+     */
+    private Toolbar mToolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawer);
 
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
+
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
+
+        // Change drawer width dynamically following by android guidelines
+        // http://www.google.com/design/spec/layout/metrics-and-keylines.html#metrics-and-keylines-keylines-and-spacing
+        //TODO replace this to another place
+        ViewGroup.LayoutParams params = mNavigationDrawerFragment.getView().getLayoutParams();
+        params.width = Util.getDrawerWidthPixels(getApplicationContext(), mToolbar.getLayoutParams().height);
+        mNavigationDrawerFragment.getView().setLayoutParams(params);
 
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
@@ -104,7 +119,7 @@ public class DrawerActivity extends Activity implements NavigationDrawerFragment
     }
 
     public void restoreActionBar() {
-        ActionBar actionBar = getActionBar();
+        ActionBar actionBar = getSupportActionBar();
 
         if (actionBar != null) {
             actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
