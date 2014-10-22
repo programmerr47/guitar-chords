@@ -22,6 +22,7 @@ import java.io.InputStream;
  * @author Michael Spitsin
  * @since 2014-10-21
  */
+@SuppressWarnings("unused")
 public abstract class ApiGetMethod<MethodResult> implements ApiMethod<MethodResult> {
 
     protected MethodParams mParams;

@@ -21,12 +21,13 @@ import java.util.Set;
  * @author Michael Spitsin
  * @since 2014-10-21
  */
+@SuppressWarnings("unused")
 public abstract class MethodParamsTemplate implements MethodParams{
 
     /**
      * Empty constructor with Builder param for providing builder-pattern
      *
-     * @param builder
+     * @param builder construction builder
      */
     protected MethodParamsTemplate(@NonNull Builder builder) {
         //nothing
@@ -68,7 +69,7 @@ public abstract class MethodParamsTemplate implements MethodParams{
      * Common builder class for all inheritors of {@link MethodParamsTemplate}.
      *
      * @author Michael Spitsin
-     * @sing 2014-10-21
+     * @since 2014-10-21
      */
     public static abstract class Builder {
 

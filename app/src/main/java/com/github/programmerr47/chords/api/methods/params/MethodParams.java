@@ -19,5 +19,6 @@ public interface MethodParams {
      *
      * @return string representation of all built params.
      */
+    @SuppressWarnings("unused")
     String getParamsString();
 }

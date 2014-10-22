@@ -22,5 +22,6 @@ public interface ApiMethod<MethodResult> {
      * @return result of certain method. It can be some response object (for GET methods),
      * or it can be just null object (for some POST methods or e.t.c)
      */
+    @SuppressWarnings("unused")
     MethodResult execute() throws IOException;
 }
