@@ -1,5 +1,7 @@
 package com.github.programmerr47.chords.api.methods;
 
+import java.io.IOException;
+
 /**
  * Common interface for all supported methods for this application.
  * If new methods will be available or needed to be written,
@@ -20,5 +22,5 @@ public interface ApiMethod<MethodResult> {
      * @return result of certain method. It can be some response object (for GET methods),
      * or it can be just null object (for some POST methods or e.t.c)
      */
-    MethodResult execute();
+    MethodResult execute() throws IOException;
 }

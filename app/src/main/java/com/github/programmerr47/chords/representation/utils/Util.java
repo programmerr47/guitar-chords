@@ -5,6 +5,10 @@ import android.util.DisplayMetrics;
 
 import com.github.programmerr47.chords.representation.Constants;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -74,5 +78,28 @@ public class Util {
         }
 
         return resultWidth;
+    }
+
+    /**
+     * Converts given input stream (<strong>without</strong> closing it) to {@link String}.
+     *
+     * @param is given input stream
+     * @return converted stream to string
+     */
+    public static String covertInputStreamToString(InputStream is) {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
+        String line = "";
+        String result = "";
+
+        try {
+            while((line = bufferedReader.readLine()) != null) {
+                result += line;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            //ignored
+        }
+        
+        return result;
     }
 }
