@@ -28,6 +28,7 @@ public final class SongChords {
         this.songName = builder.songName;
         this.artistUrl = builder.artistUrl;
         this.videoUrl = builder.videoUrl;
+        this.creationDate = builder.creationDate;
     }
 
     @SuppressWarnings("unused")
