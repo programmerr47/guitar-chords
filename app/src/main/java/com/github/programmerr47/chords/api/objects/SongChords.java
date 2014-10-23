@@ -20,6 +20,7 @@ public final class SongChords {
     private String artistUrl;
     private String videoUrl;
     private GregorianCalendar creationDate;
+    private int numberOfViews;
 
     private SongChords(Builder builder) {
         this.songChords = builder.songChords;
@@ -29,6 +30,7 @@ public final class SongChords {
         this.artistUrl = builder.artistUrl;
         this.videoUrl = builder.videoUrl;
         this.creationDate = builder.creationDate;
+        this.numberOfViews = builder.numberOfViews;
     }
 
     @SuppressWarnings("unused")
@@ -66,6 +68,11 @@ public final class SongChords {
         return creationDate;
     }
 
+    @SuppressWarnings("unused")
+    public int getNumberOfViews() {
+        return numberOfViews;
+    }
+
     public static final class Builder {
         private List<AvailableChords> songChords;
         private String textWithChords;
@@ -74,6 +81,7 @@ public final class SongChords {
         private String artistUrl;
         private String videoUrl;
         private GregorianCalendar creationDate;
+        private int numberOfViews;
 
         public Builder setSongChords(List<AvailableChords> songChords) {
             this.songChords = songChords;
@@ -112,6 +120,11 @@ public final class SongChords {
 
         public Builder setCreationDate(GregorianCalendar creationDate) {
             this.creationDate = creationDate;
+            return this;
+        }
+
+        public Builder setNumberOfViews(int numberOfViews) {
+            this.numberOfViews = numberOfViews;
             return this;
         }
 
