@@ -19,6 +19,8 @@ import com.github.programmerr47.chords.representation.adapters.elements.drawer.D
 import com.github.programmerr47.chords.representation.adapters.elements.drawer.DrawerElementName;
 import com.github.programmerr47.chords.representation.utils.Util;
 
+import org.jsoup.Jsoup;
+
 /**
  * Main activity for all fragments that represented by drawer items.
  *

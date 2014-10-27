@@ -86,6 +86,7 @@ public class Util {
      * @param is given input stream
      * @return converted stream to string
      */
+    //TODO replace to API.utils
     public static String covertInputStreamToString(InputStream is) {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
         String line = "";
