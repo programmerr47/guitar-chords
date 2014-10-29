@@ -1,5 +1,6 @@
-package com.github.programmerr47.chords.api.parsers;
+package com.github.programmerr47.chords.api.parsers.html;
 
+import com.github.programmerr47.chords.api.parsers.ParserFrom;
 import com.github.programmerr47.chords.representation.utils.Util;
 
 import org.jsoup.Jsoup;
