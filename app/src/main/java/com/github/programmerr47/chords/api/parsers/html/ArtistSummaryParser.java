@@ -1,6 +1,6 @@
 package com.github.programmerr47.chords.api.parsers.html;
 
-import com.github.programmerr47.chords.api.objects.SongChordsSummary;
+import com.github.programmerr47.chords.api.objects.ArtistSummary;
 
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -9,36 +9,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Default parser for {@link SongChordsSummary} that uses "popular chords" page
- * and "new chords" page for parsing.
+ * Parser for {@link ArtistSummary} that uses as source now only "popular artists" page.
  *
  * @author Michael Spitsin
- * @since 2014-10-28
+ * @since 2014-10-30
  */
-@SuppressWarnings("unused")
-public final class DefaultSongChordsSummaryParser extends ParserFromHTML<SongChordsSummary> {
+public class ArtistSummaryParser extends ParserFromHTML<ArtistSummary> {
 
     private static final String ITEMS_TAG = "table";
     private static final String ITEMS_BODY_TAG = "tbody";
     private static final String ITEM_TAG = "tr";
     private static final String IMAGE_TAG = "img";
-    private static final String SPAN_TAG = "span";
 
     private static final String ITEMS_CLASS = "items";
     private static final String ITEM_INFO_CLASS = "artist_name";
     private static final String ARTIST_CLASS = "artist";
     private static final String NEW_FLAG_CLASS = "flag flag_new";
+    private static final String NUMBER_CLASS = "number";
 
     private static final String IMAGE_SOURCE_ATTRIBUTE = "src";
     private static final String URL_ATTRIBUTE = "href";
 
     @Override
-    protected SongChordsSummary parseObjectFromDoc(Element element) {
+    protected ArtistSummary parseObjectFromDoc(Element element) {
         if ((element == null) || !ITEM_TAG.equals(element.tagName())) {
             return null;
         }
 
-        SongChordsSummary.Builder resultObjectBuilder = new SongChordsSummary.Builder();
+        ArtistSummary.Builder resultObjectBuilder = new ArtistSummary.Builder();
         resultObjectBuilder.setCoverThumbUrl(getItemImageUrl(element));
 
         Element chordsInfo = element.getElementsByClass(ITEM_INFO_CLASS).first();
@@ -47,16 +45,18 @@ public final class DefaultSongChordsSummaryParser extends ParserFromHTML<SongCho
             parseInfo(chordsInfo, resultObjectBuilder);
         }
 
+        parserNumbers(element, resultObjectBuilder);
+
         return resultObjectBuilder.build();
     }
 
     @Override
-    protected List<SongChordsSummary> parseListFromDoc(Element element) {
+    protected List<ArtistSummary> parseListFromDoc(Element element) {
         if (element == null) {
             return null;
         }
 
-        List<SongChordsSummary> result = new ArrayList<SongChordsSummary>();
+        List<ArtistSummary> result = new ArrayList<ArtistSummary>();
         Elements tables = element.getElementsByTag(ITEMS_TAG);
 
         for (Element table : tables) {
@@ -67,7 +67,7 @@ public final class DefaultSongChordsSummaryParser extends ParserFromHTML<SongCho
                     Elements items = tbody.children();
 
                     for (Element item : items) {
-                        SongChordsSummary itemObject = parseObjectFromDoc(item);
+                        ArtistSummary itemObject = parseObjectFromDoc(item);
 
                         if (itemObject != null) {
                             result.add(itemObject);
@@ -90,31 +90,40 @@ public final class DefaultSongChordsSummaryParser extends ParserFromHTML<SongCho
         return null;
     }
 
-    private void parseInfo(Element chordsInfo, SongChordsSummary.Builder resultObjectBuilder) {
-        Elements artistTitle = chordsInfo.getElementsByClass(ARTIST_CLASS);
-        int artistTitleLength = artistTitle.size();
+    private void parseInfo(Element chordsInfo, ArtistSummary.Builder resultObjectBuilder) {
+        Element artist = chordsInfo.getElementsByClass(ARTIST_CLASS).first();
+        String chordsUrl = artist.attr(URL_ATTRIBUTE);
+        String artistName = artist.val();
 
-        //Trying to get artist name
-        if (artistTitleLength > 0) {
-            String artist = artistTitle.get(0).val();
-            resultObjectBuilder.setArtistName(artist);
-        }
+        resultObjectBuilder
+                .setArtistName(artistName)
+                .setArtistUrl(chordsUrl);
+    }
 
-        //Trying to get song title and url to chords
-        if (artistTitleLength > 1) {
-            String title = artistTitle.get(1).val();
-            String chordsUrl = artistTitle.get(1).attr(URL_ATTRIBUTE);
-            resultObjectBuilder
-                    .setSongName(title)
-                    .setChordsUrl(chordsUrl);
-        }
+    private void parserNumbers(Element item, ArtistSummary.Builder resultObjectBuilder) {
+        Elements numbers = item.getElementsByClass(NUMBER_CLASS);
+        int numbersLength = numbers.size();
 
-        //Trying to find flag that indicates that those chords is new
-        Elements spans = chordsInfo.getElementsByTag(SPAN_TAG);
-        for (Element span : spans) {
-            if (NEW_FLAG_CLASS.equals(span.className())) {
-                resultObjectBuilder.setIsNew(true);
+        //Trying to get number of chords
+        if (numbersLength > 0) {
+            int countOfChords = 0;
+            try {
+                countOfChords = Integer.parseInt(numbers.get(0).val());
+            } catch (NumberFormatException e) {
+                //ignore
             }
+            resultObjectBuilder.setNumberOfChords(countOfChords);
+        }
+
+        //Trying to get number of views
+        if (numbersLength > 1) {
+            int countOfViews = 0;
+            try {
+                countOfViews = Integer.parseInt(numbers.get(1).val());
+            } catch (NumberFormatException e) {
+                //ignore
+            }
+            resultObjectBuilder.setNumberOfViews(countOfViews);
         }
     }
 }

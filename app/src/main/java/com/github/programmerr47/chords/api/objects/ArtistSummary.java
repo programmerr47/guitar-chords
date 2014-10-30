@@ -78,5 +78,9 @@ public final class ArtistSummary {
             this.numberOfChords = numberOfChords;
             return this;
         }
+
+        public ArtistSummary build() {
+            return new ArtistSummary(this);
+        }
     }
 }
