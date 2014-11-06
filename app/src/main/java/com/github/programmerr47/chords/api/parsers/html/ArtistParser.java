@@ -13,7 +13,7 @@ import java.util.List;
  * @author Michael Spitsin
  * @since 2014-10-31
  */
-public class ArtistParser extends ParserFromHTML<Artist> {
+public final class ArtistParser extends ParserFromHTML<Artist> {
 
     private static final String ARTIST_ART_TAG = "img";
     private static final String ARTIST_TITLE_TAG = "h1";

@@ -14,7 +14,7 @@ import java.util.List;
  * @author Michael Spitsin
  * @since 2014-10-30
  */
-public class ArtistSummaryParser extends ParserFromHTML<ArtistSummary> {
+public final class ArtistSummaryParser extends ParserFromHTML<ArtistSummary> {
 
     private static final String ITEMS_TAG = "table";
     private static final String ITEMS_BODY_TAG = "tbody";
@@ -24,7 +24,6 @@ public class ArtistSummaryParser extends ParserFromHTML<ArtistSummary> {
     private static final String ITEMS_CLASS = "items";
     private static final String ITEM_INFO_CLASS = "artist_name";
     private static final String ARTIST_CLASS = "artist";
-    private static final String NEW_FLAG_CLASS = "flag flag_new";
     private static final String NUMBER_CLASS = "number";
 
     private static final String IMAGE_SOURCE_ATTRIBUTE = "src";

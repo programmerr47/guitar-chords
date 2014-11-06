@@ -1,7 +1,5 @@
 package com.github.programmerr47.chords.api.objects;
 
-import com.github.programmerr47.chords.api.utils.AvailableChords;
-
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -13,7 +11,7 @@ import java.util.List;
  * @since 2014-10-23
  */
 public final class SongChords {
-    private List<AvailableChords> songChords;
+    private List<Chord> songChords;
     private String textWithChords;
     private String artistName;
     private String songName;
@@ -34,7 +32,7 @@ public final class SongChords {
     }
 
     @SuppressWarnings("unused")
-    public List<AvailableChords> getSongChords() {
+    public List<Chord> getSongChords() {
         return songChords;
     }
 
@@ -74,7 +72,7 @@ public final class SongChords {
     }
 
     public static final class Builder {
-        private List<AvailableChords> songChords;
+        private List<Chord> songChords;
         private String textWithChords;
         private String artistName;
         private String songName;
@@ -83,7 +81,7 @@ public final class SongChords {
         private GregorianCalendar creationDate;
         private int numberOfViews;
 
-        public Builder setSongChords(List<AvailableChords> songChords) {
+        public Builder setSongChords(List<Chord> songChords) {
             this.songChords = songChords;
             return this;
         }
