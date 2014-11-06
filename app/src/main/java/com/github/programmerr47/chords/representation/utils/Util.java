@@ -11,10 +11,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 /**
@@ -89,7 +87,7 @@ public class Util {
     //TODO replace to API.utils
     public static String covertInputStreamToString(InputStream is) {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
-        String line = "";
+        String line;
         String result = "";
 
         try {

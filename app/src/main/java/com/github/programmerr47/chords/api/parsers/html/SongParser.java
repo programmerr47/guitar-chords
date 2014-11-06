@@ -1,6 +1,5 @@
 package com.github.programmerr47.chords.api.parsers.html;
 
-import com.github.programmerr47.chords.api.objects.Artist;
 import com.github.programmerr47.chords.api.objects.SongChords;
 
 import org.jsoup.nodes.Element;

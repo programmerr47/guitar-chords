@@ -1,8 +1,6 @@
 package com.github.programmerr47.chords.api.parsers.html;
 
-import com.github.programmerr47.chords.api.objects.ArtistSummary;
 import com.github.programmerr47.chords.api.objects.Chord;
-import com.github.programmerr47.chords.api.parsers.ParserFrom;
 
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -92,8 +90,8 @@ public final class ChordsParser extends ParserFromHTML<Chord>{
      * So it is allocated in some function for fast changing if html
      * layout will be changed.
      *
-     * @param description
-     * @return
+     * @param description chords description
+     * @return only chords name
      */
     private String getNameChordFromDescription(String description) {
         String[] words = description.split(" ");

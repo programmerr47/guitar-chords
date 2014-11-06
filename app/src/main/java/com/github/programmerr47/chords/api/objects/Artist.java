@@ -1,9 +1,5 @@
 package com.github.programmerr47.chords.api.objects;
 
-import android.util.Xml;
-
-import org.xmlpull.v1.XmlPullParser;
-
 import java.util.List;
 
 /**
