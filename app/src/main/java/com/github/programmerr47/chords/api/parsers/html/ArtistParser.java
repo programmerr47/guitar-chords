@@ -49,8 +49,8 @@ public final class ArtistParser extends ParserFromHTML<Artist> {
         }
 
         //Trying to get list of chords
-        ParserFromHTML<SongChordsSummary> songChordsSummaryParser = getSongChordsSummaryParser();
         Element items = element.getElementsByClass(ARTIST_CHORDS_CLASS).first();
+        ParserFromHTML<SongChordsSummary> songChordsSummaryParser = getSongChordsSummaryParser();
         List<SongChordsSummary> parsingResult = songChordsSummaryParser.parseListFromDoc(items);
         resultObjectBuilder.setChords(parsingResult);
 

@@ -8,6 +8,7 @@ package com.github.programmerr47.chords.api.objects;
  * @author Michael Spitsin
  * @since 2014-10-24
  */
+//TODO Add artist url if has
 public final class SongChordsSummary {
     private String songName;
     private String artistName;
