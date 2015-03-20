@@ -2,40 +2,44 @@ package com.github.programmerr47.chords.api.methods.params;
 
 import android.support.annotation.NonNull;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
 /**
- * Common template for most of the inheritors. Made for providing Builder-pattern
+ * Common template for most of the cases. Made for providing Builder-pattern
  * for creation of any params and using one formula/one template for creating string representation of
  * params.
  * <br><br>
- * Common result of {@link MethodParamsTemplate#getParamsString()} is:
+ * Common result of {@link DefaultMethodParams#getParamsString()} is:
  * <br>
  * <strong>param_name1</strong>=<strong>param_value1<strong>
  * &
  * <strong>param_name2</strong>=<strong>param_value2</strong>
- * &...&
+ * & ... &
  * <strong>param_nameN</strong>=<strong>param_valueN</strong>
  *
  * @author Michael Spitsin
  * @since 2014-10-21
  */
 @SuppressWarnings("unused")
-public abstract class MethodParamsTemplate implements MethodParams{
+public class DefaultMethodParams implements MethodParams {
+
+    @NonNull
+    private Map<String, String> mapOfParams;
 
     /**
-     * Empty constructor with Builder param for providing builder-pattern
+     * Common constructor to getting builded with {@link com.github.programmerr47.chords.api.methods.params.DefaultMethodParams.DefaultMethodsParamsBuilder}
      *
      * @param builder construction builder
      */
-    protected MethodParamsTemplate(@NonNull Builder builder) {
-        //nothing
+    protected DefaultMethodParams(@NonNull DefaultMethodsParamsBuilder builder) {
+        this.mapOfParams = builder.mapOfParams;
     }
 
+    @NonNull
     @Override
     public final String getParamsString() {
-        Map<String, String> mapOfParams = getMapOfParams();
         Set<Map.Entry<String, String>> params = mapOfParams.entrySet();
 
         StringBuilder result = new StringBuilder("");
@@ -53,26 +57,32 @@ public abstract class MethodParamsTemplate implements MethodParams{
         return result.toString();
     }
 
+    @NonNull
     @Override
     public String toString() {
         return getParamsString();
     }
 
     /**
-     * Mapping all params for executing {@link MethodParamsTemplate#getParamsString()}.
-     *
-     * @return {@link Map} of the parameters, where {@code key} is
-     */
-    protected abstract @NonNull Map<String, String> getMapOfParams();
-
-    /**
-     * Common builder class for all inheritors of {@link MethodParamsTemplate}.
+     * Common parent for all builder classes, that want to gather all values and
+     * give them to {@link DefaultMethodParams}.
+     * This class used for creation of {@link DefaultMethodParams}
+     * and has no set and put methods that fill map. So all inheritors must provide their own set and put
+     * methods. This class made as abstract because itself it useless.
      *
      * @author Michael Spitsin
      * @since 2014-10-21
      */
-    public static abstract class Builder {
+    public static abstract class DefaultMethodsParamsBuilder {
 
-        public abstract MethodParamsTemplate build();
+        protected Map<String, String> mapOfParams;
+
+        public DefaultMethodsParamsBuilder() {
+            this.mapOfParams = new HashMap<>();
+        }
+
+        public DefaultMethodParams build() {
+            return new DefaultMethodParams(this);
+        }
     }
 }

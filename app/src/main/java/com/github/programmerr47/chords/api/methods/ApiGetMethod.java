@@ -3,17 +3,17 @@ package com.github.programmerr47.chords.api.methods;
 import android.support.annotation.NonNull;
 
 import com.github.programmerr47.chords.api.methods.params.MethodParams;
+import com.github.programmerr47.chords.api.objects.Artist;
+import com.github.programmerr47.chords.api.objects.responses.ApiMethodResponse;
+import com.github.programmerr47.chords.api.objects.responses.ApiMethodResponseReason;
+import com.github.programmerr47.chords.api.objects.responses.DefaultApiMethodResponse;
 import com.github.programmerr47.chords.api.parsers.ParserFrom;
 import com.github.programmerr47.chords.representation.utils.Util;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 /**
  * Common template for all GET-methods. All new implemented GET-methods
@@ -23,26 +23,63 @@ import java.io.InputStream;
  * @since 2014-10-21
  */
 @SuppressWarnings("unused")
-public abstract class ApiGetMethod<MethodResult> implements ApiMethod<MethodResult> {
+public class ApiGetMethod<ResponseObject> implements ApiMethod<ResponseObject> {
 
     protected MethodParams mParams;
     protected String mUrl;
-    protected ParserFrom<MethodResult> mResultParser;
+    protected ParserFrom<ResponseObject> mResultParser;
 
+    @NonNull
     @Override
-    public MethodResult execute() throws IOException {
-        HttpClient httpClient = new DefaultHttpClient();
-        HttpGet httpGet = new HttpGet(mUrl);
-        HttpResponse httpResponse = httpClient.execute(httpGet);
-        HttpEntity responseEntity = httpResponse.getEntity();
-        InputStream responseStream = responseEntity.getContent();
-
-        if (responseStream != null) {
-            String responseString = Util.covertInputStreamToString(responseStream);
-            responseStream.close();
-            return mResultParser.parseObjectFrom(responseString);
+    public ApiMethodResponse<ResponseObject> execute() {
+        if (mUrl == null) {
+            DefaultApiMethodResponse.ResponseInfoBuilder additionalInfo = new DefaultApiMethodResponse.ResponseInfoBuilder()
+                    .setReason(ApiMethodResponseReason.NO_URL)
+                    .setValid(false);
+            return new DefaultApiMethodResponse<>(additionalInfo);
         } else {
-            return null;
+            String fullUrl = mUrl;
+
+            if ((mParams != null) && !mParams.getParamsString().isEmpty()) {
+                fullUrl += "?" + mParams;
+            }
+
+            try {
+                URL url = new URL(fullUrl);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                if (connection.getResponseCode() != 200) {
+                    DefaultApiMethodResponse.ResponseInfoBuilder additionalInfo = new DefaultApiMethodResponse.ResponseInfoBuilder()
+                            .setReason(ApiMethodResponseReason.ERROR_CONNECTION_CODE.formatReason(
+                                    connection.getResponseCode(),
+                                    connection.getResponseMessage()))
+                            .setValid(false);
+                    return new DefaultApiMethodResponse<>(additionalInfo);
+                } else {
+                    InputStream responseStream = connection.getInputStream();
+
+                    if (responseStream == null) {
+                        DefaultApiMethodResponse.ResponseInfoBuilder additionalInfo = new DefaultApiMethodResponse.ResponseInfoBuilder()
+                                .setReason(ApiMethodResponseReason.NO_RESULT)
+                                .setValid(false);
+                        return new DefaultApiMethodResponse<>(additionalInfo);
+                    } else {
+                        String responseString = Util.covertInputStreamToString(responseStream);
+                        responseStream.close();
+                        ResponseObject responseObject = mResultParser.parseObjectFrom(responseString);
+
+                        DefaultApiMethodResponse.ResponseInfoBuilder additionalInfo = new DefaultApiMethodResponse.ResponseInfoBuilder()
+                                .setReason(ApiMethodResponseReason.NO_REASON)
+                                .setValid(true);
+                        return new DefaultApiMethodResponse<>(responseObject, additionalInfo);
+                    }
+                }
+            } catch (IOException e) {
+                DefaultApiMethodResponse.ResponseInfoBuilder additionalInfo = new DefaultApiMethodResponse.ResponseInfoBuilder()
+                        .setReason(ApiMethodResponseReason.ERROR_CONNECTION)
+                        .setValid(false);
+                return new DefaultApiMethodResponse<>(additionalInfo);
+            }
+
         }
     }
 
@@ -54,7 +91,7 @@ public abstract class ApiGetMethod<MethodResult> implements ApiMethod<MethodResu
      *
      * @param url method url
      */
-    public ApiGetMethod<MethodResult> setFullUrlWithoutParams(@NonNull String url) {
+    public ApiGetMethod<ResponseObject> setFullUrlWithoutParams(@NonNull String url) {
         mUrl = url;
         return this;
     }
@@ -66,7 +103,7 @@ public abstract class ApiGetMethod<MethodResult> implements ApiMethod<MethodResu
      *
      * @param parser method result parser
      */
-    public ApiGetMethod<MethodResult> setMethodResultParser(@NonNull ParserFrom<MethodResult> parser) {
+    public ApiGetMethod<ResponseObject> setMethodResultParser(@NonNull ParserFrom<ResponseObject> parser) {
         mResultParser = parser;
         return this;
     }
@@ -77,7 +114,7 @@ public abstract class ApiGetMethod<MethodResult> implements ApiMethod<MethodResu
      *
      * @param params method params
      */
-    public ApiGetMethod<MethodResult> setMethodParams(@NonNull MethodParams params) {
+    public ApiGetMethod<ResponseObject> setMethodParams(@NonNull MethodParams params) {
         mParams = params;
         return this;
     }

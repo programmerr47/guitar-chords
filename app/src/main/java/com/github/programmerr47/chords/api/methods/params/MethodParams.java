@@ -1,5 +1,7 @@
 package com.github.programmerr47.chords.api.methods.params;
 
+import android.support.annotation.NonNull;
+
 /**
  * Common interface for all additional params of any methods.
  * Each method has some pack of parameters, so this interface declare
@@ -19,6 +21,7 @@ public interface MethodParams {
      *
      * @return string representation of all built params.
      */
+    @NonNull
     @SuppressWarnings("unused")
     String getParamsString();
 }

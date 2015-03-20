@@ -1,5 +1,10 @@
 package com.github.programmerr47.chords.api.methods;
 
+import android.support.annotation.NonNull;
+
+import com.github.programmerr47.chords.api.objects.Artist;
+import com.github.programmerr47.chords.api.objects.responses.ApiMethodResponse;
+
 import java.io.IOException;
 
 /**
@@ -14,7 +19,7 @@ import java.io.IOException;
  * @author Michael Spitsin
  * @since 2014-10-20
  */
-public interface ApiMethod<MethodResult> {
+public interface ApiMethod<ResponseObject> {
 
     /**
      * Starts executing method described by certain inheritor.
@@ -22,6 +27,7 @@ public interface ApiMethod<MethodResult> {
      * @return result of certain method. It can be some response object (for GET methods),
      * or it can be just null object (for some POST methods or e.t.c)
      */
+    @NonNull
     @SuppressWarnings("unused")
-    MethodResult execute() throws IOException;
+    ApiMethodResponse<ResponseObject> execute();
 }

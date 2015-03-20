@@ -8,6 +8,7 @@ package com.github.programmerr47.chords.api.utils;
  * @author Michael Spitsin
  * @since 2014-10-24
  */
+@SuppressWarnings("unused")
 public enum AvailableChords {
     ;
 
