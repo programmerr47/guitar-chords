@@ -30,6 +30,29 @@ public final class Artist {
         return artistArtUrl;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Artist artist = (Artist) o;
+
+        return artistName.equals(artist.artistName);
+    }
+
+    @Override
+    public String toString() {
+        return "Artist{" +
+                "artistName='" + artistName + '\'' +
+                ", artistArtUrl='" + artistArtUrl + '\'' +
+                ", chords=" + chords +
+                '}';
+    }
+
     @SuppressWarnings("unused")
     public List<SongChordsSummary> getChords() {
         return chords;

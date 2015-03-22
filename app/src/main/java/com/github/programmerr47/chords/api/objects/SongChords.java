@@ -71,6 +71,37 @@ public final class SongChords {
         return numberOfViews;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SongChords that = (SongChords) o;
+
+        return artistName.equals(that.artistName) && songName.equals(that.songName);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = artistName.hashCode();
+        result = 31 * result + songName.hashCode();
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "SongChords{" +
+                "songChords=" + songChords +
+                ", textWithChords='" + textWithChords + '\'' +
+                ", artistName='" + artistName + '\'' +
+                ", songName='" + songName + '\'' +
+                ", artistUrl='" + artistUrl + '\'' +
+                ", videoUrl='" + videoUrl + '\'' +
+                ", creationDate=" + creationDate +
+                ", numberOfViews=" + numberOfViews +
+                '}';
+    }
+
     public static final class Builder {
         private List<Chord> songChords;
         private String textWithChords;

@@ -31,7 +31,7 @@ public class ApiGetMethod<ResponseObject> implements ApiMethod<ResponseObject> {
 
     @NonNull
     @Override
-    public ApiMethodResponse<ResponseObject> execute() {
+    public ApiMethodResponse<ResponseObject> execute() throws Exception {
         if (mUrl == null) {
             DefaultApiMethodResponse.ResponseInfoBuilder additionalInfo = new DefaultApiMethodResponse.ResponseInfoBuilder()
                     .setReason(ApiMethodResponseReason.NO_URL)
@@ -47,6 +47,7 @@ public class ApiGetMethod<ResponseObject> implements ApiMethod<ResponseObject> {
             try {
                 URL url = new URL(fullUrl);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestProperty("User-Agent","Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36");
                 if (connection.getResponseCode() != 200) {
                     DefaultApiMethodResponse.ResponseInfoBuilder additionalInfo = new DefaultApiMethodResponse.ResponseInfoBuilder()
                             .setReason(ApiMethodResponseReason.ERROR_CONNECTION_CODE.formatReason(

@@ -23,6 +23,8 @@ public final class ArtistParser extends ParserFromHTML<Artist> {
 
     private static final String ARTIST_ART_ATTRIBUTE = "src";
 
+    private static final String CONTENT = "content-table";
+
     @Override
     protected Artist parseObjectFromDoc(Element element) {
         if (element == null) {
@@ -30,26 +32,27 @@ public final class ArtistParser extends ParserFromHTML<Artist> {
         }
 
         Artist.Builder resultObjectBuilder = new Artist.Builder();
+        Element content = element.getElementsByClass(CONTENT).first();
 
         //Trying to get artist title
-        Element artistInfo = element.getElementsByClass(ARTIST_INFO_CLASS).first();
+        Element artistInfo = content.getElementsByClass(ARTIST_INFO_CLASS).first();
         if (artistInfo != null) {
             Element artistTitleElement = artistInfo.getElementsByTag(ARTIST_TITLE_TAG).first();
             if (artistTitleElement != null) {
-                String artistTitle = artistTitleElement.val();
+                String artistTitle = artistTitleElement.text();
                 resultObjectBuilder.setArtistName(artistTitle);
             }
         }
 
         //Trying to get artist art
-        Element image = element.getElementsByTag(ARTIST_ART_TAG).first();
+        Element image = content.getElementsByTag(ARTIST_ART_TAG).first();
         if (image != null) {
             String url = image.attr(ARTIST_ART_ATTRIBUTE);
             resultObjectBuilder.setArtistArtUrl(url);
         }
 
         //Trying to get list of chords
-        Element items = element.getElementsByClass(ARTIST_CHORDS_CLASS).first();
+        Element items = content.getElementsByClass(ARTIST_CHORDS_CLASS).first();
         ParserFromHTML<SongChordsSummary> songChordsSummaryParser = getSongChordsSummaryParser();
         List<SongChordsSummary> parsingResult = songChordsSummaryParser.parseListFromDoc(items);
         resultObjectBuilder.setChords(parsingResult);

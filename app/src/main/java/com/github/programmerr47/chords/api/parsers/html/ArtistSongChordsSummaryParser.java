@@ -28,6 +28,7 @@ public final class ArtistSongChordsSummaryParser extends ParserFromHTML<SongChor
     private static final String VIEW_COUNT_CLASS = "number hidden-phone";
 
     private static final String URL_ATTRIBUTE = "href";
+    private static final String CLASS_ATTRIBUTE = "class";
 
     @Override
     protected SongChordsSummary parseObjectFromDoc(Element element) {
@@ -41,7 +42,7 @@ public final class ArtistSongChordsSummaryParser extends ParserFromHTML<SongChor
         Element title = element.getElementsByClass(SONG_TITLE_CLASS).first();
         if (title != null) {
             resultObjectBuilder
-                    .setSongName(title.val())
+                    .setSongName(title.text())
                     .setChordsUrl(title.attr(URL_ATTRIBUTE));
         }
 
@@ -55,16 +56,16 @@ public final class ArtistSongChordsSummaryParser extends ParserFromHTML<SongChor
         }
 
         //Trying to find video flag
-        Elements video = element.getElementsByClass(VIDEO_FlAG_CLASS);
+        Elements video = element.getElementsByAttributeValue(CLASS_ATTRIBUTE, VIDEO_FlAG_CLASS);
         if (video.size() > 0) {
             resultObjectBuilder.setHasVideo(true);
         }
 
         //Getting number of views
-        Element viewCount = element.getElementsByClass(VIEW_COUNT_CLASS).first();
+        Element viewCount = element.getElementsByAttributeValue(CLASS_ATTRIBUTE, VIEW_COUNT_CLASS).first();
         int count = 0;
         try {
-            count = Integer.parseInt(viewCount.val());
+            count = Integer.parseInt(viewCount.text().replaceAll(",", ""));
         } catch (NumberFormatException e) {
             //ignore
         }

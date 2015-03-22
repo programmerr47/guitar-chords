@@ -62,6 +62,29 @@ public final class SongChordsSummary {
         return numberOfViews;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SongChordsSummary that = (SongChordsSummary) o;
+
+        return artistName.equals(that.artistName) && songName.equals(that.songName);
+    }
+
+    @Override
+    public String toString() {
+        return "SongChordsSummary{" +
+                "songName='" + songName + '\'' +
+                ", artistName='" + artistName + '\'' +
+                ", chordsUrl='" + chordsUrl + '\'' +
+                ", coverThumbUrl='" + coverThumbUrl + '\'' +
+                ", isNew=" + isNew +
+                ", hasVideo=" + hasVideo +
+                ", numberOfViews=" + numberOfViews +
+                '}';
+    }
+
     public static final class Builder {
         private String songName;
         private String artistName;

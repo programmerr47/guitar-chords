@@ -8,6 +8,8 @@ import com.github.programmerr47.chords.api.parsers.html.ArtistParser;
 
 import junit.framework.TestCase;
 
+import java.nio.charset.MalformedInputException;
+
 /**
  * @author MichaelSpitsin
  * @since 2015-03-20
@@ -30,10 +32,6 @@ public class ApiGetMethodTest extends TestCase{
         getArtistMethod.setMethodResultParser(new ArtistParser());
         ApiMethodResponse<Artist> response = getArtistMethod.execute();
 
-        if (response.isResponseValid()) {
-            Log.d("TESTING", "Artist response is valid with object: " + response.getResponseObject());
-        } else {
-            Log.d("TESTING", "Artist response is not valid, because of reason: " + response.getReason());
-        }
+        //TODO add assertion
     }
 }

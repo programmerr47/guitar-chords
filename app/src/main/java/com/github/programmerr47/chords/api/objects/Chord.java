@@ -24,6 +24,24 @@ public final class Chord {
         return imageUrl;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Chord chord = (Chord) o;
+
+        return name.equals(chord.name);
+    }
+
+    @Override
+    public String toString() {
+        return "Chord{" +
+                "name='" + name + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                '}';
+    }
+
     public static final class Builder {
         private String name;
         private String imageUrl;

@@ -47,6 +47,27 @@ public final class ArtistSummary {
         return numberOfChords;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ArtistSummary artistSummary = (ArtistSummary) o;
+
+        return artistName.equals(artistSummary.artistName);
+    }
+
+    @Override
+    public String toString() {
+        return "ArtistSummary{" +
+                "artistName='" + artistName + '\'' +
+                ", artistUrl='" + artistUrl + '\'' +
+                ", coverThumbUrl='" + coverThumbUrl + '\'' +
+                ", numberOfViews=" + numberOfViews +
+                ", numberOfChords=" + numberOfChords +
+                '}';
+    }
+
     public static final class Builder {
         private String artistName;
         private String artistUrl;

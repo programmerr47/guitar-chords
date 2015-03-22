@@ -29,5 +29,5 @@ public interface ApiMethod<ResponseObject> {
      */
     @NonNull
     @SuppressWarnings("unused")
-    ApiMethodResponse<ResponseObject> execute();
+    ApiMethodResponse<ResponseObject> execute() throws Exception;
 }
