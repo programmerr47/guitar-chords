@@ -16,12 +16,16 @@ import java.util.List;
  */
 public final class SongParser extends ParserFromHTML<SongChords> {
 
-    private static final String ITEM_PROP_ATTRIBUTE = "itemprop";
     private static final String ID_ATTRIBUTE = "id";
+    private static final String ITEM_PROP_ATTRIBUTE = "itemprop";
+    private static final String URL_ATTRIBUTE = "href";
 
     private static final String ARTIST_ITEM_PROP = "byArtist";
-    private static final String TITLE_ITEM_PROP = "name";
     private static final String CHORDS_ITEM_PROP = "chordsBlock";
+    private static final String TITLE_ITEM_PROP = "name";
+
+    private static final String CLASS = "class";
+    private static final String NAVIGATION_BAR_CLASS = "b-nav hidden-phone";
 
     private static final String ALL_SONG_CHORDS_ID = "song_chords";
 
@@ -42,16 +46,24 @@ public final class SongParser extends ParserFromHTML<SongChords> {
         //Trying to get title
         Element title = element.getElementsByAttributeValue(ITEM_PROP_ATTRIBUTE, TITLE_ITEM_PROP).first();
         if (title != null) {
-            resultObjectBuilder.setSongName(title.val());
+            resultObjectBuilder.setSongName(title.text());
         }
 
         //Trying to get text with chords
         Element text = element.getElementsByAttributeValue(ITEM_PROP_ATTRIBUTE, CHORDS_ITEM_PROP).first();
         if (text != null) {
-            resultObjectBuilder.setTextWithChords(text.val());
+            resultObjectBuilder.setTextWithChords(text.text());
         }
 
-        //TODO think about artist url
+        //Trying to get artist url
+        Element navigationUrls = element.getElementsByAttributeValue(CLASS, NAVIGATION_BAR_CLASS).first();
+        if (navigationUrls != null) {
+            Element artistUrl = element.children().last();
+
+            if (artistUrl != null) {
+                resultObjectBuilder.setArtistUrl(artistUrl.attr(URL_ATTRIBUTE));
+            }
+        }
 
         //Trying to get chords
         Element chords = element.getElementsByAttributeValue(ID_ATTRIBUTE, ALL_SONG_CHORDS_ID).first();
