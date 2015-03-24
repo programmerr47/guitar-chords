@@ -32,20 +32,4 @@ public interface ParserFrom<ParseResult> {
      * @return object if it can be even partially created (when part of objectIS is valid and part is invalid) of null, if not
      */
     ParseResult parseObjectFrom(InputStream objectIS);
-
-    /**
-     * Gets {@link List} of objects from {@link String} that represented response with array of result objects.
-     *
-     * @param arrayStr response string
-     * @return list of objects if it can be even partially created (when part of arrayStr is valid and part is invalid) of null, if not
-     */
-    List<ParseResult> parseListFrom(String arrayStr);
-
-    /**
-     * Gets {@link List} of objects from {@link InputStream} that represented response with array of result objects.
-     *
-     * @param arrayIS input stream
-     * @return list of objects if it can be even partially created (when part of arrayIS is valid and part is invalid) of null, if not
-     */
-    List<ParseResult> parseListFrom(InputStream arrayIS);
 }

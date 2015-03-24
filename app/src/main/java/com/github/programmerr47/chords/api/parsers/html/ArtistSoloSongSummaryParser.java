@@ -5,23 +5,23 @@ import com.github.programmerr47.chords.api.objects.SongChordsSummary;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Default parser for {@link SongChordsSummary} that uses artist page for parsing.
+ * <br><br>
+ * <strong>Note:</strong>
+ * This parser parses only one of songs from artist page and return only one instance of
+ * {@link SongChordsSummary}, so default purpose of this parser is being used by
+ * {@link ArtistSongSummariesParser}, that must parse all list of songs
+ * in artist page.
  *
  * @author Michael Spitsin
  * @since 2014-10-29
  */
-public final class ArtistSongChordsSummaryParser extends ParserFromHTML<SongChordsSummary>{
+public final class ArtistSoloSongSummaryParser extends ParserFromHTML<SongChordsSummary>{
 
-    private static final String ITEMS_TAG = "table";
-    private static final String ITEMS_BODY_TAG = "tbody";
     private static final String ITEM_TAG = "tr";
     private static final String SPAN_TAG = "span";
 
-    private static final String ITEMS_CLASS = "items";
     private static final String NEW_FLAG_CLASS = "flag flag_new";
     private static final String VIDEO_FlAG_CLASS = "fa fa-youtube-play";
     private static final String SONG_TITLE_CLASS = "g-link";
@@ -72,35 +72,5 @@ public final class ArtistSongChordsSummaryParser extends ParserFromHTML<SongChor
         resultObjectBuilder.setNumberOfViews(count);
 
         return resultObjectBuilder.build();
-    }
-
-    @Override
-    protected List<SongChordsSummary> parseListFromDoc(Element element) {
-        if (element == null) {
-            return null;
-        }
-
-        List<SongChordsSummary> result = new ArrayList<SongChordsSummary>();
-        Elements tables = element.getElementsByTag(ITEMS_TAG);
-
-        for (Element table : tables) {
-            if (ITEMS_CLASS.equals(table.className())) {
-                Element tbody = table.getElementsByTag(ITEMS_BODY_TAG).first();
-
-                if (tbody != null) {
-                    Elements items = tbody.children();
-
-                    for (Element item : items) {
-                        SongChordsSummary itemObject = parseObjectFromDoc(item);
-
-                        if (itemObject != null) {
-                            result.add(itemObject);
-                        }
-                    }
-                }
-            }
-        }
-
-        return result;
     }
 }

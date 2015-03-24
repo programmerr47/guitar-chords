@@ -10,57 +10,35 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Additional to {@link SongParser} parser for {@link Chord} from song page.
+ * Parser for {@link Chord} that uses as source song page. This parser parses whole list of
+ * chords in those types of pages and returns list of results.
  *
  * @author Michael Spitsin
- * @since 2014-11-06
+ * @since 2015-03-24
  */
-public final class ChordsParser extends ParserFromHTML<Chord>{
+public class ChordsParser extends ParserFromHTML<List<Chord>> {
 
-    private static final String CHORD_TAG = "img";
     private static final String CHORDS_TAG = "div";
 
     private static final String CHORDS_ATTRIBUTE = "id";
-    private static final String CHORD_IMAGE_URL_ATTRIBUTE = "src";
-    private static final String CHORD_NAME_ATTRIBUTE = "alt";
 
     private static final String CHORDS_IDENTIFICATOR = "song_chords";
 
     @Override
-    protected Chord parseObjectFromDoc(Element element) {
-        if ((element == null) || !CHORD_TAG.equals(element.tagName())) {
-            return null;
-        }
-
-        Chord.Builder resultObjectBuilder = new Chord.Builder();
-
-        //Getting url to image representation of chord
-        String imageUrl = element.attr(CHORD_IMAGE_URL_ATTRIBUTE);
-        //Getting full description for chord
-        String descr = element.attr(CHORD_NAME_ATTRIBUTE);
-        String name = getNameChordFromDescription(descr);
-
-        resultObjectBuilder
-                .setImageUrl(imageUrl)
-                .setName(name);
-
-        return resultObjectBuilder.build();
-    }
-
-    @Override
-    protected List<Chord> parseListFromDoc(Element element) {
+    protected List<Chord> parseObjectFromDoc(Element element) {
         if (element == null) {
             return null;
         }
 
-        List<Chord> result = new ArrayList<Chord>();
+        ParserFromHTML<Chord> chordParser = getSoloChordParser();
+        List<Chord> result = new ArrayList<>();
         Element chords = element.getElementsByTag(CHORDS_TAG).first();
 
         if ((chords != null) && isChordsValid(chords)) {
             Elements items = chords.children();
 
             for (Element item : items) {
-                Chord itemObject = parseObjectFromDoc(item);
+                Chord itemObject = chordParser.parseObjectFromDoc(item);
 
                 if (itemObject != null) {
                     result.add(itemObject);
@@ -85,16 +63,11 @@ public final class ChordsParser extends ParserFromHTML<Chord>{
     }
 
     /**
-     * Parses description, that always is "Аккорд 'name of chord'".
-     * Yea, it is hardcode. But all off this html parses is hardcode.
-     * So it is allocated in some function for fast changing if html
-     * layout will be changed.
+     * Used as method for fast and harmless changing of SongChords parser.
      *
-     * @param description chords description
-     * @return only chords name
+     * @return song chords summary parser
      */
-    private String getNameChordFromDescription(String description) {
-        String[] words = description.split(" ");
-        return words[1];
+    private ParserFromHTML<Chord> getSoloChordParser() {
+        return new SoloChordParser();
     }
 }

@@ -2,7 +2,6 @@ package com.github.programmerr47.chords.api.parsers.html;
 
 import com.github.programmerr47.chords.api.objects.Chord;
 import com.github.programmerr47.chords.api.objects.SongChords;
-import com.github.programmerr47.chords.api.objects.SongChordsSummary;
 
 import org.jsoup.nodes.Element;
 
@@ -14,7 +13,7 @@ import java.util.List;
  * @author Michael Spitsin
  * @since 2014-11-06
  */
-public final class SongParser extends ParserFromHTML<SongChords> {
+public final class SongPageParser extends ParserFromHTML<SongChords> {
 
     private static final String ID_ATTRIBUTE = "id";
     private static final String ITEM_PROP_ATTRIBUTE = "itemprop";
@@ -67,8 +66,8 @@ public final class SongParser extends ParserFromHTML<SongChords> {
 
         //Trying to get chords
         Element chords = element.getElementsByAttributeValue(ID_ATTRIBUTE, ALL_SONG_CHORDS_ID).first();
-        ParserFromHTML<Chord> chordsParser = getChordsParser();
-        List<Chord> chordList = chordsParser.parseListFromDoc(chords);
+        ParserFromHTML<List<Chord>> chordsParser = getChordsParser();
+        List<Chord> chordList = chordsParser.parseObjectFromDoc(chords);
         resultObjectBuilder.setSongChords(chordList);
 
         //TODO finish
@@ -76,17 +75,12 @@ public final class SongParser extends ParserFromHTML<SongChords> {
         return resultObjectBuilder.build();
     }
 
-    @Override
-    protected List<SongChords> parseListFromDoc(Element element) {
-        throw new UnsupportedOperationException("Cannot parse list of artist pages");
-    }
-
     /**
      * Used as method for fast and harmless changing of Chords parser.
      *
      * @return song chords summary parser
      */
-    private ParserFromHTML<Chord> getChordsParser() {
+    private ParserFromHTML<List<Chord>> getChordsParser() {
         return new ChordsParser();
     }
 }

@@ -13,7 +13,7 @@ import java.util.List;
  * @author Michael Spitsin
  * @since 2014-10-31
  */
-public final class ArtistParser extends ParserFromHTML<Artist> {
+public final class ArtistPageParser extends ParserFromHTML<Artist> {
 
     private static final String ARTIST_ART_TAG = "img";
     private static final String ARTIST_TITLE_TAG = "h1";
@@ -53,16 +53,11 @@ public final class ArtistParser extends ParserFromHTML<Artist> {
 
         //Trying to get list of chords
         Element items = content.getElementsByClass(ARTIST_CHORDS_CLASS).first();
-        ParserFromHTML<SongChordsSummary> songChordsSummaryParser = getSongChordsSummaryParser();
-        List<SongChordsSummary> parsingResult = songChordsSummaryParser.parseListFromDoc(items);
+        ParserFromHTML<List<SongChordsSummary>> songChordsSummaryParser = getSongChordsSummaryParser();
+        List<SongChordsSummary> parsingResult = songChordsSummaryParser.parseObjectFromDoc(items);
         resultObjectBuilder.setChords(parsingResult);
 
         return resultObjectBuilder.build();
-    }
-
-    @Override
-    protected List<Artist> parseListFromDoc(Element element) {
-        throw new UnsupportedOperationException("Cannot parse list of artist pages");
     }
 
     /**
@@ -70,7 +65,7 @@ public final class ArtistParser extends ParserFromHTML<Artist> {
      *
      * @return song chords summary parser
      */
-    private ParserFromHTML<SongChordsSummary> getSongChordsSummaryParser() {
-        return new ArtistSongChordsSummaryParser();
+    private ParserFromHTML<List<SongChordsSummary>> getSongChordsSummaryParser() {
+        return new ArtistSongSummariesParser();
     }
 }

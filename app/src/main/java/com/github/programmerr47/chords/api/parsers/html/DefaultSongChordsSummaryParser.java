@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Default parser for {@link SongChordsSummary} that uses "popular chords" page
- * and "new chords" page for parsing.
+ * Default parser for {@link SongChordsSummary} that uses most of pages with song summaries to
+ * parse like "popular songs" page, "new songs" page, "search result" page etc.
  *
  * @author Michael Spitsin
  * @since 2014-10-28
@@ -50,13 +50,13 @@ public final class DefaultSongChordsSummaryParser extends ParserFromHTML<SongCho
         return resultObjectBuilder.build();
     }
 
-    @Override
+    //TODO replace to separate parser
     protected List<SongChordsSummary> parseListFromDoc(Element element) {
         if (element == null) {
             return null;
         }
 
-        List<SongChordsSummary> result = new ArrayList<SongChordsSummary>();
+        List<SongChordsSummary> result = new ArrayList<>();
         Elements tables = element.getElementsByTag(ITEMS_TAG);
 
         for (Element table : tables) {

@@ -38,21 +38,6 @@ public abstract class ParserFromHTML<ParseResult> implements ParserFrom<ParseRes
         return parseObjectFromDoc(body);
     }
 
-    @Override
-    public List<ParseResult> parseListFrom(String arrayStr) {
-        Document document = Jsoup.parse(arrayStr);
-        Element body = document.body();
-        return parseListFromDoc(body);
-    }
-
-    @Override
-    public List<ParseResult> parseListFrom(InputStream arrayIS) {
-        String arrayStr = Util.covertInputStreamToString(arrayIS);
-        Document document = Jsoup.parse(arrayStr);
-        Element body = document.body();
-        return parseListFromDoc(body);
-    }
-
     /**
      * Gets object from {@link Element} that represented handled with special lib response.
      * For parsing HTMLs it is decided to use external lib {@code org.jsoup}.
@@ -60,19 +45,7 @@ public abstract class ParserFromHTML<ParseResult> implements ParserFrom<ParseRes
      * Fro more information use: http://jsoup.org/
      *
      * @param element given document
-     * @return object if it can be even partially created (when part of document is valid and part is invalid) of null, if not
+     * @return object if it can be even partially created (when part of document is valid and part is invalid) or null, if not
      */
     protected abstract ParseResult parseObjectFromDoc(Element element);
-
-
-    /**
-     * Gets {@link List} of objects from {@link Element} that represented response with array of result objects.
-     * For parsing HTMLs it is decided to use external lib {@code org.jsoup}.
-     * <br><br>
-     * Fro more information use: http://jsoup.org/
-     *
-     * @param element given document
-     * @return list of objects if it can be even partially created (when part of document is valid and part is invalid) of null, if not
-     */
-    protected abstract List<ParseResult> parseListFromDoc(Element element);
 }

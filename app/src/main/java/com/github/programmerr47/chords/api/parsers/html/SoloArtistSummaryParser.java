@@ -5,23 +5,24 @@ import com.github.programmerr47.chords.api.objects.ArtistSummary;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * Parser for {@link ArtistSummary} that uses as source now only "popular artists" page.
+ * Parser for {@link ArtistSummary} that uses as source now for "popular artists" page
+ * for example or for "artists on letter <n>" page.
+ * <br><br>
+ * <strong>Note:</strong>
+ * This parser parses only one artist from list of artist, that stored in pages like
+ * "popular artists" page and return only one instance of {@link ArtistSummary}.
+ * So default purpose of this parser is being used by {@link ArtistSummariesParser},
+ * that must parse entire list of artists.
  *
  * @author Michael Spitsin
  * @since 2014-10-30
  */
-public final class ArtistSummaryParser extends ParserFromHTML<ArtistSummary> {
+public final class SoloArtistSummaryParser extends ParserFromHTML<ArtistSummary> {
 
-    private static final String ITEMS_TAG = "table";
-    private static final String ITEMS_BODY_TAG = "tbody";
     private static final String ITEM_TAG = "tr";
     private static final String IMAGE_TAG = "img";
 
-    private static final String ITEMS_CLASS = "items";
     private static final String ITEM_INFO_CLASS = "artist_name";
     private static final String ARTIST_CLASS = "artist";
     private static final String NUMBER_CLASS = "number";
@@ -47,36 +48,6 @@ public final class ArtistSummaryParser extends ParserFromHTML<ArtistSummary> {
         parserNumbers(element, resultObjectBuilder);
 
         return resultObjectBuilder.build();
-    }
-
-    @Override
-    protected List<ArtistSummary> parseListFromDoc(Element element) {
-        if (element == null) {
-            return null;
-        }
-
-        List<ArtistSummary> result = new ArrayList<ArtistSummary>();
-        Elements tables = element.getElementsByTag(ITEMS_TAG);
-
-        for (Element table : tables) {
-            if (ITEMS_CLASS.equals(table.className())) {
-                Element tbody = table.getElementsByTag(ITEMS_BODY_TAG).first();
-
-                if (tbody != null) {
-                    Elements items = tbody.children();
-
-                    for (Element item : items) {
-                        ArtistSummary itemObject = parseObjectFromDoc(item);
-
-                        if (itemObject != null) {
-                            result.add(itemObject);
-                        }
-                    }
-                }
-            }
-        }
-
-        return result;
     }
 
     private String getItemImageUrl(Element item) {
