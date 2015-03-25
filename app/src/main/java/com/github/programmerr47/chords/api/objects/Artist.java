@@ -12,7 +12,7 @@ import java.util.List;
 public final class Artist {
     private String artistName;
     private String artistArtUrl;
-    private List<SongChordsSummary> chords;
+    private List<SongSummary> chords;
 
     private Artist(Builder builder) {
         this.artistName = builder.artistName;
@@ -54,14 +54,14 @@ public final class Artist {
     }
 
     @SuppressWarnings("unused")
-    public List<SongChordsSummary> getChords() {
+    public List<SongSummary> getChords() {
         return chords;
     }
 
     public static final class Builder {
         private String artistName;
         private String artistArtUrl;
-        private List<SongChordsSummary> chords;
+        private List<SongSummary> chords;
 
         public Builder setArtistName(String artistName) {
             this.artistName = artistName;
@@ -73,7 +73,7 @@ public final class Artist {
             return this;
         }
 
-        public Builder setChords(List<SongChordsSummary> chords) {
+        public Builder setChords(List<SongSummary> chords) {
             this.chords = chords;
             return this;
         }

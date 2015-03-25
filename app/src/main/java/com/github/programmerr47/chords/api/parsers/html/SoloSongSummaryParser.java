@@ -1,30 +1,28 @@
 package com.github.programmerr47.chords.api.parsers.html;
 
-import com.github.programmerr47.chords.api.objects.SongChordsSummary;
+import com.github.programmerr47.chords.api.objects.SongSummary;
 
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * Default parser for {@link SongChordsSummary} that uses most of pages with song summaries to
+ * Default parser for {@link SongSummary} that uses most of pages with song summaries to
  * parse like "popular songs" page, "new songs" page, "search result" page etc.
+ * <br><br>
+ * <strong>Note:</strong>
+ * This parser parses only one summary from list of song summaries, that stored in "new songs"
+ * page and etc. and returns only one instance of {@link SongSummary}. So default purpose of this parser
+ * is being used by {@link SongSummariesParser}, that must parse entire list of song summaries.
  *
  * @author Michael Spitsin
  * @since 2014-10-28
  */
-@SuppressWarnings("unused")
-public final class DefaultSongChordsSummaryParser extends ParserFromHTML<SongChordsSummary> {
+public final class SoloSongSummaryParser extends ParserFromHTML<SongSummary> {
 
-    private static final String ITEMS_TAG = "table";
-    private static final String ITEMS_BODY_TAG = "tbody";
     private static final String ITEM_TAG = "tr";
     private static final String IMAGE_TAG = "img";
     private static final String SPAN_TAG = "span";
 
-    private static final String ITEMS_CLASS = "items";
     private static final String ITEM_INFO_CLASS = "artist_name";
     private static final String ARTIST_CLASS = "artist";
     private static final String NEW_FLAG_CLASS = "flag flag_new";
@@ -33,12 +31,12 @@ public final class DefaultSongChordsSummaryParser extends ParserFromHTML<SongCho
     private static final String URL_ATTRIBUTE = "href";
 
     @Override
-    protected SongChordsSummary parseObjectFromDoc(Element element) {
+    protected SongSummary parseObjectFromDoc(Element element) {
         if ((element == null) || !ITEM_TAG.equals(element.tagName())) {
             return null;
         }
 
-        SongChordsSummary.Builder resultObjectBuilder = new SongChordsSummary.Builder();
+        SongSummary.Builder resultObjectBuilder = new SongSummary.Builder();
         resultObjectBuilder.setCoverThumbUrl(getItemImageUrl(element));
 
         Element chordsInfo = element.getElementsByClass(ITEM_INFO_CLASS).first();
@@ -48,36 +46,6 @@ public final class DefaultSongChordsSummaryParser extends ParserFromHTML<SongCho
         }
 
         return resultObjectBuilder.build();
-    }
-
-    //TODO replace to separate parser
-    protected List<SongChordsSummary> parseListFromDoc(Element element) {
-        if (element == null) {
-            return null;
-        }
-
-        List<SongChordsSummary> result = new ArrayList<>();
-        Elements tables = element.getElementsByTag(ITEMS_TAG);
-
-        for (Element table : tables) {
-            if (ITEMS_CLASS.equals(table.className())) {
-                Element tbody = table.getElementsByTag(ITEMS_BODY_TAG).first();
-
-                if (tbody != null) {
-                    Elements items = tbody.children();
-
-                    for (Element item : items) {
-                        SongChordsSummary itemObject = parseObjectFromDoc(item);
-
-                        if (itemObject != null) {
-                            result.add(itemObject);
-                        }
-                    }
-                }
-            }
-        }
-
-        return result;
     }
 
     private String getItemImageUrl(Element item) {
@@ -90,7 +58,7 @@ public final class DefaultSongChordsSummaryParser extends ParserFromHTML<SongCho
         return null;
     }
 
-    private void parseInfo(Element chordsInfo, SongChordsSummary.Builder resultObjectBuilder) {
+    private void parseInfo(Element chordsInfo, SongSummary.Builder resultObjectBuilder) {
         Elements artistTitle = chordsInfo.getElementsByClass(ARTIST_CLASS);
         int artistTitleLength = artistTitle.size();
 

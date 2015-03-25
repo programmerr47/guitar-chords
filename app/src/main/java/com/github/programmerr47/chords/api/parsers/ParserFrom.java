@@ -1,7 +1,6 @@
 package com.github.programmerr47.chords.api.parsers;
 
 import java.io.InputStream;
-import java.util.List;
 
 /**
  * Basic interface for all parsers from some response from AmDm.ru to {@code ParserResult} that

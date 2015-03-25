@@ -9,7 +9,7 @@ package com.github.programmerr47.chords.api.objects;
  * @since 2014-10-24
  */
 //TODO Add artist url if has
-public final class SongChordsSummary {
+public final class SongSummary {
     private String songName;
     private String artistName;
     private String chordsUrl;
@@ -19,7 +19,7 @@ public final class SongChordsSummary {
     private boolean hasVideo;
     private int numberOfViews;
 
-    private SongChordsSummary(Builder builder) {
+    private SongSummary(Builder builder) {
         this.songName = builder.songName;
         this.artistName = builder.artistName;
         this.chordsUrl = builder.chordsUrl;
@@ -44,10 +44,12 @@ public final class SongChordsSummary {
         return chordsUrl;
     }
 
+    @SuppressWarnings("unused")
     public String getCoverThumbUrl() {
         return coverThumbUrl;
     }
 
+    @SuppressWarnings("unused")
     public boolean isNew() {
         return isNew;
     }
@@ -67,7 +69,7 @@ public final class SongChordsSummary {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        SongChordsSummary that = (SongChordsSummary) o;
+        SongSummary that = (SongSummary) o;
 
         return artistName.equals(that.artistName) && songName.equals(that.songName);
     }
@@ -129,8 +131,8 @@ public final class SongChordsSummary {
             return this;
         }
 
-        public SongChordsSummary build() {
-            return new SongChordsSummary(this);
+        public SongSummary build() {
+            return new SongSummary(this);
         }
     }
 }

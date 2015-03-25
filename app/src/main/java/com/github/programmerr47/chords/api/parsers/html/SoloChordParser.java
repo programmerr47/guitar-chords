@@ -3,14 +3,9 @@ package com.github.programmerr47.chords.api.parsers.html;
 import com.github.programmerr47.chords.api.objects.Chord;
 
 import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 /**
- * Additional to {@link SongPageParser} parser for {@link Chord} from song page.
+ * Additional to {@link SongParser} parser for {@link Chord} from song page.
  * <br><br>
  * <strong>Note:</strong>
  * This parser parses only one chord from list of chords, that stored in song page
@@ -38,8 +33,8 @@ public final class SoloChordParser extends ParserFromHTML<Chord>{
         //Getting url to image representation of chord
         String imageUrl = element.attr(CHORD_IMAGE_URL_ATTRIBUTE);
         //Getting full description for chord
-        String descr = element.attr(CHORD_NAME_ATTRIBUTE);
-        String name = getNameChordFromDescription(descr);
+        String description = element.attr(CHORD_NAME_ATTRIBUTE);
+        String name = getNameChordFromDescription(description);
 
         resultObjectBuilder
                 .setImageUrl(imageUrl)

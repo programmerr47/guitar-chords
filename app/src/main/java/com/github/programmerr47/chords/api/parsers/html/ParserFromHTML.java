@@ -8,7 +8,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 import java.io.InputStream;
-import java.util.List;
 
 /**
  * Implements logic of working with HTML pages. Parse HTML layout and build new object(s).

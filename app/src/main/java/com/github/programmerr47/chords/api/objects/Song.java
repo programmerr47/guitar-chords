@@ -1,5 +1,6 @@
 package com.github.programmerr47.chords.api.objects;
 
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -10,17 +11,17 @@ import java.util.List;
  * @author Michael Spitsin
  * @since 2014-10-23
  */
-public final class SongChords {
+public final class Song {
     private List<Chord> songChords;
     private String textWithChords;
     private String artistName;
     private String songName;
     private String artistUrl;
     private String videoUrl;
-    private GregorianCalendar creationDate;
+    private Calendar creationDate;
     private int numberOfViews;
 
-    private SongChords(Builder builder) {
+    private Song(Builder builder) {
         this.songChords = builder.songChords;
         this.textWithChords = builder.textWithChords;
         this.artistName = builder.artistName;
@@ -62,7 +63,7 @@ public final class SongChords {
     }
 
     @SuppressWarnings("unused")
-    public GregorianCalendar getCreationDate() {
+    public Calendar getCreationDate() {
         return creationDate;
     }
 
@@ -76,7 +77,7 @@ public final class SongChords {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        SongChords that = (SongChords) o;
+        Song that = (Song) o;
 
         return artistName.equals(that.artistName) && songName.equals(that.songName);
     }
@@ -109,7 +110,7 @@ public final class SongChords {
         private String songName;
         private String artistUrl;
         private String videoUrl;
-        private GregorianCalendar creationDate;
+        private Calendar creationDate;
         private int numberOfViews;
 
         public Builder setSongChords(List<Chord> songChords) {
@@ -147,7 +148,7 @@ public final class SongChords {
             return this;
         }
 
-        public Builder setCreationDate(GregorianCalendar creationDate) {
+        public Builder setCreationDate(Calendar creationDate) {
             this.creationDate = creationDate;
             return this;
         }
@@ -157,8 +158,8 @@ public final class SongChords {
             return this;
         }
 
-        public SongChords build() {
-            return new SongChords(this);
+        public Song build() {
+            return new Song(this);
         }
     }
 }

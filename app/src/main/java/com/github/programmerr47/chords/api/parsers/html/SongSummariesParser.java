@@ -9,13 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Default parser for {@link com.github.programmerr47.chords.api.objects.SongSummary} that uses artist page for parsing.
- * This parser parses whole list of songs in artist page and returns list of results.
+ * Default parser for {@link SongSummary} that uses most of pages with song summaries to
+ * parse like "popular songs" page, "new songs" page, "search result" page etc. This parser
+ * parses whole list of songs in those types of pages and returns list of results.
  *
  * @author Michael Spitsin
- * @since 2015-03-24
+ * @since 2015-03-25
  */
-public final class ArtistSongSummariesParser extends ParserFromHTML<List<SongSummary>> {
+public class SongSummariesParser extends ParserFromHTML<List<SongSummary>> {
 
     private static final String ITEMS_TAG = "table";
     private static final String ITEMS_BODY_TAG = "tbody";
@@ -28,7 +29,7 @@ public final class ArtistSongSummariesParser extends ParserFromHTML<List<SongSum
             return null;
         }
 
-        ParserFromHTML<SongSummary> songChordsSummaryParser = getSongChordsSummaryParser();
+        ParserFromHTML<SongSummary> songSummaryParser = getSoloSongSummaryParser();
         List<SongSummary> result = new ArrayList<>();
         Elements tables = element.getElementsByTag(ITEMS_TAG);
 
@@ -40,7 +41,7 @@ public final class ArtistSongSummariesParser extends ParserFromHTML<List<SongSum
                     Elements items = tbody.children();
 
                     for (Element item : items) {
-                        SongSummary itemObject = songChordsSummaryParser.parseObjectFromDoc(item);
+                        SongSummary itemObject = songSummaryParser.parseObjectFromDoc(item);
 
                         if (itemObject != null) {
                             result.add(itemObject);
@@ -58,7 +59,7 @@ public final class ArtistSongSummariesParser extends ParserFromHTML<List<SongSum
      *
      * @return song chords summary parser
      */
-    private ParserFromHTML<SongSummary> getSongChordsSummaryParser() {
-        return new ArtistSoloSongSummaryParser();
+    private ParserFromHTML<SongSummary> getSoloSongSummaryParser() {
+        return new SoloSongSummaryParser();
     }
 }

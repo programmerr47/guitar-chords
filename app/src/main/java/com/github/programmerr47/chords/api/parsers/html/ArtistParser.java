@@ -1,7 +1,7 @@
 package com.github.programmerr47.chords.api.parsers.html;
 
 import com.github.programmerr47.chords.api.objects.Artist;
-import com.github.programmerr47.chords.api.objects.SongChordsSummary;
+import com.github.programmerr47.chords.api.objects.SongSummary;
 
 import org.jsoup.nodes.Element;
 
@@ -13,7 +13,7 @@ import java.util.List;
  * @author Michael Spitsin
  * @since 2014-10-31
  */
-public final class ArtistPageParser extends ParserFromHTML<Artist> {
+public final class ArtistParser extends ParserFromHTML<Artist> {
 
     private static final String ARTIST_ART_TAG = "img";
     private static final String ARTIST_TITLE_TAG = "h1";
@@ -53,8 +53,8 @@ public final class ArtistPageParser extends ParserFromHTML<Artist> {
 
         //Trying to get list of chords
         Element items = content.getElementsByClass(ARTIST_CHORDS_CLASS).first();
-        ParserFromHTML<List<SongChordsSummary>> songChordsSummaryParser = getSongChordsSummaryParser();
-        List<SongChordsSummary> parsingResult = songChordsSummaryParser.parseObjectFromDoc(items);
+        ParserFromHTML<List<SongSummary>> songChordsSummaryParser = getSongChordsSummaryParser();
+        List<SongSummary> parsingResult = songChordsSummaryParser.parseObjectFromDoc(items);
         resultObjectBuilder.setChords(parsingResult);
 
         return resultObjectBuilder.build();
@@ -65,7 +65,7 @@ public final class ArtistPageParser extends ParserFromHTML<Artist> {
      *
      * @return song chords summary parser
      */
-    private ParserFromHTML<List<SongChordsSummary>> getSongChordsSummaryParser() {
+    private ParserFromHTML<List<SongSummary>> getSongChordsSummaryParser() {
         return new ArtistSongSummariesParser();
     }
 }
