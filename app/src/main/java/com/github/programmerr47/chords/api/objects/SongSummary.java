@@ -12,7 +12,7 @@ package com.github.programmerr47.chords.api.objects;
 public final class SongSummary {
     private String songName;
     private String artistName;
-    private String chordsUrl;
+    private String songUrl;
     private String coverThumbUrl;
     //---Optional params---//
     private boolean isNew;
@@ -22,7 +22,7 @@ public final class SongSummary {
     private SongSummary(Builder builder) {
         this.songName = builder.songName;
         this.artistName = builder.artistName;
-        this.chordsUrl = builder.chordsUrl;
+        this.songUrl = builder.chordsUrl;
         this.coverThumbUrl = builder.coverThumbUrl;
         this.isNew = builder.isNew;
         this.hasVideo = builder.hasVideo;
@@ -40,8 +40,8 @@ public final class SongSummary {
     }
 
     @SuppressWarnings("unused")
-    public String getChordsUrl() {
-        return chordsUrl;
+    public String getSongUrl() {
+        return songUrl;
     }
 
     @SuppressWarnings("unused")
@@ -79,7 +79,7 @@ public final class SongSummary {
         return "SongChordsSummary{" +
                 "songName='" + songName + '\'' +
                 ", artistName='" + artistName + '\'' +
-                ", chordsUrl='" + chordsUrl + '\'' +
+                ", songUrl='" + songUrl + '\'' +
                 ", coverThumbUrl='" + coverThumbUrl + '\'' +
                 ", isNew=" + isNew +
                 ", hasVideo=" + hasVideo +

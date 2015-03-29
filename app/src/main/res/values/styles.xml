@@ -1,18 +1,27 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="ChordsTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/blue_vivid</item>
-        <item name="colorPrimaryDark">@color/blue_strong</item>
-        <item name="colorAccent">@color/cyan_light</item>
+    <!-- base application theme. -->
+    <style name="chordstheme" parent="theme.appcompat.light.noactionbar">
+        <item name="colorprimary">@color/blue_vivid</item>
+        <item name="colorprimarydark">@color/blue_strong</item>
+        <item name="coloraccent">@color/cyan_light</item>
+
+        <item name="android:textcolorprimary">@color/abc_primary_text_material_dark</item>
+        <item name="android:textcolorsecondary">@color/abc_secondary_text_material_dark</item>
     </style>
 
-    <style name="DrawerTextPrimary" parent="android:TextAppearance.Holo.Large">
-        <item name="android:textColor">@color/gray_dark_very_transparent_light</item>
+    <style name="drawertextprimary" parent="android:textappearance.holo.large">
+        <item name="android:textcolor">@color/gray_dark_very_transparent_light</item>
     </style>
 
-    <style name="DrawerTextSecondary" parent="android:TextAppearance.Holo.Small">
-        <item name="android:textColor">@color/gray_dark_very_transparent_light</item>
+    <style name="drawertextsecondary" parent="android:textappearance.holo.small">
+        <item name="android:textcolor">@color/gray_dark_very_transparent_light</item>
+    </style>
+
+    <style name="chordstheme.popup" parent="theme.appcompat.light.noactionbar">
+        <item name="android:colorbackground">@color/blue_vivid</item>
+        <item name="android:popupbackground">@color/blue_vivid</item>
+        <item name="android:textcolor">@color/white_transparent_light</item>
     </style>
 
 </resources>
