@@ -106,7 +106,7 @@ public class NavigationDrawerFragment extends Fragment implements DrawerSearchEl
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mDrawerAdapterElements = new ArrayList<DrawerElement>();
+        mDrawerAdapterElements = new ArrayList<>();
         mDrawerAdapterElements.add(new DrawerSearchElement.Builder(getActivity()).setOnSearchListener(this).setName(DrawerElementName.SEARCH).build());
         mDrawerAdapterElements.add(new DrawerPrimaryElement.Builder(getActivity()).setIcon(R.drawable.ic_launcher).setTitle(R.string.NEW_CHORDS).setName(DrawerElementName.NEW_CHORDS).build());
         mDrawerAdapterElements.add(new DrawerPrimaryElement.Builder(getActivity()).setIcon(R.drawable.ic_launcher).setTitle(R.string.POPULAR_CHORDS).setName(DrawerElementName.POPULAR_CHORDS).build());
@@ -116,7 +116,7 @@ public class NavigationDrawerFragment extends Fragment implements DrawerSearchEl
         mDrawerAdapterElements.add(new DrawerSecondaryElement.Builder(getActivity()).setIcon(R.drawable.ic_launcher).setTitle(R.string.ABOUT).setName(DrawerElementName.ABOUT).build());
         mDrawerAdapterElements.add(new DrawerSecondaryElement.Builder(getActivity()).setIcon(R.drawable.ic_launcher).setTitle(R.string.SEND_FEEDBACK).setName(DrawerElementName.SEND_FEEDBACK).build());
 
-        mDrawerAdapter = new SimpleAdapter<DrawerElement>(getActivity(), mDrawerAdapterElements);
+        mDrawerAdapter = new SimpleAdapter<>(getActivity(), mDrawerAdapterElements);
 
         mDrawerListView = (ListView) inflater.inflate(R.layout.fragment_drawer_list, container, false);
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -170,6 +170,7 @@ public class NavigationDrawerFragment extends Fragment implements DrawerSearchEl
                 }
 
                 getActivity().invalidateOptionsMenu(); // calls onPrepareOptionsMenu()
+                syncState();
             }
 
             @Override
@@ -189,6 +190,7 @@ public class NavigationDrawerFragment extends Fragment implements DrawerSearchEl
                 }
 
                 getActivity().invalidateOptionsMenu(); // calls onPrepareOptionsMenu()
+                syncState();
             }
         };
 
@@ -258,7 +260,7 @@ public class NavigationDrawerFragment extends Fragment implements DrawerSearchEl
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // If the drawer is open, show the global app actions in the action bar. See also
         // showGlobalContextActionBar, which controls the top-left area of the action bar.
-        if (mDrawerLayout != null && isDrawerOpen()) {
+        if (isDrawerOpen()) {
 //            inflater.inflate(R.menu.global, menu);//TODO
             showGlobalContextActionBar();
         }
