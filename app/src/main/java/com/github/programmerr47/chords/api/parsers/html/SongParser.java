@@ -52,7 +52,7 @@ public final class SongParser extends ParserFromHTML<Song> {
         //Trying to get artist
         Element artist = element.getElementsByAttributeValue(ITEM_PROP_ATTRIBUTE, ARTIST_ITEM_PROP).first();
         if (artist != null) {
-            resultObjectBuilder.setArtistName(artist.val());
+            resultObjectBuilder.setArtistName(artist.text());
         }
 
         //Trying to get title
@@ -70,7 +70,7 @@ public final class SongParser extends ParserFromHTML<Song> {
         //Trying to get artist url
         Element navigationUrls = element.getElementsByAttributeValue(CLASS, NAVIGATION_BAR_CLASS).first();
         if (navigationUrls != null) {
-            Element artistUrl = element.children().last();
+            Element artistUrl = navigationUrls.children().last();
 
             if (artistUrl != null) {
                 resultObjectBuilder.setArtistUrl(artistUrl.attr(URL_ATTRIBUTE));

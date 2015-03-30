@@ -3,7 +3,6 @@ package com.github.programmerr47.chords.api.methods;
 import android.support.annotation.NonNull;
 
 import com.github.programmerr47.chords.api.methods.params.MethodParams;
-import com.github.programmerr47.chords.api.objects.Artist;
 import com.github.programmerr47.chords.api.objects.responses.ApiMethodResponse;
 import com.github.programmerr47.chords.api.objects.responses.ApiMethodResponseReason;
 import com.github.programmerr47.chords.api.objects.responses.DefaultApiMethodResponse;

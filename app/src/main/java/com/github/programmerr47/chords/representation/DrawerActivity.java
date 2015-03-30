@@ -64,7 +64,8 @@ public class DrawerActivity extends ActionBarActivity implements NavigationDrawe
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
-                (DrawerLayout) findViewById(R.id.drawer_layout));
+                (DrawerLayout) findViewById(R.id.drawer_layout),
+                mToolbar);
     }
 
     @Override

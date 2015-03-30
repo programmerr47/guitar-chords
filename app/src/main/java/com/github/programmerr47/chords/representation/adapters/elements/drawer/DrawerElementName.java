@@ -7,6 +7,7 @@ package com.github.programmerr47.chords.representation.adapters.elements.drawer;
  * @since 2014-10-09
  */
 public enum DrawerElementName {
+    HEADER,
     SEARCH,
     NEW_CHORDS,
     POPULAR_CHORDS,
