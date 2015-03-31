@@ -38,6 +38,4 @@ public class Constants {
      * Common font for represent default texts and information. It is preferable to use it.
      */
     public static final String ROBOTO_REGULAR = "Roboto-Regular.ttf";
-
-    public static final int DRAWER_MAX_WIDTH_DP = 400;
 }

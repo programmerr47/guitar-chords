@@ -1,8 +1,10 @@
 package com.github.programmerr47.chords.representation.utils;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.util.DisplayMetrics;
 
+import com.github.programmerr47.chords.R;
 import com.github.programmerr47.chords.representation.Constants;
 
 import java.io.BufferedReader;
@@ -60,22 +62,24 @@ public class Util {
      * <br><br>
      * According to this link drawer_width = screen_width - toolbar_height.
      * <br><br>
-     * <strong>Note </strong> that drawer has max_width defined by
-     * {@link Constants#DRAWER_MAX_WIDTH_DP} in <strong>independent pixels</strong>.
+     * <strong>Note </strong> that drawer has max_width defined by values/integer.xml resources
+     * in <strong>independent pixels</strong>. Those xml-s specifying for different platforms.
      *
      * @param applicationContext given context of application to work with screen metrics
-     * @param toolbarHeight height of currently displayed toolbar in <strong>pixels</strong>
      * @return width of drawer in <strong>pixels</strong>
      */
-    public static int getDrawerWidthPixels(Context applicationContext, int toolbarHeight) {
-        DisplayMetrics metrics = applicationContext.getResources().getDisplayMetrics();
-        int resultWidth = metrics.widthPixels - toolbarHeight;
+    public static int getDrawerWidthPixels(Context applicationContext) {
+        Resources resources = applicationContext.getResources();
+        DisplayMetrics metrics = resources.getDisplayMetrics();
+        int toolbarStandardHeight = resources.getInteger(R.integer.TOOLBAR_STANDARD_HEIGHT);
+        int drawerMaxWidth = resources.getInteger(R.integer.DRAWER_MAX_WIDTH);
+        float resultWidth = metrics.widthPixels - toolbarStandardHeight * metrics.density;
 
-        if (resultWidth > Constants.DRAWER_MAX_WIDTH_DP * metrics.density) {
-            resultWidth = (int)(Constants.DRAWER_MAX_WIDTH_DP * metrics.density);
+        if (resultWidth > drawerMaxWidth * metrics.density) {
+            resultWidth = (int)(drawerMaxWidth * metrics.density);
         }
 
-        return resultWidth;
+        return (int)resultWidth;
     }
 
     /**

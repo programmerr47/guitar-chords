@@ -58,7 +58,7 @@ public class DrawerActivity extends ActionBarActivity implements NavigationDrawe
         // http://www.google.com/design/spec/layout/metrics-and-keylines.html#metrics-and-keylines-keylines-and-spacing
         //TODO replace this to another place
         ViewGroup.LayoutParams params = mNavigationDrawerFragment.getView().getLayoutParams();
-        params.width = Util.getDrawerWidthPixels(getApplicationContext(), mToolbar.getLayoutParams().height);
+        params.width = Util.getDrawerWidthPixels(getApplicationContext());
         mNavigationDrawerFragment.getView().setLayoutParams(params);
 
         // Set up the drawer.
