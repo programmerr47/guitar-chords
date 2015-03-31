@@ -5,7 +5,6 @@ import android.content.res.Resources;
 import android.util.DisplayMetrics;
 
 import com.github.programmerr47.chords.R;
-import com.github.programmerr47.chords.representation.Constants;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -44,14 +43,14 @@ public class Util {
         if (collection == null) {
             return null;
         } else {
-            Set<String> preResult = new HashSet<String>();
+            Set<String> preResult = new HashSet<>();
 
             for (Object item : collection) {
                 String className = item.getClass().getName();
                 preResult.add(className);
             }
 
-            return new ArrayList<String>(preResult);
+            return new ArrayList<>(preResult);
         }
     }
 
