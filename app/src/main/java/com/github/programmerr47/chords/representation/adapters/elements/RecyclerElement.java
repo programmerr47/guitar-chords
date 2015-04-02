@@ -1,20 +1,27 @@
 package com.github.programmerr47.chords.representation.adapters.elements;
 
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
 /**
  * Represents abstract item of abstract adapter. This is can be just opening item, item with some
  * buttons, search item, anything.
- * <br><br>
- * <strong>Update 2015-04-02: </strong>
- * Because of moving to {@link android.support.v7.widget.RecyclerView.Adapter}, logic have to be
- * slightly changed. So know
+ * <strong>Note:</strong> It's a new alternative to previous interface AdapterElement,
+ * because now we have a {@link android.support.v7.widget.RecyclerView} and
+ * {@link android.support.v7.widget.RecyclerView.Adapter}. And we have to handle
+ * their elements in a different way. Specifically we need to extend each item from
+ * {@link android.support.v7.widget.RecyclerView.ViewHolder} to provide new
+ * implemented "view holder" pattern in {@link android.support.v7.widget.RecyclerView.Adapter}.
  *
  * @author Michael Spitsin
- * @since 2014-10-07
+ * @since 2015-04-02
  */
-public interface AdapterElement {
+public abstract class RecyclerElement extends RecyclerView.ViewHolder {
+
+    public RecyclerElement(View itemView) {
+        super(itemView);
+    }
 
     /**
      * Calls when another taken in {@link com.github.programmerr47.chords.representation.adapters.BindBaseAdapter#getView(int, android.view.View, android.view.ViewGroup)}
@@ -24,7 +31,7 @@ public interface AdapterElement {
      * @param position position of element that will be represented by this view
      * @return created View
      */
-    View newView(ViewGroup parent, int position);
+    public abstract View newView(ViewGroup parent, int position);
 
     /**
      * Calls when another taken in {@link com.github.programmerr47.chords.representation.adapters.BindBaseAdapter#getView(int, android.view.View, android.view.ViewGroup)}
@@ -33,5 +40,5 @@ public interface AdapterElement {
      * @param view given created of existing view
      * @param position position of this view
      */
-    void bindView(View view, int position);
+    public abstract void bindView(View view, int position);
 }
