@@ -15,8 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.programmerr47.chords.R;
-import com.github.programmerr47.chords.representation.adapters.elements.drawer.DrawerElement;
-import com.github.programmerr47.chords.representation.adapters.elements.drawer.DrawerElementName;
+import com.github.programmerr47.chords.representation.adapters.element.drawer.DrawerItem;
+import com.github.programmerr47.chords.representation.adapters.element.drawer.DrawerElementName;
 import com.github.programmerr47.chords.representation.utils.Util;
 
 /**
@@ -69,7 +69,7 @@ public class DrawerActivity extends ActionBarActivity implements NavigationDrawe
     }
 
     @Override
-    public void onNavigationDrawerItemSelected(DrawerElement element, int position) {
+    public void onNavigationDrawerItemSelected(DrawerItem element, int position) {
         if ((element != null) && (element.getName() != null)) {
             // update the main content by replacing fragments
             FragmentManager fragmentManager = getFragmentManager();

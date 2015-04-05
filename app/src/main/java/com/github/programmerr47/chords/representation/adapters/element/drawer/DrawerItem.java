@@ -1,8 +1,8 @@
-package com.github.programmerr47.chords.representation.adapters.elements.drawer;
+package com.github.programmerr47.chords.representation.adapters.element.drawer;
 
 import android.content.Context;
 
-import com.github.programmerr47.chords.representation.adapters.elements.SelectionModeAdapterElement;
+import com.github.programmerr47.chords.representation.adapters.element.SelectionModeAdapterItem;
 
 /**
  * Represents abstract drawer element
@@ -10,12 +10,12 @@ import com.github.programmerr47.chords.representation.adapters.elements.Selectio
  * @author Michael Spitsin
  * @since 2014-10-10
  */
-public abstract class DrawerElement extends SelectionModeAdapterElement {
+public abstract class DrawerItem extends SelectionModeAdapterItem {
 
     protected Context mContext;
     protected DrawerElementName mName;
 
-    protected DrawerElement(Builder builder) {
+    protected DrawerItem(Builder builder) {
         if (builder.context == null) {
             throw new NullPointerException("Context must be not null");
         }
@@ -50,6 +50,6 @@ public abstract class DrawerElement extends SelectionModeAdapterElement {
             return this;
         }
 
-        public abstract DrawerElement build();
+        public abstract DrawerItem build();
     }
 }

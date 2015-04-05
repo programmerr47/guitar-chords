@@ -23,11 +23,11 @@ import android.widget.ListView;
 
 import com.github.programmerr47.chords.R;
 import com.github.programmerr47.chords.representation.adapters.SimpleAdapter;
-import com.github.programmerr47.chords.representation.adapters.elements.drawer.DrawerElement;
-import com.github.programmerr47.chords.representation.adapters.elements.drawer.DrawerElementName;
-import com.github.programmerr47.chords.representation.adapters.elements.drawer.DrawerPrimaryElement;
-import com.github.programmerr47.chords.representation.adapters.elements.drawer.DrawerSearchElement;
-import com.github.programmerr47.chords.representation.adapters.elements.drawer.DrawerSecondaryElement;
+import com.github.programmerr47.chords.representation.adapters.element.drawer.DrawerItem;
+import com.github.programmerr47.chords.representation.adapters.element.drawer.DrawerElementName;
+import com.github.programmerr47.chords.representation.adapters.element.drawer.DrawerPrimaryItem;
+import com.github.programmerr47.chords.representation.adapters.element.drawer.DrawerSearchItem;
+import com.github.programmerr47.chords.representation.adapters.element.drawer.DrawerSecondaryItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +40,7 @@ import java.util.List;
  * @author Michael Spitsin
  * @since 2014-10-14
  */
-public class NavigationDrawerFragment extends Fragment implements DrawerSearchElement.OnSearchListener {
+public class NavigationDrawerFragment extends Fragment implements DrawerSearchItem.OnSearchListener {
 
     /**
      * Remember the position of the selected item.
@@ -65,11 +65,11 @@ public class NavigationDrawerFragment extends Fragment implements DrawerSearchEl
 
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerListView;
-    private SimpleAdapter<DrawerElement> mDrawerAdapter;
+    private SimpleAdapter<DrawerItem> mDrawerAdapter;
     private View mFragmentContainerView;
     private Toolbar mToolbar;
 
-    private List<DrawerElement> mDrawerAdapterElements;
+    private List<DrawerItem> mDrawerAdapterElements;
 
     private int mCurrentSelectedPosition = 1;
     private boolean mFromSavedInstanceState;
@@ -107,14 +107,14 @@ public class NavigationDrawerFragment extends Fragment implements DrawerSearchEl
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mDrawerAdapterElements = new ArrayList<>();
-        mDrawerAdapterElements.add(new DrawerSearchElement.Builder(getActivity()).setOnSearchListener(this).setName(DrawerElementName.SEARCH).build());
-        mDrawerAdapterElements.add(new DrawerPrimaryElement.Builder(getActivity()).setIcon(R.drawable.ic_launcher).setTitle(R.string.NEW_CHORDS).setName(DrawerElementName.NEW_CHORDS).build());
-        mDrawerAdapterElements.add(new DrawerPrimaryElement.Builder(getActivity()).setIcon(R.drawable.ic_launcher).setTitle(R.string.POPULAR_CHORDS).setName(DrawerElementName.POPULAR_CHORDS).build());
-        mDrawerAdapterElements.add(new DrawerPrimaryElement.Builder(getActivity()).setIcon(R.drawable.ic_launcher).setTitle(R.string.POPULAR_ARTISTS).setName(DrawerElementName.POPULAR_ARTISTS).build());
-        mDrawerAdapterElements.add(new DrawerPrimaryElement.Builder(getActivity()).setIcon(R.drawable.ic_launcher).setTitle(R.string.SAVED_CHORDS).setName(DrawerElementName.SAVED_CHORDS).build());
-        mDrawerAdapterElements.add(new DrawerPrimaryElement.Builder(getActivity()).setIcon(R.drawable.ic_launcher).setTitle(R.string.ALL_CHORDS).setName(DrawerElementName.ALL_CHORDS).build());
-        mDrawerAdapterElements.add(new DrawerSecondaryElement.Builder(getActivity()).setIcon(R.drawable.ic_launcher).setTitle(R.string.ABOUT).setName(DrawerElementName.ABOUT).build());
-        mDrawerAdapterElements.add(new DrawerSecondaryElement.Builder(getActivity()).setIcon(R.drawable.ic_launcher).setTitle(R.string.SEND_FEEDBACK).setName(DrawerElementName.SEND_FEEDBACK).build());
+        mDrawerAdapterElements.add(new DrawerSearchItem.Builder(getActivity()).setOnSearchListener(this).setName(DrawerElementName.SEARCH).build());
+        mDrawerAdapterElements.add(new DrawerPrimaryItem.Builder(getActivity()).setIcon(R.drawable.ic_launcher).setTitle(R.string.NEW_CHORDS).setName(DrawerElementName.NEW_CHORDS).build());
+        mDrawerAdapterElements.add(new DrawerPrimaryItem.Builder(getActivity()).setIcon(R.drawable.ic_launcher).setTitle(R.string.POPULAR_CHORDS).setName(DrawerElementName.POPULAR_CHORDS).build());
+        mDrawerAdapterElements.add(new DrawerPrimaryItem.Builder(getActivity()).setIcon(R.drawable.ic_launcher).setTitle(R.string.POPULAR_ARTISTS).setName(DrawerElementName.POPULAR_ARTISTS).build());
+        mDrawerAdapterElements.add(new DrawerPrimaryItem.Builder(getActivity()).setIcon(R.drawable.ic_launcher).setTitle(R.string.SAVED_CHORDS).setName(DrawerElementName.SAVED_CHORDS).build());
+        mDrawerAdapterElements.add(new DrawerPrimaryItem.Builder(getActivity()).setIcon(R.drawable.ic_launcher).setTitle(R.string.ALL_CHORDS).setName(DrawerElementName.ALL_CHORDS).build());
+        mDrawerAdapterElements.add(new DrawerSecondaryItem.Builder(getActivity()).setIcon(R.drawable.ic_launcher).setTitle(R.string.ABOUT).setName(DrawerElementName.ABOUT).build());
+        mDrawerAdapterElements.add(new DrawerSecondaryItem.Builder(getActivity()).setIcon(R.drawable.ic_launcher).setTitle(R.string.SEND_FEEDBACK).setName(DrawerElementName.SEND_FEEDBACK).build());
 
         mDrawerAdapter = new SimpleAdapter<>(getActivity(), mDrawerAdapterElements);
 
@@ -321,7 +321,7 @@ public class NavigationDrawerFragment extends Fragment implements DrawerSearchEl
          * @param selectedItem item that was selected
          * @param position position of item that was selected
          */
-        void onNavigationDrawerItemSelected(DrawerElement selectedItem, int position);
+        void onNavigationDrawerItemSelected(DrawerItem selectedItem, int position);
 
         /**
          * Calls when search field is filled and it is needed to search this information.

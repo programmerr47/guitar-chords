@@ -1,4 +1,4 @@
-package com.github.programmerr47.chords.representation.adapters.elements.drawer;
+package com.github.programmerr47.chords.representation.adapters.element.drawer;
 
 import android.content.Context;
 import android.view.KeyEvent;
@@ -19,13 +19,13 @@ import com.github.programmerr47.chords.R;
  * @author Michael Spitsin
  * @since 2014-10-13
  */
-public final class DrawerSearchElement extends DrawerElement {
+public final class DrawerSearchItem extends DrawerItem {
 
     private static final int LAYOUT_ID = R.layout.drawer_item_search;
 
     private OnSearchListener onSearchListener;
 
-    private DrawerSearchElement(Builder builder) {
+    private DrawerSearchItem(Builder builder) {
         super(builder);
 
         onSearchListener = builder.listener;
@@ -94,7 +94,7 @@ public final class DrawerSearchElement extends DrawerElement {
      * @author Michael Spitsin
      * @since 2014-10-13
      */
-    public static final class Builder extends DrawerElement.Builder {
+    public static final class Builder extends DrawerItem.Builder {
 
         OnSearchListener listener;
 
@@ -108,8 +108,8 @@ public final class DrawerSearchElement extends DrawerElement {
         }
 
         @Override
-        public DrawerSearchElement build() {
-            return new DrawerSearchElement(this);
+        public DrawerSearchItem build() {
+            return new DrawerSearchItem(this);
         }
     }
 

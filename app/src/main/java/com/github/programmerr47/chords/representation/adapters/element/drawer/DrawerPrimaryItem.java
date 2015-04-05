@@ -1,4 +1,4 @@
-package com.github.programmerr47.chords.representation.adapters.elements.drawer;
+package com.github.programmerr47.chords.representation.adapters.element.drawer;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -12,14 +12,14 @@ import com.github.programmerr47.chords.R;
 import com.github.programmerr47.chords.representation.Constants;
 
 /**
- * Represents drawer elements that show secondary pages (About).
+ * Represents drawer elements that show primary pages (New chords, Popular chords/artists and etc).
  *
  * @author Michael Spitsin
- * @since 2014-10-12
+ * @since 2014-10-10
  */
-public final class DrawerSecondaryElement extends DrawerElement{
+public final class DrawerPrimaryItem extends DrawerItem {
 
-    private static final int LAYOUT_ID = R.layout.drawer_item_secondary;
+    private static final int LAYOUT_ID = R.layout.drawer_item_primary;
 
     private Typeface selectedStateTypeface;
     private Typeface defaultStateTypeface;
@@ -29,14 +29,14 @@ public final class DrawerSecondaryElement extends DrawerElement{
 
     private ViewHolder holder;
 
-    private DrawerSecondaryElement(Builder builder) {
+    private DrawerPrimaryItem(Builder builder) {
         super(builder);
 
         this.iconResId = builder.iconResId;
         this.titleResId = builder.titleResId;
 
         selectedStateTypeface = Typeface.createFromAsset(mContext.getAssets(), Constants.ASSETS_FONTS_DIR + Constants.ROBOTO_BOLD);
-        defaultStateTypeface = Typeface.createFromAsset(mContext.getAssets(), Constants.ASSETS_FONTS_DIR + Constants.ROBOTO_REGULAR);
+        defaultStateTypeface = Typeface.createFromAsset(mContext.getAssets(), Constants.ASSETS_FONTS_DIR + Constants.ROBOTO_LIGHT);
     }
 
     @Override
@@ -88,7 +88,7 @@ public final class DrawerSecondaryElement extends DrawerElement{
 
     /**
      * @author Michael Spitsin
-     * @since 2014-10-12
+     * @since 2014-10-10
      */
     public static final class ViewHolder {
         private ImageView icon;
@@ -99,7 +99,7 @@ public final class DrawerSecondaryElement extends DrawerElement{
      * @author Michael Spitsin
      * @since 2014-10-12
      */
-    public static final class Builder extends DrawerElement.Builder {
+    public static final class Builder extends DrawerItem.Builder {
         private int iconResId;
         private int titleResId;
 
@@ -118,8 +118,8 @@ public final class DrawerSecondaryElement extends DrawerElement{
         }
 
         @Override
-        public DrawerSecondaryElement build() {
-            return new DrawerSecondaryElement(this);
+        public DrawerPrimaryItem build() {
+            return new DrawerPrimaryItem(this);
         }
     }
 }

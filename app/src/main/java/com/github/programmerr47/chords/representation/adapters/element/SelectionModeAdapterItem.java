@@ -1,13 +1,13 @@
-package com.github.programmerr47.chords.representation.adapters.elements;
+package com.github.programmerr47.chords.representation.adapters.element;
 
 /**
- * Simple expansion of interface {@link AdapterElement} for organization of
+ * Simple expansion of interface {@link AdapterItem} for organization of
  * "selection mode".
  *
  * @author Michael Spitsin
  * @since 2014-10-08
  */
-public abstract class SelectionModeAdapterElement implements AdapterElement {
+public abstract class SelectionModeAdapterItem implements AdapterItem {
 
     protected boolean isSelected;
 
@@ -32,7 +32,7 @@ public abstract class SelectionModeAdapterElement implements AdapterElement {
     }
 
     /**
-     * Changes view when calls {@link SelectionModeAdapterElement#setElementSelected(boolean)}.
+     * Changes view when calls {@link SelectionModeAdapterItem#setElementSelected(boolean)}.
      */
     protected abstract void setViewSelected();
 }
