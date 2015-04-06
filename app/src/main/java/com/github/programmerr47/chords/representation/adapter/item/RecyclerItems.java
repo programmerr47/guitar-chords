@@ -1,25 +1,22 @@
-package com.github.programmerr47.chords.representation.adapters.element;
+package com.github.programmerr47.chords.representation.adapter.item;
 
 import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 
-import com.github.programmerr47.chords.representation.adapters.holder.producer.HolderProducer;
+import com.github.programmerr47.chords.representation.adapter.holder.producer.HolderProducer;
 import com.github.programmerr47.chords.representation.utils.Util;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Map;
 
 /**
  * @author Michael Spitsin
  * @since 2014-04-04
  */
-//TODO
+//TODO javadocs
 public class RecyclerItems<Item extends AdapterItem> extends ArrayList<Item> {
 
     private Map<Integer, HolderProducer> mHolderMap;
@@ -34,17 +31,20 @@ public class RecyclerItems<Item extends AdapterItem> extends ArrayList<Item> {
     public RecyclerItems(List<Item> items) {
         super(items);
         mTypeNames = Util.getAllDifferentClassesFromCollection(items);
-        mHolderMap = retrieveTypes(items);
+        mHolderMap = retrieveProducers(items, mTypeNames);
     }
 
     @Override
-    public void add(int location, Item object) {
-        //TODO
+    public void add(int location, Item item) {
+        super.add(location, item);
+        checkAndAddNewType(item, mTypeNames, mHolderMap);
     }
 
     @Override
-    public boolean add(Item object) {
-        //TODO
+    public boolean add(Item item) {
+        boolean result = super.add(item);
+        checkAndAddNewType(item, mTypeNames, mHolderMap);
+        return result;
     }
 
     @Override
@@ -73,12 +73,12 @@ public class RecyclerItems<Item extends AdapterItem> extends ArrayList<Item> {
     }
 
     @Override
-    public boolean removeAll(Collection<?> collection) {
+    public boolean removeAll(@NonNull Collection<?> collection) {
         throw new UnsupportedOperationException("removeAll not supported yet in RecyclerItems");
     }
 
     @Override
-    public boolean retainAll(Collection<?> collection) {
+    public boolean retainAll(@NonNull Collection<?> collection) {
         throw new UnsupportedOperationException("retainAll not supported yet in RecyclerItems");
     }
 
@@ -96,7 +96,11 @@ public class RecyclerItems<Item extends AdapterItem> extends ArrayList<Item> {
     @NonNull
     @Override
     public Object[] toArray() {
-        return new Object[0];
+        return super.toArray();
+    }
+
+    public Map<Integer, HolderProducer> getTypesMap() {
+        return Collections.unmodifiableMap(mHolderMap);
     }
 
     private Map<Integer, HolderProducer> retrieveProducers(List<Item> items, List<String> typeNames) {
@@ -109,11 +113,21 @@ public class RecyclerItems<Item extends AdapterItem> extends ArrayList<Item> {
 
             if (key == -1) {
                 throw new IllegalArgumentException("Not filled collection of typeNames");
-            } else {
-                //TODO
+            } else if (!result.containsKey(key)) {
+                result.put(key, item.getViewHolderProducer());
             }
         }
 
-        return new HashMap<>();
+        return result;
+    }
+
+    private void checkAndAddNewType(Item item, List<String> typeNames, Map<Integer, HolderProducer> holderMap) {
+        String typeName = item.getClass().getName();
+        int key = typeNames.indexOf(typeName);
+
+        if (key == -1) {
+            typeNames.add(typeName);
+            holderMap.put(typeNames.size() - 1, item.getViewHolderProducer());
+        }
     }
 }

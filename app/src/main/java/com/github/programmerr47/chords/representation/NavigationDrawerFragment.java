@@ -22,12 +22,12 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.github.programmerr47.chords.R;
-import com.github.programmerr47.chords.representation.adapters.SimpleAdapter;
-import com.github.programmerr47.chords.representation.adapters.element.drawer.DrawerItem;
-import com.github.programmerr47.chords.representation.adapters.element.drawer.DrawerElementName;
-import com.github.programmerr47.chords.representation.adapters.element.drawer.DrawerPrimaryItem;
-import com.github.programmerr47.chords.representation.adapters.element.drawer.DrawerSearchItem;
-import com.github.programmerr47.chords.representation.adapters.element.drawer.DrawerSecondaryItem;
+import com.github.programmerr47.chords.representation.adapter.SimpleAdapter;
+import com.github.programmerr47.chords.representation.adapter.item.drawer.DrawerItem;
+import com.github.programmerr47.chords.representation.adapter.item.drawer.DrawerElementName;
+import com.github.programmerr47.chords.representation.adapter.item.drawer.DrawerPrimaryItem;
+import com.github.programmerr47.chords.representation.adapter.item.drawer.DrawerSearchItem;
+import com.github.programmerr47.chords.representation.adapter.item.drawer.DrawerSecondaryItem;
 
 import java.util.ArrayList;
 import java.util.List;

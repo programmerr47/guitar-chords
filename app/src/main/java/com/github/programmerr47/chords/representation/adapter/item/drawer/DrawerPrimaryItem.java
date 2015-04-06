@@ -1,7 +1,8 @@
-package com.github.programmerr47.chords.representation.adapters.element.drawer;
+package com.github.programmerr47.chords.representation.adapter.item.drawer;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 
 import com.github.programmerr47.chords.R;
 import com.github.programmerr47.chords.representation.Constants;
+import com.github.programmerr47.chords.representation.adapter.holder.producer.DrawerPrimaryItemHolderProducer;
+import com.github.programmerr47.chords.representation.adapter.holder.producer.HolderProducer;
 
 /**
  * Represents drawer elements that show primary pages (New chords, Popular chords/artists and etc).
@@ -84,6 +87,16 @@ public final class DrawerPrimaryItem extends DrawerItem {
         } else {
             holder.title.setTypeface(defaultStateTypeface);
         }
+    }
+
+    @Override
+    public void bindView(RecyclerView.ViewHolder viewHolder, int position) {
+        //TODO
+    }
+
+    @Override
+    public HolderProducer getViewHolderProducer() {
+        return new DrawerPrimaryItemHolderProducer(mContext);
     }
 
     /**

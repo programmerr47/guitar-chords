@@ -1,4 +1,4 @@
-package com.github.programmerr47.chords.representation.adapters;
+package com.github.programmerr47.chords.representation.adapter;
 
 import android.view.View;
 import android.view.ViewGroup;

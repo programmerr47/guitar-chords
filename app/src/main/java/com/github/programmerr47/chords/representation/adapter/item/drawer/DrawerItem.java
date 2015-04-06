@@ -1,8 +1,9 @@
-package com.github.programmerr47.chords.representation.adapters.element.drawer;
+package com.github.programmerr47.chords.representation.adapter.item.drawer;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
-import com.github.programmerr47.chords.representation.adapters.element.SelectionModeAdapterItem;
+import com.github.programmerr47.chords.representation.adapter.item.SelectionModeAdapterItem;
 
 /**
  * Represents abstract drawer element
@@ -41,7 +42,7 @@ public abstract class DrawerItem extends SelectionModeAdapterItem {
         private Context context;
         private DrawerElementName name;
 
-        public Builder(Context context) {
+        public Builder(@NonNull Context context) {
             this.context = context;
         }
 

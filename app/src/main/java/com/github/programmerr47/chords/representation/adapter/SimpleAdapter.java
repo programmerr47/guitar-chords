@@ -1,11 +1,11 @@
-package com.github.programmerr47.chords.representation.adapters;
+package com.github.programmerr47.chords.representation.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.github.programmerr47.chords.representation.adapters.element.AdapterItem;
+import com.github.programmerr47.chords.representation.adapter.item.AdapterItem;
 import com.github.programmerr47.chords.representation.utils.Util;
 
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.List;
  * like: updating and realisation of common abstract methods.
  * <br><br>
  * <strong>Note</strong> that items, that will be used by this adapter, must implement
- * {@link com.github.programmerr47.chords.representation.adapters.element.AdapterItem} interface.
+ * {@link com.github.programmerr47.chords.representation.adapter.item.AdapterItem} interface.
  *
  * @author Michael Spitsin
  * @since 2014-10-08

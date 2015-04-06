@@ -1,4 +1,4 @@
-package com.github.programmerr47.chords.representation.adapters.element;
+package com.github.programmerr47.chords.representation.adapter.item;
 
 /**
  * Simple expansion of interface {@link AdapterItem} for organization of

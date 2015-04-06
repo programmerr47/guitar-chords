@@ -1,10 +1,9 @@
-package com.github.programmerr47.chords.representation.adapters.element;
+package com.github.programmerr47.chords.representation.adapter.item;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewGroup;
 
-import com.github.programmerr47.chords.representation.adapters.holder.producer.HolderProducer;
+import com.github.programmerr47.chords.representation.adapter.holder.producer.HolderProducer;
 
 /**
  * Represents abstract item of abstract adapter. This is can be just opening item, item with some
@@ -22,7 +21,7 @@ public interface AdapterItem {
 
     /**
      * Calls when element taken in
-     * {@link com.github.programmerr47.chords.representation.adapters.RecyclerAdapter#onBindViewHolder(android.support.v7.widget.RecyclerView.ViewHolder, int)}
+     * {@link com.github.programmerr47.chords.representation.adapter.RecyclerAdapter#onBindViewHolder(android.support.v7.widget.RecyclerView.ViewHolder, int)}
      * is exists and it is needed to bind it (set up it).
      *
      * @param viewHolder holder for view, that need to be bound
@@ -32,7 +31,7 @@ public interface AdapterItem {
 
     /**
      * Produce new instance of
-     * {@link com.github.programmerr47.chords.representation.adapters.holder.producer.HolderProducer}
+     * {@link com.github.programmerr47.chords.representation.adapter.holder.producer.HolderProducer}
      * or any of it inheritor. Choosing what is needed to be created or produced depends on
      * implementation of this interface. So it is inheritor responsibility to providing context
      * and information to creating correct producer.
@@ -40,14 +39,10 @@ public interface AdapterItem {
      * <strong>Not that: </strong> subclasses should only create new producer. All other manipulations
      * must be done in {@link this#bindView(android.support.v7.widget.RecyclerView.ViewHolder, int)}
      * method (like filling view with specific information) or in
-     * {@link com.github.programmerr47.chords.representation.adapters.holder.producer.HolderProducer#produce()}
+     * {@link com.github.programmerr47.chords.representation.adapter.holder.producer.HolderProducer#produce()}
      * method (like creation of new holder).
      *
-     * @param parentView parent view of view of the adapter element.
-     *                   <strong>Note: </strong> it's only a parent view, <strong>not</strong>
-     *                   a element view. So inheritor should implement logic of getting view
-     *                   from parent one.
      * @return instance of specific producer that can build new holder
      */
-    HolderProducer getViewHolderProducer(View parentView);
+    HolderProducer getViewHolderProducer();
 }
