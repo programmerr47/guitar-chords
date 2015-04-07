@@ -6,19 +6,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
- * Created by MS on 06.04.2015.
+ * @author Michael Spitsin
+ * @since 2015-04-07
  */
 //TODO describe
-public final class DrawerPrimaryItemHolder extends RecyclerView.ViewHolder {
+public final class DrawerStandardItemHolder extends RecyclerView.ViewHolder {
 
     private ImageView mIcon;
     private TextView mTitle;
 
-    public DrawerPrimaryItemHolder(View itemView, ResourceParams params) {
+    public DrawerStandardItemHolder(View itemView, ResourceParams params) {
         super(itemView);
 
-        mIcon = (ImageView) itemView.findViewById(params.iconResId);
-        mTitle = (TextView) itemView.findViewById(params.titleResId);
+        mIcon = (ImageView) itemView.findViewById(params.iconLayoutId);
+        mTitle = (TextView) itemView.findViewById(params.titleLayoutId);
     }
 
     public ImageView getIcon() {
@@ -30,7 +31,7 @@ public final class DrawerPrimaryItemHolder extends RecyclerView.ViewHolder {
     }
 
     public static final class ResourceParams {
-        public int iconResId;
-        public int titleResId;
+        public int iconLayoutId;
+        public int titleLayoutId;
     }
 }

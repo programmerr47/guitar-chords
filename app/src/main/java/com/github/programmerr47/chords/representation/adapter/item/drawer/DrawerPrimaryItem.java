@@ -3,14 +3,11 @@ package com.github.programmerr47.chords.representation.adapter.item.drawer;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.github.programmerr47.chords.R;
 import com.github.programmerr47.chords.representation.Constants;
+import com.github.programmerr47.chords.representation.adapter.holder.drawer.DrawerStandardItemHolder;
 import com.github.programmerr47.chords.representation.adapter.holder.producer.DrawerPrimaryItemHolderProducer;
 import com.github.programmerr47.chords.representation.adapter.holder.producer.HolderProducer;
 
@@ -22,15 +19,11 @@ import com.github.programmerr47.chords.representation.adapter.holder.producer.Ho
  */
 public final class DrawerPrimaryItem extends DrawerItem {
 
-    private static final int LAYOUT_ID = R.layout.drawer_item_primary;
-
     private Typeface selectedStateTypeface;
     private Typeface defaultStateTypeface;
 
     private int iconResId;
     private int titleResId;
-
-    private ViewHolder holder;
 
     private DrawerPrimaryItem(Builder builder) {
         super(builder);
@@ -43,55 +36,9 @@ public final class DrawerPrimaryItem extends DrawerItem {
     }
 
     @Override
-    public View newView(ViewGroup parent, int position) {
-        LayoutInflater layoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = layoutInflater.inflate(LAYOUT_ID, parent, false);
-
-        if (view == null) {
-            throw new IllegalStateException("View not created");
-        }
-
-        holder = new ViewHolder();
-        holder.icon = (ImageView) view.findViewById(R.id.icon);
-        holder.title = (TextView) view.findViewById(R.id.title);
-        view.setTag(holder);
-
-        return view;
-    }
-
-    @Override
-    public void bindView(View view, int position) {
-        if (view.getTag() == null) {
-            throw new IllegalArgumentException("View must contain its own holder");
-        }
-
-        ViewHolder holder = (ViewHolder) view.getTag();
-        bindView(holder, isSelected);
-    }
-
-    @Override
-    protected void setViewSelected() {
-        if (holder != null) {
-            bindView(holder, isSelected);
-        }
-    }
-
-    private void bindView(ViewHolder holder, boolean isSelected) {
-        holder.icon.setImageResource(iconResId);
-        holder.title.setText(titleResId);
-
-        holder.icon.setSelected(isSelected);
-
-        if (isSelected) {
-            holder.title.setTypeface(selectedStateTypeface);
-        } else {
-            holder.title.setTypeface(defaultStateTypeface);
-        }
-    }
-
-    @Override
     public void bindView(RecyclerView.ViewHolder viewHolder, int position) {
-        //TODO
+        DrawerStandardItemHolder holder = (DrawerStandardItemHolder) viewHolder;
+        bindView(holder, isSelected);
     }
 
     @Override
@@ -99,13 +46,20 @@ public final class DrawerPrimaryItem extends DrawerItem {
         return new DrawerPrimaryItemHolderProducer(mContext);
     }
 
-    /**
-     * @author Michael Spitsin
-     * @since 2014-10-10
-     */
-    public static final class ViewHolder {
-        private ImageView icon;
-        private TextView title;
+    private void bindView(DrawerStandardItemHolder holder, boolean isSelected) {
+        ImageView icon = holder.getIcon();
+        TextView title = holder.getTitle();
+
+        icon.setImageResource(iconResId);
+        title.setText(titleResId);
+
+        icon.setSelected(isSelected);
+
+        if (isSelected) {
+            title.setTypeface(selectedStateTypeface);
+        } else {
+            title.setTypeface(defaultStateTypeface);
+        }
     }
 
     /**

@@ -19,7 +19,7 @@ public abstract class SelectionModeAdapterItem implements AdapterItem {
      */
     public final void setElementSelected(boolean isSelected) {
         this.isSelected = isSelected;
-        setViewSelected();
+//        setViewSelected();
     }
 
     /**
@@ -31,8 +31,8 @@ public abstract class SelectionModeAdapterItem implements AdapterItem {
         return isSelected;
     }
 
-    /**
-     * Changes view when calls {@link SelectionModeAdapterItem#setElementSelected(boolean)}.
-     */
-    protected abstract void setViewSelected();
+//    /**
+//     * Changes view when calls {@link SelectionModeAdapterItem#setElementSelected(boolean)}.
+//     */
+//    protected abstract void setViewSelected();
 }

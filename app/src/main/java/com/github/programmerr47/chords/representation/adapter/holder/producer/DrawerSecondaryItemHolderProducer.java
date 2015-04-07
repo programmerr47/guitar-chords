@@ -11,14 +11,14 @@ import com.github.programmerr47.chords.R;
 import com.github.programmerr47.chords.representation.adapter.holder.drawer.DrawerStandardItemHolder;
 
 /**
- * Created by MS on 06.04.2015.
+ * Created by MS on 07.04.2015.
  */
 //TODO describe
-public class DrawerPrimaryItemHolderProducer implements HolderProducer {
+public class DrawerSecondaryItemHolderProducer implements HolderProducer {
 
     private final Context mContext;
 
-    public DrawerPrimaryItemHolderProducer(@NonNull Context context) {
+    public DrawerSecondaryItemHolderProducer(@NonNull Context context) {
         mContext = context;
     }
 
@@ -26,7 +26,7 @@ public class DrawerPrimaryItemHolderProducer implements HolderProducer {
     @Override
     public RecyclerView.ViewHolder produce(ViewGroup parentView) {
         LayoutInflater layoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = layoutInflater.inflate(R.layout.drawer_item_primary, parentView, false);
+        View view = layoutInflater.inflate(R.layout.drawer_item_secondary, parentView, false);
 
         if (view == null) {
             throw new IllegalStateException("View not created");
