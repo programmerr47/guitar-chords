@@ -2,6 +2,7 @@ package com.github.programmerr47.chords.representation.adapter.item.drawer;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -70,7 +71,7 @@ public final class DrawerSecondaryItem extends DrawerItem {
         private int iconResId;
         private int titleResId;
 
-        public Builder(Context context) {
+        public Builder(@NonNull Context context) {
             super(context);
         }
 

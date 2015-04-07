@@ -1,6 +1,8 @@
 package com.github.programmerr47.chords.representation.adapter.item.drawer;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.github.programmerr47.chords.R;
+import com.github.programmerr47.chords.representation.adapter.holder.drawer.DrawerSearchItemHolder;
+import com.github.programmerr47.chords.representation.adapter.holder.drawer.DrawerStandardItemHolder;
+import com.github.programmerr47.chords.representation.adapter.holder.producer.DrawerSecondaryItemHolderProducer;
+import com.github.programmerr47.chords.representation.adapter.holder.producer.HolderProducer;
 
 /**
  * Search element of drawer, that represents simple {@link EditText}. Can search artist, songs.
@@ -23,27 +29,19 @@ public final class DrawerSearchItem extends DrawerItem {
 
     private static final int LAYOUT_ID = R.layout.drawer_item_search;
 
-    private OnSearchListener onSearchListener;
-
     private DrawerSearchItem(Builder builder) {
         super(builder);
-
-        onSearchListener = builder.listener;
     }
 
     @Override
-    public View newView(ViewGroup parent, int position) {
-        LayoutInflater layoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = layoutInflater.inflate(LAYOUT_ID, parent, false);
+    public void bindView(RecyclerView.ViewHolder viewHolder, int position) {
+        DrawerSearchItemHolder holder = (DrawerSearchItemHolder) viewHolder;
+        bindView(holder, isSelected);
+    }
 
-        if (view == null) {
-            throw new IllegalStateException("View not created");
-        }
-
-        EditText searchField = (EditText) view.findViewById(R.id.searchField);
-        view.setTag(searchField);
-
-        return view;
+    @Override
+    public HolderProducer getViewHolderProducer() {
+        return new DrawerSecondaryItemHolderProducer(mContext);
     }
 
     @Override
@@ -96,34 +94,13 @@ public final class DrawerSearchItem extends DrawerItem {
      */
     public static final class Builder extends DrawerItem.Builder {
 
-        OnSearchListener listener;
-
-        public Builder(Context context) {
+        public Builder(@NonNull Context context) {
             super(context);
-        }
-
-        public Builder setOnSearchListener(OnSearchListener listener) {
-            this.listener = listener;
-            return this;
         }
 
         @Override
         public DrawerSearchItem build() {
             return new DrawerSearchItem(this);
         }
-    }
-
-    /**
-     * @author Michael Spitsin
-     * @since 2014-10-13
-     */
-    public static interface OnSearchListener {
-
-        /**
-         * Calls when search field is filled and it is needed to search this information.
-         *
-         * @param searchText text from search field
-         */
-        void onSearchStarted(String searchText);
     }
 }
