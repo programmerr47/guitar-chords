@@ -2,7 +2,9 @@ package com.github.programmerr47.chords.representation.adapter.item;
 
 import android.support.annotation.NonNull;
 
+import com.github.programmerr47.chords.representation.adapter.RecyclerAdapter;
 import com.github.programmerr47.chords.representation.adapter.holder.producer.HolderProducer;
+import com.github.programmerr47.chords.representation.adapter.item.drawer.DrawerPrimaryItem;
 import com.github.programmerr47.chords.representation.utils.Util;
 
 import java.util.ArrayList;
@@ -49,12 +51,24 @@ public class RecyclerItems<Item extends AdapterItem> extends ArrayList<Item> {
 
     @Override
     public boolean addAll(int location, Collection<? extends Item> collection) {
-        throw new UnsupportedOperationException("addAll not supported yet in RecyclerItems");
+        boolean result = super.addAll(location, collection);
+
+        for (Item item : collection) {
+            checkAndAddNewType(item, mTypeNames, mHolderMap);
+        }
+
+        return result;
     }
 
     @Override
     public boolean addAll(Collection<? extends Item> collection) {
-        throw new UnsupportedOperationException("addAll not supported yet in RecyclerItems");
+        boolean result = super.addAll(collection);
+
+        for (Item item : collection) {
+            checkAndAddNewType(item, mTypeNames, mHolderMap);
+        }
+
+        return result;
     }
 
     @Override
@@ -101,6 +115,13 @@ public class RecyclerItems<Item extends AdapterItem> extends ArrayList<Item> {
 
     public Map<Integer, HolderProducer> getTypesMap() {
         return Collections.unmodifiableMap(mHolderMap);
+    }
+
+
+    public int getItemType(int position) {
+        Item item = get(position);
+        String className = item.getClass().getName();
+        return mTypeNames.indexOf(className);
     }
 
     private Map<Integer, HolderProducer> retrieveProducers(List<Item> items, List<String> typeNames) {
