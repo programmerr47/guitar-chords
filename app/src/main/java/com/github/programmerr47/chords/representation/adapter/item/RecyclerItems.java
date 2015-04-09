@@ -2,16 +2,15 @@ package com.github.programmerr47.chords.representation.adapter.item;
 
 import android.support.annotation.NonNull;
 
-import com.github.programmerr47.chords.representation.adapter.RecyclerAdapter;
 import com.github.programmerr47.chords.representation.adapter.holder.producer.HolderProducer;
-import com.github.programmerr47.chords.representation.adapter.item.drawer.DrawerPrimaryItem;
 import com.github.programmerr47.chords.representation.utils.Util;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 
 /**
@@ -19,39 +18,34 @@ import java.util.Map;
  * @since 2014-04-04
  */
 //TODO javadocs
-public class RecyclerItems<Item extends AdapterItem> extends ArrayList<Item> {
+public class RecyclerItems<Item extends AdapterItem> implements List<Item> {
 
+    private List<Item> mItems;
     private Map<Integer, HolderProducer> mHolderMap;
     private List<String> mTypeNames;
 
-    public RecyclerItems() {
-        super();
-        mTypeNames = new ArrayList<>();
-        mHolderMap= new HashMap<>();
-    }
-
-    public RecyclerItems(List<Item> items) {
-        super(items);
+    public RecyclerItems(@NonNull List<Item> items) {
+        mItems = items;
         mTypeNames = Util.getAllDifferentClassesFromCollection(items);
         mHolderMap = retrieveProducers(items, mTypeNames);
     }
 
     @Override
     public void add(int location, Item item) {
-        super.add(location, item);
+        mItems.add(location, item);
         checkAndAddNewType(item, mTypeNames, mHolderMap);
     }
 
     @Override
     public boolean add(Item item) {
-        boolean result = super.add(item);
+        boolean result = mItems.add(item);
         checkAndAddNewType(item, mTypeNames, mHolderMap);
         return result;
     }
 
     @Override
     public boolean addAll(int location, Collection<? extends Item> collection) {
-        boolean result = super.addAll(location, collection);
+        boolean result = mItems.addAll(location, collection);
 
         for (Item item : collection) {
             checkAndAddNewType(item, mTypeNames, mHolderMap);
@@ -62,7 +56,7 @@ public class RecyclerItems<Item extends AdapterItem> extends ArrayList<Item> {
 
     @Override
     public boolean addAll(Collection<? extends Item> collection) {
-        boolean result = super.addAll(collection);
+        boolean result = mItems.addAll(collection);
 
         for (Item item : collection) {
             checkAndAddNewType(item, mTypeNames, mHolderMap);
@@ -74,6 +68,54 @@ public class RecyclerItems<Item extends AdapterItem> extends ArrayList<Item> {
     @Override
     public void clear() {
         throw new UnsupportedOperationException("clear not supported yet in RecyclerItems");
+    }
+
+    @Override
+    public boolean contains(Object object) {
+        return mItems.contains(object);
+    }
+
+    @Override
+    public boolean containsAll(@NonNull Collection<?> collection) {
+        return mItems.containsAll(collection);
+    }
+
+    @Override
+    public Item get(int location) {
+        return mItems.get(location);
+    }
+
+    @Override
+    public int indexOf(Object object) {
+        return mItems.indexOf(object);
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return mItems.isEmpty();
+    }
+
+    @NonNull
+    @Override
+    public Iterator<Item> iterator() {
+        return mItems.iterator();
+    }
+
+    @Override
+    public int lastIndexOf(Object object) {
+        return mItems.lastIndexOf(object);
+    }
+
+    @NonNull
+    @Override
+    public ListIterator<Item> listIterator() {
+        return mItems.listIterator();
+    }
+
+    @NonNull
+    @Override
+    public ListIterator<Item> listIterator(int location) {
+        return mItems.listIterator(location);
     }
 
     @Override
@@ -101,6 +143,11 @@ public class RecyclerItems<Item extends AdapterItem> extends ArrayList<Item> {
         throw new UnsupportedOperationException("set not supported yet in RecyclerItems");
     }
 
+    @Override
+    public int size() {
+        return mItems.size();
+    }
+
     @NonNull
     @Override
     public RecyclerItems<Item> subList(int start, int end) {
@@ -110,7 +157,13 @@ public class RecyclerItems<Item extends AdapterItem> extends ArrayList<Item> {
     @NonNull
     @Override
     public Object[] toArray() {
-        return super.toArray();
+        return mItems.toArray();
+    }
+
+    @NonNull
+    @Override
+    public <T> T[] toArray(@NonNull T[] array) {
+        return mItems.toArray(array);
     }
 
     public Map<Integer, HolderProducer> getTypesMap() {

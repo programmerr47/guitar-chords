@@ -9,6 +9,7 @@ import com.github.programmerr47.chords.representation.adapter.item.AdapterItem;
 import com.github.programmerr47.chords.representation.adapter.item.RecyclerItems;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,8 +25,8 @@ public class RecyclerAdapter<Item extends AdapterItem> extends RecyclerView.Adap
         mItems = items;
     }
 
-    public RecyclerAdapter() {
-        mItems = new RecyclerItems<>();
+    public RecyclerAdapter(@NonNull List<Item> items) {
+        mItems = new RecyclerItems<>(items);
     }
 
     @Override

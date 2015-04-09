@@ -11,6 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -22,7 +23,10 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.github.programmerr47.chords.R;
+import com.github.programmerr47.chords.representation.adapter.RecyclerAdapter;
 import com.github.programmerr47.chords.representation.adapter.SimpleAdapter;
+import com.github.programmerr47.chords.representation.adapter.item.AdapterItem;
+import com.github.programmerr47.chords.representation.adapter.item.RecyclerItems;
 import com.github.programmerr47.chords.representation.adapter.item.drawer.DrawerItem;
 import com.github.programmerr47.chords.representation.adapter.item.drawer.DrawerElementName;
 import com.github.programmerr47.chords.representation.adapter.item.drawer.DrawerPrimaryItem;
@@ -40,7 +44,7 @@ import java.util.List;
  * @author Michael Spitsin
  * @since 2014-10-14
  */
-public class NavigationDrawerFragment extends Fragment implements DrawerSearchItem.OnSearchListener {
+public class NavigationDrawerFragment extends Fragment {
 
     /**
      * Remember the position of the selected item.
@@ -64,8 +68,8 @@ public class NavigationDrawerFragment extends Fragment implements DrawerSearchIt
     private ActionBarDrawerToggle mDrawerToggle;
 
     private DrawerLayout mDrawerLayout;
-    private ListView mDrawerListView;
-    private SimpleAdapter<DrawerItem> mDrawerAdapter;
+    private RecyclerView mDrawerRecyclerView;
+    private RecyclerAdapter<DrawerItem> mDrawerAdapter;
     private View mFragmentContainerView;
     private Toolbar mToolbar;
 
@@ -106,8 +110,8 @@ public class NavigationDrawerFragment extends Fragment implements DrawerSearchIt
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mDrawerAdapterElements = new ArrayList<>();
-        mDrawerAdapterElements.add(new DrawerSearchItem.Builder(getActivity()).setOnSearchListener(this).setName(DrawerElementName.SEARCH).build());
+        mDrawerAdapterElements = new RecyclerItems<>(new ArrayList<DrawerItem>());
+        mDrawerAdapterElements.add(new DrawerSearchItem.Builder(getActivity()).setName(DrawerElementName.SEARCH).build());
         mDrawerAdapterElements.add(new DrawerPrimaryItem.Builder(getActivity()).setIcon(R.drawable.ic_launcher).setTitle(R.string.NEW_CHORDS).setName(DrawerElementName.NEW_CHORDS).build());
         mDrawerAdapterElements.add(new DrawerPrimaryItem.Builder(getActivity()).setIcon(R.drawable.ic_launcher).setTitle(R.string.POPULAR_CHORDS).setName(DrawerElementName.POPULAR_CHORDS).build());
         mDrawerAdapterElements.add(new DrawerPrimaryItem.Builder(getActivity()).setIcon(R.drawable.ic_launcher).setTitle(R.string.POPULAR_ARTISTS).setName(DrawerElementName.POPULAR_ARTISTS).build());
@@ -116,17 +120,17 @@ public class NavigationDrawerFragment extends Fragment implements DrawerSearchIt
         mDrawerAdapterElements.add(new DrawerSecondaryItem.Builder(getActivity()).setIcon(R.drawable.ic_launcher).setTitle(R.string.ABOUT).setName(DrawerElementName.ABOUT).build());
         mDrawerAdapterElements.add(new DrawerSecondaryItem.Builder(getActivity()).setIcon(R.drawable.ic_launcher).setTitle(R.string.SEND_FEEDBACK).setName(DrawerElementName.SEND_FEEDBACK).build());
 
-        mDrawerAdapter = new SimpleAdapter<>(getActivity(), mDrawerAdapterElements);
+        mDrawerAdapter = new RecyclerAdapter<>(mDrawerAdapterElements);
 
-        mDrawerListView = (ListView) inflater.inflate(R.layout.fragment_drawer_list, container, false);
-        mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mDrawerRecyclerView = (RecyclerView) inflater.inflate(R.layout.fragment_drawer_list, container, false);
+        mDrawerRecyclerView.setOn(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 selectItem(position);
             }
         });
-        mDrawerListView.setAdapter(mDrawerAdapter);
-        mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
+        mDrawerRecyclerView.setAdapter(mDrawerAdapter);
+        mDrawerRecyclerView.setItemChecked(mCurrentSelectedPosition, true);
 
         return mDrawerListView;
     }
