@@ -17,15 +17,15 @@ import java.util.Map;
  * @since 2015-04-08
  */
 //TODO describe
-public class RecyclerAdapter<Item extends AdapterItem> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public abstract class AbstractRecyclerAdapter<Item extends AdapterItem> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private RecyclerItems<Item> mItems;
 
-    public RecyclerAdapter(@NonNull RecyclerItems<Item> items) {
+    public AbstractRecyclerAdapter(@NonNull RecyclerItems<Item> items) {
         mItems = items;
     }
 
-    public RecyclerAdapter(@NonNull List<Item> items) {
+    public AbstractRecyclerAdapter(@NonNull List<Item> items) {
         mItems = new RecyclerItems<>(items);
     }
 
@@ -40,7 +40,11 @@ public class RecyclerAdapter<Item extends AdapterItem> extends RecyclerView.Adap
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Item item = mItems.get(position);
         item.bindView(holder, position);
+        onPostBindViewHolder(holder, position);
     }
+
+    //todo document
+    protected abstract void onPostBindViewHolder(RecyclerView.ViewHolder holder, int position);
 
     @Override
     public int getItemCount() {

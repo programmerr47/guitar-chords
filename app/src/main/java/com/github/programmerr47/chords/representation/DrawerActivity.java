@@ -25,7 +25,7 @@ import com.github.programmerr47.chords.representation.utils.Util;
  * @author Michael Spitsin
  * @since 2014-10-15
  */
-public class DrawerActivity extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+public class DrawerActivity extends ActionBarActivity implements NavigationDrawerCallbacks {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -77,14 +77,6 @@ public class DrawerActivity extends ActionBarActivity implements NavigationDrawe
                     .replace(R.id.container, getFragmentInstanceByName(element.getName()))
                     .commit();
         }
-    }
-
-    @Override
-    public void onSearchStarted(String searchText) {
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(100500))
-                .commit();
     }
 
     /**

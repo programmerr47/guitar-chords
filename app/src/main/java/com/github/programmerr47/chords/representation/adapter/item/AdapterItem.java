@@ -1,7 +1,6 @@
 package com.github.programmerr47.chords.representation.adapter.item;
 
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 
 import com.github.programmerr47.chords.representation.adapter.holder.producer.HolderProducer;
 
@@ -21,7 +20,7 @@ public interface AdapterItem {
 
     /**
      * Calls when element taken in
-     * {@link com.github.programmerr47.chords.representation.adapter.RecyclerAdapter#onBindViewHolder(android.support.v7.widget.RecyclerView.ViewHolder, int)}
+     * {@link com.github.programmerr47.chords.representation.adapter.AbstractRecyclerAdapter#onBindViewHolder(android.support.v7.widget.RecyclerView.ViewHolder, int)}
      * is exists and it is needed to bind it (set up it).
      *
      * @param viewHolder holder for view, that need to be bound

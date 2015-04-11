@@ -11,6 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -19,13 +20,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
 
 import com.github.programmerr47.chords.R;
-import com.github.programmerr47.chords.representation.adapter.RecyclerAdapter;
-import com.github.programmerr47.chords.representation.adapter.SimpleAdapter;
-import com.github.programmerr47.chords.representation.adapter.item.AdapterItem;
+import com.github.programmerr47.chords.representation.adapter.AbstractRecyclerAdapter;
+import com.github.programmerr47.chords.representation.adapter.Adapters;
 import com.github.programmerr47.chords.representation.adapter.item.RecyclerItems;
 import com.github.programmerr47.chords.representation.adapter.item.drawer.DrawerItem;
 import com.github.programmerr47.chords.representation.adapter.item.drawer.DrawerElementName;
@@ -34,7 +32,6 @@ import com.github.programmerr47.chords.representation.adapter.item.drawer.Drawer
 import com.github.programmerr47.chords.representation.adapter.item.drawer.DrawerSecondaryItem;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -44,7 +41,7 @@ import java.util.List;
  * @author Michael Spitsin
  * @since 2014-10-14
  */
-public class NavigationDrawerFragment extends Fragment {
+public class NavigationDrawerFragment extends Fragment implements NavigationDrawerCallbacks {
 
     /**
      * Remember the position of the selected item.
@@ -69,11 +66,11 @@ public class NavigationDrawerFragment extends Fragment {
 
     private DrawerLayout mDrawerLayout;
     private RecyclerView mDrawerRecyclerView;
-    private RecyclerAdapter<DrawerItem> mDrawerAdapter;
+    private AbstractRecyclerAdapter<DrawerItem> mDrawerAdapter;
     private View mFragmentContainerView;
     private Toolbar mToolbar;
 
-    private List<DrawerItem> mDrawerAdapterElements;
+    private RecyclerItems<DrawerItem> mDrawerAdapterElements;
 
     private int mCurrentSelectedPosition = 1;
     private boolean mFromSavedInstanceState;
@@ -120,19 +117,14 @@ public class NavigationDrawerFragment extends Fragment {
         mDrawerAdapterElements.add(new DrawerSecondaryItem.Builder(getActivity()).setIcon(R.drawable.ic_launcher).setTitle(R.string.ABOUT).setName(DrawerElementName.ABOUT).build());
         mDrawerAdapterElements.add(new DrawerSecondaryItem.Builder(getActivity()).setIcon(R.drawable.ic_launcher).setTitle(R.string.SEND_FEEDBACK).setName(DrawerElementName.SEND_FEEDBACK).build());
 
-        mDrawerAdapter = new RecyclerAdapter<>(mDrawerAdapterElements);
+        mDrawerAdapter = Adapters.createDrawerAdapter(mDrawerAdapterElements, this);
 
         mDrawerRecyclerView = (RecyclerView) inflater.inflate(R.layout.fragment_drawer_list, container, false);
-        mDrawerRecyclerView.setOn(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                selectItem(position);
-            }
-        });
+        mDrawerRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mDrawerRecyclerView.setAdapter(mDrawerAdapter);
-        mDrawerRecyclerView.setItemChecked(mCurrentSelectedPosition, true);
+        //mDrawerRecyclerView.setItemChecked(mCurrentSelectedPosition, true);
 
-        return mDrawerListView;
+        return mDrawerRecyclerView;
     }
 
     public boolean isDrawerOpen() {
@@ -216,18 +208,22 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     private void selectItem(int position) {
+        selectItem(mDrawerAdapterElements.get(position), position);
+    }
+
+    private void selectItem(DrawerItem item, int position) {
         mCurrentSelectedPosition = position;
-        if (mDrawerListView != null) {
-            mDrawerListView.setItemChecked(position, true);
-            //mDrawerAdapter.setItemChecked(position);//TODO
-        }
+//        if (mDrawerListView != null) {
+//            mDrawerListView.setItemChecked(position, true);
+//            //mDrawerAdapter.setItemChecked(position);//TODO
+//        }
 
         if (mDrawerLayout != null) {
             mDrawerLayout.closeDrawer(mFragmentContainerView);
         }
 
         if (mCallbacks != null) {
-            mCallbacks.onNavigationDrawerItemSelected(mDrawerAdapterElements.get(position), position);
+            mCallbacks.onNavigationDrawerItemSelected(item, position);
         }
     }
 
@@ -302,36 +298,7 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     @Override
-    public void onSearchStarted(String searchText) {
-        mCurrentSelectedPosition = -1;
-        //mDrawerAdapter.setItemChecked(position);//TODO
-        if (mDrawerLayout != null) {
-            mDrawerLayout.closeDrawer(mFragmentContainerView);
-        }
-
-        if (mCallbacks != null) {
-            mCallbacks.onSearchStarted(searchText);
-        }
-    }
-
-    /**
-     * Callbacks interface that all activities using this fragment must implement.
-     */
-    public static interface NavigationDrawerCallbacks {
-
-        /**
-         * Called when an item in the navigation drawer is selected.
-         *
-         * @param selectedItem item that was selected
-         * @param position position of item that was selected
-         */
-        void onNavigationDrawerItemSelected(DrawerItem selectedItem, int position);
-
-        /**
-         * Calls when search field is filled and it is needed to search this information.
-         *
-         * @param searchText text from search field
-         */
-        void onSearchStarted(String searchText);
+    public void onNavigationDrawerItemSelected(DrawerItem selectedItem, int position) {
+        selectItem(position);
     }
 }
