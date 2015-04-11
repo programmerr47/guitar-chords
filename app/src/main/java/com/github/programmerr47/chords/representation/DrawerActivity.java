@@ -15,8 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.programmerr47.chords.R;
-import com.github.programmerr47.chords.representation.adapters.elements.drawer.DrawerElement;
-import com.github.programmerr47.chords.representation.adapters.elements.drawer.DrawerElementName;
+import com.github.programmerr47.chords.representation.adapter.item.drawer.DrawerItem;
+import com.github.programmerr47.chords.representation.adapter.item.drawer.DrawerElementName;
 import com.github.programmerr47.chords.representation.utils.Util;
 
 /**
@@ -25,7 +25,7 @@ import com.github.programmerr47.chords.representation.utils.Util;
  * @author Michael Spitsin
  * @since 2014-10-15
  */
-public class DrawerActivity extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+public class DrawerActivity extends ActionBarActivity implements NavigationDrawerCallbacks {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -69,7 +69,7 @@ public class DrawerActivity extends ActionBarActivity implements NavigationDrawe
     }
 
     @Override
-    public void onNavigationDrawerItemSelected(DrawerElement element, int position) {
+    public void onNavigationDrawerItemSelected(DrawerItem element, int position) {
         if ((element != null) && (element.getName() != null)) {
             // update the main content by replacing fragments
             FragmentManager fragmentManager = getFragmentManager();
@@ -77,14 +77,6 @@ public class DrawerActivity extends ActionBarActivity implements NavigationDrawe
                     .replace(R.id.container, getFragmentInstanceByName(element.getName()))
                     .commit();
         }
-    }
-
-    @Override
-    public void onSearchStarted(String searchText) {
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(100500))
-                .commit();
     }
 
     /**

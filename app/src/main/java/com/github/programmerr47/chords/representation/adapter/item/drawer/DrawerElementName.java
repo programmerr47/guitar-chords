@@ -1,4 +1,4 @@
-package com.github.programmerr47.chords.representation.adapters.elements.drawer;
+package com.github.programmerr47.chords.representation.adapter.item.drawer;
 
 /**
  * All drawer identificators.
