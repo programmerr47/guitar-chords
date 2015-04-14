@@ -1,4 +1,4 @@
-package com.github.programmerr47.chords.api.utils;
+package com.github.programmerr47.chords.api.util;
 
 /**
  * List of available chords, that can be present in texts of songs.

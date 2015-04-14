@@ -8,12 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.programmerr47.chords.R;
-import com.github.programmerr47.chords.representation.adapter.holder.drawer.DrawerStandardItemHolder;
+import com.github.programmerr47.chords.representation.adapter.holder.drawer.IconTitleItemHolder;
 
 /**
- * Created by MS on 07.04.2015.
+ * Class that produces view holder for
+ * {@link com.github.programmerr47.chords.representation.adapter.item.drawer.DrawerSecondaryItem}
+ *
+ * @author Michael Spitsin
+ * @since 2015-04-06
  */
-//TODO describe
 public class DrawerSecondaryItemHolderProducer implements HolderProducer {
 
     private final Context mContext;
@@ -32,9 +35,9 @@ public class DrawerSecondaryItemHolderProducer implements HolderProducer {
             throw new IllegalStateException("View not created");
         }
 
-        DrawerStandardItemHolder.ResourceParams params = new DrawerStandardItemHolder.ResourceParams();
+        IconTitleItemHolder.ResourceParams params = new IconTitleItemHolder.ResourceParams();
         params.iconLayoutId = R.id.icon;
         params.titleLayoutId = R.id.title;
-        return new DrawerStandardItemHolder(view, params);
+        return new IconTitleItemHolder(view, params);
     }
 }

@@ -7,7 +7,7 @@ import com.github.programmerr47.chords.api.objects.responses.ApiMethodResponse;
 import com.github.programmerr47.chords.api.objects.responses.ApiMethodResponseReason;
 import com.github.programmerr47.chords.api.objects.responses.DefaultApiMethodResponse;
 import com.github.programmerr47.chords.api.parsers.ParserFrom;
-import com.github.programmerr47.chords.representation.utils.Util;
+import com.github.programmerr47.chords.api.util.Util;
 
 import java.io.IOException;
 import java.io.InputStream;
