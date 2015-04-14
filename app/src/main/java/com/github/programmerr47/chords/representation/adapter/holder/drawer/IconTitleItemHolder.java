@@ -6,16 +6,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
+ * Standard view holder for most of items of {@link android.support.v7.widget.RecyclerView}.
+ * Contains only two view, that can provide and handle: one of them represents icon, second
+ * main text.
+ *
  * @author Michael Spitsin
  * @since 2015-04-07
  */
-//TODO describe
-public final class DrawerStandardItemHolder extends RecyclerView.ViewHolder {
+public final class IconTitleItemHolder extends RecyclerView.ViewHolder {
 
     private ImageView mIcon;
     private TextView mTitle;
 
-    public DrawerStandardItemHolder(View itemView, ResourceParams params) {
+    public IconTitleItemHolder(View itemView, ResourceParams params) {
         super(itemView);
 
         mIcon = (ImageView) itemView.findViewById(params.iconLayoutId);

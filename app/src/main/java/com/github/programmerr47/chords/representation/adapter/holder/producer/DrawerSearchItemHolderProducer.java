@@ -8,12 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.programmerr47.chords.R;
-import com.github.programmerr47.chords.representation.adapter.holder.drawer.DrawerSearchItemHolder;
+import com.github.programmerr47.chords.representation.adapter.holder.drawer.SearchItemHolder;
 
 /**
- * Created by MS on 07.04.2015.
+ * Class that produces view holder for
+ * {@link com.github.programmerr47.chords.representation.adapter.item.drawer.DrawerSearchItem}
+ *
+ * @author Michael Spitsin
+ * @since 2015-04-06
  */
-//TODO describe
 public class DrawerSearchItemHolderProducer implements HolderProducer {
 
     private final Context mContext;
@@ -32,9 +35,9 @@ public class DrawerSearchItemHolderProducer implements HolderProducer {
             throw new IllegalStateException("View not created");
         }
 
-        DrawerSearchItemHolder.ResourceParams params = new DrawerSearchItemHolder.ResourceParams();
+        SearchItemHolder.ResourceParams params = new SearchItemHolder.ResourceParams();
         params.iconLayoutId = R.id.icon;
         params.searchFieldLayoutId = R.id.searchField;
-        return new DrawerSearchItemHolder(view, params);
+        return new SearchItemHolder(view, params);
     }
 }

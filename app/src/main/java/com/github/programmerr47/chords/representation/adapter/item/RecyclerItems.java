@@ -3,7 +3,7 @@ package com.github.programmerr47.chords.representation.adapter.item;
 import android.support.annotation.NonNull;
 
 import com.github.programmerr47.chords.representation.adapter.holder.producer.HolderProducer;
-import com.github.programmerr47.chords.representation.utils.Util;
+import com.github.programmerr47.chords.representation.util.Util;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -14,14 +14,37 @@ import java.util.ListIterator;
 import java.util.Map;
 
 /**
+ * Decorator to any {@link java.util.List} implementation, that required to be used
+ * only with {@link com.github.programmerr47.chords.representation.adapter.item.AdapterItem}.
+ * <br><br>
+ * <strong>Note: </strong> currently it is needed to have possibility to define some
+ *                         types for any items of {@link android.support.v7.widget.RecyclerView}
+ *                         for providing good handling of multi-type items in
+ *                         {@link android.support.v7.widget.RecyclerView.Adapter}.
+ *                         But it will be good to have auto determination of types.
+ * <br><br>
+ * So it is a main purpose of this class: to check new added items and add new types to special
+ * list if there is no such types yet. So additionally this list provides a special map to
+ * retrieving implementations of {@link HolderProducer} that depends on type of item.
+ * Then retrieving implementation of special producer it is possible to produce some
+ * {@link android.support.v7.widget.RecyclerView.ViewHolder} from type of item.
+ * So in that case it is a controller class for {@link android.support.v7.widget.RecyclerView.Adapter}.
+ * <br><br>
+ *
+ *
  * @author Michael Spitsin
  * @since 2014-04-04
  */
-//TODO javadocs
 public class RecyclerItems<Item extends AdapterItem> implements List<Item> {
 
+    /**
+     * Base object, list of items, that needed to be wrapped to providing determination of types.
+     */
     private List<Item> mItems;
+
     private Map<Integer, HolderProducer> mHolderMap;
+    //TODO think about replacement to map in order to remove binding position
+    //TODO of item and type identificator, because it may be dangerous.
     private List<String> mTypeNames;
 
     public RecyclerItems(@NonNull List<Item> items) {

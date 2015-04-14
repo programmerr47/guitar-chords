@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.github.programmerr47.chords.representation.Constants;
-import com.github.programmerr47.chords.representation.adapter.holder.drawer.DrawerStandardItemHolder;
+import com.github.programmerr47.chords.representation.adapter.holder.drawer.IconTitleItemHolder;
 import com.github.programmerr47.chords.representation.adapter.holder.producer.DrawerSecondaryItemHolderProducer;
 import com.github.programmerr47.chords.representation.adapter.holder.producer.HolderProducer;
 
@@ -38,7 +38,7 @@ public final class DrawerSecondaryItem extends DrawerItem {
 
     @Override
     public void bindView(RecyclerView.ViewHolder viewHolder, int position) {
-        DrawerStandardItemHolder holder = (DrawerStandardItemHolder) viewHolder;
+        IconTitleItemHolder holder = (IconTitleItemHolder) viewHolder;
         bindView(holder, isSelected);
     }
 
@@ -47,7 +47,7 @@ public final class DrawerSecondaryItem extends DrawerItem {
         return new DrawerSecondaryItemHolderProducer(mContext);
     }
 
-    private void bindView(DrawerStandardItemHolder holder, boolean isSelected) {
+    private void bindView(IconTitleItemHolder holder, boolean isSelected) {
         ImageView icon = holder.getIcon();
         TextView title = holder.getTitle();
 

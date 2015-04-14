@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 import com.github.programmerr47.chords.R;
 import com.github.programmerr47.chords.representation.adapter.item.drawer.DrawerItem;
 import com.github.programmerr47.chords.representation.adapter.item.drawer.DrawerElementName;
-import com.github.programmerr47.chords.representation.utils.Util;
+import com.github.programmerr47.chords.representation.util.Util;
 
 /**
  * Main activity for all fragments that represented by drawer items.

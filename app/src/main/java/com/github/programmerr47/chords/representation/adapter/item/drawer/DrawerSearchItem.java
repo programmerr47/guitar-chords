@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.github.programmerr47.chords.representation.adapter.holder.drawer.DrawerSearchItemHolder;
+import com.github.programmerr47.chords.representation.adapter.holder.drawer.SearchItemHolder;
 import com.github.programmerr47.chords.representation.adapter.holder.producer.DrawerSearchItemHolderProducer;
 import com.github.programmerr47.chords.representation.adapter.holder.producer.HolderProducer;
 
@@ -25,7 +25,7 @@ public final class DrawerSearchItem extends DrawerItem {
 
     @Override
     public void bindView(RecyclerView.ViewHolder viewHolder, int position) {
-        DrawerSearchItemHolder holder = (DrawerSearchItemHolder) viewHolder;
+        SearchItemHolder holder = (SearchItemHolder) viewHolder;
         bindView(holder, isSelected);
     }
 
@@ -34,7 +34,7 @@ public final class DrawerSearchItem extends DrawerItem {
         return new DrawerSearchItemHolderProducer(mContext);
     }
 
-    private void bindView(DrawerSearchItemHolder viewHolder, boolean isSelected) {
+    private void bindView(SearchItemHolder viewHolder, boolean isSelected) {
         ImageView icon = viewHolder.getIcon();
         EditText searchField = viewHolder.getSearchField();
 

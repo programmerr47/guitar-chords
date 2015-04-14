@@ -1,4 +1,4 @@
-package com.github.programmerr47.chords.representation.utils;
+package com.github.programmerr47.chords.representation.util;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -6,10 +6,6 @@ import android.util.DisplayMetrics;
 
 import com.github.programmerr47.chords.R;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -17,7 +13,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Common functions.
+ * Common presentation functions.
  *
  * @author Michael Spitsin
  * @since 2014-10-08
@@ -79,29 +75,5 @@ public class Util {
         }
 
         return (int)resultWidth;
-    }
-
-    /**
-     * Converts given input stream (<strong>without</strong> closing it) to {@link String}.
-     *
-     * @param is given input stream
-     * @return converted stream to string
-     */
-    //TODO replace to API.utils
-    public static String covertInputStreamToString(InputStream is) {
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
-        String line;
-        String result = "";
-
-        try {
-            while((line = bufferedReader.readLine()) != null) {
-                result += line;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            //ignored
-        }
-        
-        return result;
     }
 }

@@ -6,15 +6,19 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 /**
- * Created by MS on 07.04.2015.
+ * Standard view holder for all simple search items of any
+ * {@link android.support.v7.widget.RecyclerView}. Simply
+ * contains icon of search and search field.
+ *
+ * @author Michael Spitsin
+ * @since 2015-04-07
  */
-//TODO describe
-public class DrawerSearchItemHolder extends RecyclerView.ViewHolder {
+public class SearchItemHolder extends RecyclerView.ViewHolder {
 
     private ImageView mIcon;
     private EditText mSearchField;
 
-    public DrawerSearchItemHolder(View itemView, ResourceParams params) {
+    public SearchItemHolder(View itemView, ResourceParams params) {
         super(itemView);
 
         mIcon = (ImageView) itemView.findViewById(params.iconLayoutId);
