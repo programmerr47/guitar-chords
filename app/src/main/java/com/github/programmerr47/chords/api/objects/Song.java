@@ -1,6 +1,7 @@
 package com.github.programmerr47.chords.api.objects;
 
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -12,14 +13,15 @@ import java.util.List;
  * @since 2014-10-23
  */
 public final class Song {
-    private List<Chord> songChords;
-    private String textWithChords;
-    private String artistName;
-    private String songName;
-    private String artistUrl;
-    private String videoUrl;
-    private Calendar creationDate;
-    private int numberOfViews;
+    private final List<Chord> songChords;
+    private final String textWithChords;
+    private final String artistName;
+    private final String songName;
+    private final String artistUrl;
+    private final String videoUrl;
+    //TODO make immutable
+    private final Calendar creationDate;
+    private final int numberOfViews;
 
     private Song(Builder builder) {
         this.songChords = builder.songChords;
@@ -34,7 +36,7 @@ public final class Song {
 
     @SuppressWarnings("unused")
     public List<Chord> getSongChords() {
-        return songChords;
+        return Collections.unmodifiableList(songChords);
     }
 
     @SuppressWarnings("unused")

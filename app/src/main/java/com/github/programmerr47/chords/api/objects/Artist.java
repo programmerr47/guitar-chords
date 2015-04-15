@@ -1,5 +1,6 @@
 package com.github.programmerr47.chords.api.objects;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -10,9 +11,9 @@ import java.util.List;
  * @since 2014-10-24
  */
 public final class Artist {
-    private String artistName;
-    private String artistArtUrl;
-    private List<SongSummary> chords;
+    private final String artistName;
+    private final String artistArtUrl;
+    private final List<SongSummary> chords;
 
     private Artist(Builder builder) {
         this.artistName = builder.artistName;
@@ -28,6 +29,11 @@ public final class Artist {
     @SuppressWarnings("unused")
     public String getArtistArtUrl() {
         return artistArtUrl;
+    }
+
+    @SuppressWarnings("unused")
+    public List<SongSummary> getChords() {
+        return Collections.unmodifiableList(chords);
     }
 
     @Override
@@ -56,11 +62,6 @@ public final class Artist {
                 ", artistArtUrl='" + artistArtUrl + '\'' +
                 ", chords=" + chords +
                 '}';
-    }
-
-    @SuppressWarnings("unused")
-    public List<SongSummary> getChords() {
-        return chords;
     }
 
     public static final class Builder {
