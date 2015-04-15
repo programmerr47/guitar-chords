@@ -6,8 +6,8 @@ package com.github.programmerr47.chords.api.objects;
  * @since 2014-11-06
  */
 public final class Chord {
-    private String name;
-    private String imageUrl;
+    private final String name;
+    private final String imageUrl;
 
     private Chord(Builder builder) {
         this.name = builder.name;
@@ -32,6 +32,11 @@ public final class Chord {
         Chord chord = (Chord) o;
 
         return name.equals(chord.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return name.hashCode();
     }
 
     @Override

@@ -75,6 +75,13 @@ public final class SongSummary {
     }
 
     @Override
+    public int hashCode() {
+        int result = songName.hashCode();
+        result = 31 * result + artistName.hashCode();
+        return result;
+    }
+
+    @Override
     public String toString() {
         return "SongChordsSummary{" +
                 "songName='" + songName + '\'' +

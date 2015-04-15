@@ -83,6 +83,13 @@ public final class Song {
     }
 
     @Override
+    public int hashCode() {
+        int result = artistName.hashCode();
+        result = 31 * result + songName.hashCode();
+        return result;
+    }
+
+    @Override
     public String toString() {
         return "SongChords{" +
                 "songChords=" + songChords +

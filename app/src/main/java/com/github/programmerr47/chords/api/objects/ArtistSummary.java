@@ -58,6 +58,11 @@ public final class ArtistSummary {
     }
 
     @Override
+    public int hashCode() {
+        return artistName.hashCode();
+    }
+
+    @Override
     public String toString() {
         return "ArtistSummary{" +
                 "artistName='" + artistName + '\'' +

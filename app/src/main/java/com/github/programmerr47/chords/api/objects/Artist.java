@@ -1,5 +1,7 @@
 package com.github.programmerr47.chords.api.objects;
 
+import android.support.annotation.NonNull;
+
 import java.util.List;
 
 /**
@@ -42,6 +44,11 @@ public final class Artist {
         Artist artist = (Artist) o;
 
         return artistName.equals(artist.artistName);
+    }
+
+    @Override
+    public int hashCode() {
+        return artistName.hashCode();
     }
 
     @Override
