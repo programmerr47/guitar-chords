@@ -1,7 +1,5 @@
 package com.github.programmerr47.chords.api.objects;
 
-import android.support.annotation.NonNull;
-
 import java.util.List;
 
 /**
