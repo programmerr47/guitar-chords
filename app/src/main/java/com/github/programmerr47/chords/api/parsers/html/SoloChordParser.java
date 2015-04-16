@@ -15,7 +15,7 @@ import org.jsoup.nodes.Element;
  * @author Michael Spitsin
  * @since 2014-11-06
  */
-public final class SoloChordParser extends ParserFromHTML<Chord>{
+public final class SoloChordParser extends ParserFromHTML<Chord> {
 
     private static final String CHORD_TAG = "img";
 

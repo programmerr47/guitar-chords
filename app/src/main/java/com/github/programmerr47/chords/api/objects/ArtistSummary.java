@@ -8,11 +8,11 @@ package com.github.programmerr47.chords.api.objects;
  * @since 2014-10-24
  */
 public final class ArtistSummary {
-    private String artistName;
-    private String artistUrl;
-    private String coverThumbUrl;
-    private int numberOfViews;
-    private int numberOfChords;
+    private final String artistName;
+    private final String artistUrl;
+    private final String coverThumbUrl;
+    private final int numberOfViews;
+    private final int numberOfChords;
 
     private ArtistSummary(Builder builder) {
         this.artistName = builder.artistName;
@@ -55,6 +55,11 @@ public final class ArtistSummary {
         ArtistSummary artistSummary = (ArtistSummary) o;
 
         return artistName.equals(artistSummary.artistName);
+    }
+
+    @Override
+    public int hashCode() {
+        return artistName.hashCode();
     }
 
     @Override

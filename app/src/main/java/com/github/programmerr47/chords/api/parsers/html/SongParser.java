@@ -9,9 +9,7 @@ import org.jsoup.select.Elements;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -93,7 +91,7 @@ public final class SongParser extends ParserFromHTML<Song> {
      * Trying to get stats: number of views and date of creation.
      * If something not found then nothing happens.
      *
-     * @param element page element
+     * @param element             page element
      * @param resultObjectBuilder builder of {@link Song}
      */
     private void tryToGetStatsInfo(Element element, Song.Builder resultObjectBuilder) {
@@ -117,10 +115,7 @@ public final class SongParser extends ParserFromHTML<Song> {
                 DateFormat dateFormat = new SimpleDateFormat(DEFAULT_AMDM_DATE_FORMAT, Locale.getDefault());
                 try {
                     Date date = dateFormat.parse(creationDateStat.text());
-                    Calendar calendar = GregorianCalendar.getInstance();
-                    calendar.setTime(date);
-
-                    resultObjectBuilder.setCreationDate(calendar);
+                    resultObjectBuilder.setCreationDate(date);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }

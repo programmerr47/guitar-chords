@@ -8,22 +8,23 @@ package com.github.programmerr47.chords.api.objects;
  * @author Michael Spitsin
  * @since 2014-10-24
  */
-//TODO Add artist url if has
 public final class SongSummary {
-    private String songName;
-    private String artistName;
-    private String songUrl;
-    private String coverThumbUrl;
+    private final String songName;
+    private final String artistName;
+    private final String songUrl;
+    private final String coverThumbUrl;
     //---Optional params---//
-    private boolean isNew;
-    private boolean hasVideo;
-    private int numberOfViews;
+    private final String artistUrl;
+    private final boolean isNew;
+    private final boolean hasVideo;
+    private final int numberOfViews;
 
     private SongSummary(Builder builder) {
         this.songName = builder.songName;
         this.artistName = builder.artistName;
         this.songUrl = builder.chordsUrl;
         this.coverThumbUrl = builder.coverThumbUrl;
+        this.artistUrl = builder.artistUrl;
         this.isNew = builder.isNew;
         this.hasVideo = builder.hasVideo;
         this.numberOfViews = builder.numberOfViews;
@@ -47,6 +48,11 @@ public final class SongSummary {
     @SuppressWarnings("unused")
     public String getCoverThumbUrl() {
         return coverThumbUrl;
+    }
+
+    @SuppressWarnings("unused")
+    public String getArtistUrl() {
+        return artistUrl;
     }
 
     @SuppressWarnings("unused")
@@ -75,6 +81,13 @@ public final class SongSummary {
     }
 
     @Override
+    public int hashCode() {
+        int result = songName.hashCode();
+        result = 31 * result + artistName.hashCode();
+        return result;
+    }
+
+    @Override
     public String toString() {
         return "SongChordsSummary{" +
                 "songName='" + songName + '\'' +
@@ -92,6 +105,7 @@ public final class SongSummary {
         private String artistName;
         private String chordsUrl;
         private String coverThumbUrl;
+        private String artistUrl;
         private boolean isNew;
         private boolean hasVideo;
         private int numberOfViews;
@@ -113,6 +127,11 @@ public final class SongSummary {
 
         public Builder setCoverThumbUrl(String coverThumbUrl) {
             this.coverThumbUrl = coverThumbUrl;
+            return this;
+        }
+
+        public Builder setArtistUrl(String artistUrl) {
+            this.artistUrl = artistUrl;
             return this;
         }
 

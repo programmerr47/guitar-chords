@@ -1,6 +1,8 @@
 package com.github.programmerr47.chords.api.objects;
 
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -12,14 +14,14 @@ import java.util.List;
  * @since 2014-10-23
  */
 public final class Song {
-    private List<Chord> songChords;
-    private String textWithChords;
-    private String artistName;
-    private String songName;
-    private String artistUrl;
-    private String videoUrl;
-    private Calendar creationDate;
-    private int numberOfViews;
+    private final List<Chord> songChords;
+    private final String textWithChords;
+    private final String artistName;
+    private final String songName;
+    private final String artistUrl;
+    private final String videoUrl;
+    private final long creationDate;
+    private final int numberOfViews;
 
     private Song(Builder builder) {
         this.songChords = builder.songChords;
@@ -34,7 +36,7 @@ public final class Song {
 
     @SuppressWarnings("unused")
     public List<Chord> getSongChords() {
-        return songChords;
+        return Collections.unmodifiableList(songChords);
     }
 
     @SuppressWarnings("unused")
@@ -63,8 +65,8 @@ public final class Song {
     }
 
     @SuppressWarnings("unused")
-    public Calendar getCreationDate() {
-        return creationDate;
+    public Date getCreationDate() {
+        return new Date(creationDate);
     }
 
     @SuppressWarnings("unused")
@@ -80,6 +82,13 @@ public final class Song {
         Song that = (Song) o;
 
         return artistName.equals(that.artistName) && songName.equals(that.songName);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = artistName.hashCode();
+        result = 31 * result + songName.hashCode();
+        return result;
     }
 
     @Override
@@ -103,7 +112,7 @@ public final class Song {
         private String songName;
         private String artistUrl;
         private String videoUrl;
-        private Calendar creationDate;
+        private long creationDate;
         private int numberOfViews;
 
         public Builder setSongChords(List<Chord> songChords) {
@@ -137,12 +146,22 @@ public final class Song {
         }
 
         public Builder setCreationDate(int year, int month, int day) {
-            this.creationDate = new GregorianCalendar(year, month, day);
+            this.creationDate = new GregorianCalendar(year, month, day).getTimeInMillis();
             return this;
         }
 
         public Builder setCreationDate(Calendar creationDate) {
+            this.creationDate = creationDate.getTimeInMillis();
+            return this;
+        }
+
+        public Builder setCreationDate(long creationDate) {
             this.creationDate = creationDate;
+            return this;
+        }
+
+        public Builder setCreationDate(Date date) {
+            this.creationDate = date.getTime();
             return this;
         }
 
