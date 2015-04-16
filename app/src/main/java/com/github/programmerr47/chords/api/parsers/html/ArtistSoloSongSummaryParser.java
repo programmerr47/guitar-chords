@@ -17,7 +17,7 @@ import org.jsoup.select.Elements;
  * @author Michael Spitsin
  * @since 2014-10-29
  */
-public final class ArtistSoloSongSummaryParser extends ParserFromHTML<SongSummary>{
+public final class ArtistSoloSongSummaryParser extends ParserFromHTML<SongSummary> {
 
     private static final String ITEM_TAG = "tr";
     private static final String SPAN_TAG = "span";

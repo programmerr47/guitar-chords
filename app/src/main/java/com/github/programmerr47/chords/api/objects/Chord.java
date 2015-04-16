@@ -2,6 +2,7 @@ package com.github.programmerr47.chords.api.objects;
 
 /**
  * //TODO descr
+ *
  * @author Michael Spitsin
  * @since 2014-11-06
  */

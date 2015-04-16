@@ -65,7 +65,10 @@ public final class SoloSongSummaryParser extends ParserFromHTML<SongSummary> {
         //Trying to get artist name
         if (artistTitleLength > 0) {
             String artist = artistTitle.get(0).val();
-            resultObjectBuilder.setArtistName(artist);
+            String artistUrl = artistTitle.get(0).attr(URL_ATTRIBUTE);
+            resultObjectBuilder
+                    .setArtistName(artist)
+                    .setArtistUrl(artistUrl);
         }
 
         //Trying to get song title and url to chords

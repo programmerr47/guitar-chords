@@ -2,6 +2,7 @@ package com.github.programmerr47.chords.api.objects;
 
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -19,8 +20,7 @@ public final class Song {
     private final String songName;
     private final String artistUrl;
     private final String videoUrl;
-    //TODO make immutable
-    private final Calendar creationDate;
+    private final long creationDate;
     private final int numberOfViews;
 
     private Song(Builder builder) {
@@ -65,8 +65,8 @@ public final class Song {
     }
 
     @SuppressWarnings("unused")
-    public Calendar getCreationDate() {
-        return creationDate;
+    public Date getCreationDate() {
+        return new Date(creationDate);
     }
 
     @SuppressWarnings("unused")
@@ -112,7 +112,7 @@ public final class Song {
         private String songName;
         private String artistUrl;
         private String videoUrl;
-        private Calendar creationDate;
+        private long creationDate;
         private int numberOfViews;
 
         public Builder setSongChords(List<Chord> songChords) {
@@ -146,12 +146,22 @@ public final class Song {
         }
 
         public Builder setCreationDate(int year, int month, int day) {
-            this.creationDate = new GregorianCalendar(year, month, day);
+            this.creationDate = new GregorianCalendar(year, month, day).getTimeInMillis();
             return this;
         }
 
         public Builder setCreationDate(Calendar creationDate) {
+            this.creationDate = creationDate.getTimeInMillis();
+            return this;
+        }
+
+        public Builder setCreationDate(long creationDate) {
             this.creationDate = creationDate;
+            return this;
+        }
+
+        public Builder setCreationDate(Date date) {
+            this.creationDate = date.getTime();
             return this;
         }
 
