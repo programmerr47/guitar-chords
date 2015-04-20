@@ -1,5 +1,6 @@
 package com.github.programmerr47.chords.api.objects;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -13,12 +14,12 @@ import java.util.List;
 public final class Artist {
     private final String artistName;
     private final String artistArtUrl;
-    private final List<SongSummary> chords;
+    private final List<SongSummary> chords = new ArrayList<>();
 
     private Artist(Builder builder) {
         this.artistName = builder.artistName;
         this.artistArtUrl = builder.artistArtUrl;
-        this.chords = builder.chords;
+        Collections.copy(chords, builder.chords);
     }
 
     @SuppressWarnings("unused")

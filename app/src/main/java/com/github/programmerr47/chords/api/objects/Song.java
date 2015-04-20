@@ -1,5 +1,6 @@
 package com.github.programmerr47.chords.api.objects;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
@@ -14,7 +15,7 @@ import java.util.List;
  * @since 2014-10-23
  */
 public final class Song {
-    private final List<Chord> songChords;
+    private final List<Chord> songChords = new ArrayList<>();
     private final String textWithChords;
     private final String artistName;
     private final String songName;
@@ -24,7 +25,7 @@ public final class Song {
     private final int numberOfViews;
 
     private Song(Builder builder) {
-        this.songChords = builder.songChords;
+        Collections.copy(this.songChords, builder.songChords);
         this.textWithChords = builder.textWithChords;
         this.artistName = builder.artistName;
         this.songName = builder.songName;
