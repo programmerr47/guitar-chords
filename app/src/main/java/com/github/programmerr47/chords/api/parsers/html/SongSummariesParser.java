@@ -16,7 +16,7 @@ import java.util.List;
  * @author Michael Spitsin
  * @since 2015-03-25
  */
-public class SongSummariesParser extends ParserFromHTML<List<SongSummary>> {
+public final class SongSummariesParser extends ParserFromHTML<List<SongSummary>> {
 
     private static final String ITEMS_TAG = "table";
     private static final String ITEMS_BODY_TAG = "tbody";

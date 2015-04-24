@@ -16,7 +16,7 @@ import java.util.Map;
  * @author Michael Spitsin
  * @since 2015-03-24
  */
-public class ChordsParser extends ParserFromHTML<List<Chord>> {
+public final class ChordsParser extends ParserFromHTML<List<Chord>> {
 
     private static final String CHORDS_TAG = "div";
 
